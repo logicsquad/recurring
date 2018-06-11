@@ -5,4 +5,19 @@
   <version>0.1-SNAPSHOT</version>
   <name>Recurring</name>
   <description>A Java implementation of the ideas in Martin Fowler's "Recurring Events for Calendars".</description>
+
+  <organization>
+    <name>Logic Squad</name>
+    <url>http://logicsquad.net/</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>paulh</id>
+      <name>Paul Hoadley</name>
+      <email>paulh@logicsquad.net</email>
+      <organization>Logic Squad</organization>
+      <timezone>Australia/Adelaide</timezone>
+    </developer>
+  </developers>
 </project>
