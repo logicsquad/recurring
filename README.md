@@ -3,10 +3,11 @@ Recurring
 
 Some Java code to represent recurring events.
 
-This will start as an implementation of the ideas in Martin Fowler's
-"Recurring Events for Calendars" (1997). That paper presents only an
-outline of the ideas, and we will use Java 8 features in this
-implementation.
+This will start as an implementation of the ideas in [Martin Fowler's
+"Recurring Events for
+Calendars"](https://martinfowler.com/apsupp/recurring.pdf) (1997). That
+paper presents only an outline of the ideas, and we will use Java 8
+features in this implementation.
 
 Differences
 -----------
