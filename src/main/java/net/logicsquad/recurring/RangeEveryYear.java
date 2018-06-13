@@ -34,8 +34,31 @@ public class RangeEveryYear implements TemporalExpression {
 	
 	@Override
 	public boolean includes(LocalDate date) {
-		// TODO Auto-generated method stub
-		return false;
+		return monthsInclude(date) || startMonthIncludes(date) || endMonthIncludes(date);
 	}
-	
+
+	private boolean monthsInclude(LocalDate date) {
+		int month = date.getMonthValue();
+		return month > startMonth && month < endMonth;
+	}
+
+	private boolean startMonthIncludes(LocalDate date) {
+		if (date.getMonthValue() != startMonth) {
+			return false;
+		} else if (startDay == 0) {
+			return true;
+		} else {
+			return date.getDayOfMonth() >= startDay;
+		}
+	}
+
+	private boolean endMonthIncludes(LocalDate date) {
+		if (date.getMonthValue() != endMonth) {
+			return false;
+		} else if (endDay == 0) {
+			return true;
+		} else {
+			return date.getDayOfMonth() <= endDay;
+		}
+	}
 }
