@@ -20,11 +20,7 @@ public class DayInMonth implements TemporalExpression {
 	}
 
 	private boolean dayMatches(LocalDate date) {
-		System.out.println("date.getDayOfMonth() = " + date.getDayOfMonth());
-		
-		System.out.println("dayIndex = " + dayIndex);
 		boolean result = date.getDayOfWeek().getValue() == dayIndex;
-		System.out.println("dayMatches(): " + result);
 		return result;
 	}
 
