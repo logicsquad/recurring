@@ -3,11 +3,9 @@ package net.logicsquad.recurring;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Union implements TemporalExpression {
-	private final List<TemporalExpression> expressions;
-
+public class Union extends CompositeTemporalExpression {
 	public Union(List<TemporalExpression> expressions) {
-		this.expressions = expressions;
+		super(expressions);
 		return;
 	}
 

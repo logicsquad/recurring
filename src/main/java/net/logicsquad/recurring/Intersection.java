@@ -3,11 +3,9 @@ package net.logicsquad.recurring;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Intersection implements TemporalExpression {
-	private List<TemporalExpression> expressions;
-
+public class Intersection extends CompositeTemporalExpression {
 	public Intersection(List<TemporalExpression> expressions) {
-		this.expressions = expressions;
+		super(expressions);
 		return;
 	}
 
