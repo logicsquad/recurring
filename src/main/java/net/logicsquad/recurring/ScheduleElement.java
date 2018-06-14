@@ -2,7 +2,7 @@ package net.logicsquad.recurring;
 
 import java.time.LocalDate;
 
-class ScheduleElement {
+public class ScheduleElement {
 	private final String event;
 	private final TemporalExpression expression;
 
