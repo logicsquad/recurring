@@ -4,13 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Test;
 
 public class ScheduleTest {
-	private TemporalExpression dayInMonth = new DayInMonth(1, 2);
+	private TemporalExpression dayInMonth = new DayInMonth(DayOfWeek.MONDAY, 2);
 	private TemporalExpression range = new RangeEveryYear(1, 6);
 
 	private Intersection intersection = Intersection.of(dayInMonth, range);

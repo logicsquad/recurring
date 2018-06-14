@@ -3,12 +3,13 @@ package net.logicsquad.recurring;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 import org.junit.Test;
 
 public class ScheduleElementTest {
-	private TemporalExpression dayInMonth = new DayInMonth(1, 2);
+	private TemporalExpression dayInMonth = new DayInMonth(DayOfWeek.MONDAY, 2);
 	private TemporalExpression range = new RangeEveryYear(1, 6);
 
 	private Intersection intersection = Intersection.of(dayInMonth, range);

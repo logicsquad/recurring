@@ -1,16 +1,17 @@
 package net.logicsquad.recurring;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 
 public class DayInMonth implements TemporalExpression {
-	private int count;
-	private int dayIndex;
+	private int ordinal;
 
-	public DayInMonth(int dayIndex, int count) {
-		this.dayIndex = dayIndex;
-		this.count = count;
+	private DayOfWeek day;
+	public DayInMonth(DayOfWeek day, int ordinal) {
+		this.day = day;
+		this.ordinal = ordinal;
 		return;
 	}
 
@@ -20,12 +21,12 @@ public class DayInMonth implements TemporalExpression {
 	}
 
 	private boolean dayMatches(LocalDate date) {
-		boolean result = date.getDayOfWeek().getValue() == dayIndex;
+		boolean result = date.getDayOfWeek() == day;
 		return result;
 	}
 
 	private boolean weekMatches(LocalDate date) {
-		if (count > 0) {
+		if (ordinal > 0) {
 			return weekFromStartMatches(date);
 		} else {
 			return weekFromEndMatches(date);
@@ -33,11 +34,11 @@ public class DayInMonth implements TemporalExpression {
 	}
 
 	private boolean weekFromStartMatches(LocalDate date) {
-		return weekInMonth(date.getDayOfMonth()) == count;
+		return weekInMonth(date.getDayOfMonth()) == ordinal;
 	}
 
 	private boolean weekFromEndMatches(LocalDate date) {
-		return weekInMonth(daysLeftInMonth(date) + 1) == Math.abs(count);
+		return weekInMonth(daysLeftInMonth(date) + 1) == Math.abs(ordinal);
 	}
 
 	private int weekInMonth(int day) {
