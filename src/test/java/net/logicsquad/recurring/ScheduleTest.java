@@ -73,12 +73,12 @@ public class ScheduleTest {
 	@Test
 	public void nextOccurrenceReturnsExpectedResults() {
 		assertEquals(LocalDate.of(2018, 1, 8), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2017, 6, 30)));
-//		assertEquals(LocalDate.of(2018, 1, 8), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2017, 9, 1)));
-//		assertEquals(LocalDate.of(2018, 1, 8), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2017, 12, 20)));
-//		assertEquals(LocalDate.of(2018, 1, 8), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 1)));
-//		assertEquals(LocalDate.of(2018, 1, 8), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 8)));
-//		assertEquals(LocalDate.of(2018, 2, 12), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 9)));
-//		assertEquals(LocalDate.of(2018, 3, 12), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 2, 13)));
+		assertEquals(LocalDate.of(2018, 1, 8), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2017, 9, 1)));
+		assertEquals(LocalDate.of(2018, 1, 8), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2017, 12, 20)));
+		assertEquals(LocalDate.of(2018, 1, 8), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 1)));
+		assertEquals(LocalDate.of(2018, 1, 8), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 8)));
+		assertEquals(LocalDate.of(2018, 2, 12), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 9)));
+		assertEquals(LocalDate.of(2018, 3, 12), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 2, 13)));
 		return;
 	}
 }
