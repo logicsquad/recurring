@@ -2,6 +2,17 @@ package net.logicsquad.recurring;
 
 import java.time.LocalDate;
 
-public interface ScheduleElement {
-	boolean isOccurring(LocalDate date);
+class ScheduleElement {
+	private final String event;
+	private final TemporalExpression expression;
+
+	public ScheduleElement(String event, TemporalExpression expression) {
+		this.event = event;
+		this.expression = expression;
+		return;
+	}
+
+	public boolean isOccurring(LocalDate date) {
+		return expression.includes(date);
+	}
 }
