@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -12,7 +11,7 @@ public class UnionTest {
 	RangeEveryYear range = new RangeEveryYear(6, 9);
 	DayInMonth day = new DayInMonth(7, 1);
 
-	Union union = new Union(Arrays.asList(range, day));
+	Union union = Union.of(range, day);
 
 	@Test
 	public void unionIncludesAnyDayInRange() {

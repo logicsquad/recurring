@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -12,7 +11,7 @@ public class IntersectionTest {
 	private TemporalExpression dayInMonth = new DayInMonth(1, 2);
 	private TemporalExpression range = new RangeEveryYear(1, 6);
 
-	private Intersection intersection = new Intersection(Arrays.asList(dayInMonth, range));
+	private Intersection intersection = Intersection.of(dayInMonth, range);
 
 	private LocalDate in_1 = LocalDate.of(2018, 1, 8);
 	private LocalDate in_2 = LocalDate.of(2018, 2, 12);
