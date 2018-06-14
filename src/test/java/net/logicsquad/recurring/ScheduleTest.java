@@ -7,10 +7,9 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
-public class BasicScheduleTest {
+public class ScheduleTest {
 	private TemporalExpression dayInMonth = new DayInMonth(1, 2);
 	private TemporalExpression range = new RangeEveryYear(1, 6);
 
@@ -29,12 +28,7 @@ public class BasicScheduleTest {
 	private LocalDate out_2 = LocalDate.of(2018, 8, 13);
 	private LocalDate out_3 = LocalDate.of(2018, 9, 10);
 
-	private BasicSchedule schedule = new BasicSchedule();
-
-	@Before
-	public void setup() {
-		schedule.addElement(element);
-	}
+	private Schedule schedule = Schedule.of(element);
 
 	@Test
 	public void includesExpectedDatesForKnownEvent() {
