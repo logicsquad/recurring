@@ -15,4 +15,8 @@ class ScheduleElement {
 	public boolean isOccurring(LocalDate date) {
 		return expression.includes(date);
 	}
+
+	public String event() {
+		return event;
+	}
 }
