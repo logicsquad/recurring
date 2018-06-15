@@ -5,12 +5,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.MonthDay;
 
 import org.junit.Test;
 
 public class RangeEveryYearTest {
-	private RangeEveryYear fullRange = new RangeEveryYear(Month.MARCH, Month.JULY, 12, 20);
-
+	private RangeEveryYear fullRange = new RangeEveryYear(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.JULY, 20));
 	private RangeEveryYear monthsRange = new RangeEveryYear(Month.APRIL, Month.AUGUST);
 
 	private RangeEveryYear monthRange = new RangeEveryYear(Month.JUNE);

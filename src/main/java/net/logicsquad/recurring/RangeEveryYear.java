@@ -2,6 +2,7 @@ package net.logicsquad.recurring;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.MonthDay;
 
 /**
  * Describes a contiguous range of days in any year.
@@ -30,22 +31,18 @@ public class RangeEveryYear implements TemporalExpression {
 	private int endDay;
 
 	/**
-	 * Constructor taking months and days.
+	 * Constructor taking {@link MonthDay}s.
 	 * 
-	 * @param startMonth
-	 *            first month in range
-	 * @param endMonth
-	 *            last month in range
-	 * @param startDay
-	 *            first day (in {@code startMonth})
-	 * @param endDay
-	 *            last day (in {@code endMonth})
+	 * @param start
+	 *            first day in range
+	 * @param end
+	 *            last day in range
 	 */
-	public RangeEveryYear(Month startMonth, Month endMonth, int startDay, int endDay) {
-		this.startMonth = startMonth;
-		this.endMonth = endMonth;
-		this.startDay = startDay;
-		this.endDay = endDay;
+	public RangeEveryYear(MonthDay start, MonthDay end) {
+		this.startMonth = start.getMonth();
+		this.endMonth = end.getMonth();
+		this.startDay = start.getDayOfMonth();
+		this.endDay = end.getDayOfMonth();
 		return;
 	}
 
