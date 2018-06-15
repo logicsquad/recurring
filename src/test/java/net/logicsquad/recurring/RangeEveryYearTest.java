@@ -20,6 +20,7 @@ public class RangeEveryYearTest {
 	private LocalDate fullRange_in3 = LocalDate.of(2018, 6, 30);
 	private LocalDate fullRange_out1 = LocalDate.of(2019, 8, 1);
 	private LocalDate fullRange_out2 = LocalDate.of(2020, 1, 31);
+	private LocalDate fullRange_out3 = LocalDate.of(2020, 3, 11);
 
 	private LocalDate monthsRange_in1 = LocalDate.of(2018, 4, 1);
 	private LocalDate monthsRange_in2 = LocalDate.of(2018, 8, 1);
@@ -45,6 +46,7 @@ public class RangeEveryYearTest {
 	public void includesReturnsFalseForDatesNotInFullRange() {
 		assertFalse(fullRange.includes(fullRange_out1));
 		assertFalse(fullRange.includes(fullRange_out2));
+		assertFalse(fullRange.includes(fullRange_out3));
 		return;
 	}
 
