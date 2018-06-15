@@ -5,11 +5,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 
 import org.junit.Test;
 
 public class UnionTest {
-	RangeEveryYear range = new RangeEveryYear(6, 9);
+	RangeEveryYear range = new RangeEveryYear(Month.JUNE, Month.SEPTEMBER);
 	DayInMonth day = new DayInMonth(DayOfWeek.SUNDAY, 1);
 
 	Union union = Union.of(range, day);

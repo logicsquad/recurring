@@ -4,15 +4,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 import org.junit.Test;
 
 public class RangeEveryYearTest {
-	private RangeEveryYear fullRange = new RangeEveryYear(3, 7, 12, 20);
+	private RangeEveryYear fullRange = new RangeEveryYear(Month.MARCH, Month.JULY, 12, 20);
 
-	private RangeEveryYear monthsRange = new RangeEveryYear(4, 8);
+	private RangeEveryYear monthsRange = new RangeEveryYear(Month.APRIL, Month.AUGUST);
 
-	private RangeEveryYear monthRange = new RangeEveryYear(6);
+	private RangeEveryYear monthRange = new RangeEveryYear(Month.JUNE);
 
 	private LocalDate fullRange_in1 = LocalDate.of(2018, 3, 12);
 	private LocalDate fullRange_in2 = LocalDate.of(2018, 7, 20);

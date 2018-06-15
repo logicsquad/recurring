@@ -5,11 +5,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 
 import org.junit.Test;
 
 public class DifferenceTest {
-	private TemporalExpression months = new RangeEveryYear(6, 9);
+	private TemporalExpression months = new RangeEveryYear(Month.JUNE, Month.SEPTEMBER);
 	private TemporalExpression days = new DayInMonth(DayOfWeek.TUESDAY, -1);
 
 	private TemporalExpression difference = Difference.of(months, days);
