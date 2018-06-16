@@ -10,7 +10,7 @@ import java.time.temporal.TemporalAdjusters;
 import org.junit.Test;
 
 public class DayInMonthTest {
-	private DayInMonth exp = new DayInMonth(DayOfWeek.MONDAY, 2);
+	private DayInMonth exp = DayInMonth.of(DayOfWeek.MONDAY, 2);
 
 	private LocalDate match1 = LocalDate.of(2018, 6, 11);
 

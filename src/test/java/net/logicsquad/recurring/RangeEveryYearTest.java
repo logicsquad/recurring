@@ -10,10 +10,9 @@ import java.time.MonthDay;
 import org.junit.Test;
 
 public class RangeEveryYearTest {
-	private RangeEveryYear fullRange = new RangeEveryYear(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.JULY, 20));
-	private RangeEveryYear monthsRange = new RangeEveryYear(Month.APRIL, Month.AUGUST);
-
-	private RangeEveryYear monthRange = new RangeEveryYear(Month.JUNE);
+	private RangeEveryYear fullRange = RangeEveryYear.of(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.JULY, 20));
+	private RangeEveryYear monthsRange = RangeEveryYear.of(Month.APRIL, Month.AUGUST);
+	private RangeEveryYear monthRange = RangeEveryYear.of(Month.JUNE);
 
 	private LocalDate fullRange_in1 = LocalDate.of(2018, 3, 12);
 	private LocalDate fullRange_in2 = LocalDate.of(2018, 7, 20);

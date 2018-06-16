@@ -10,8 +10,8 @@ import java.time.Month;
 import org.junit.Test;
 
 public class UnionTest {
-	RangeEveryYear range = new RangeEveryYear(Month.JUNE, Month.SEPTEMBER);
-	DayInMonth day = new DayInMonth(DayOfWeek.SUNDAY, 1);
+	RangeEveryYear range = RangeEveryYear.of(Month.JUNE, Month.SEPTEMBER);
+	DayInMonth day = DayInMonth.of(DayOfWeek.SUNDAY, 1);
 
 	Union union = Union.of(range, day);
 

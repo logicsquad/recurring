@@ -27,10 +27,24 @@ public class ScheduleElement {
 	 * @param expression
 	 *            {@link TemporalExpression} describing event's recurrence
 	 */
-	public ScheduleElement(String event, TemporalExpression expression) {
+	private ScheduleElement(String event, TemporalExpression expression) {
 		this.event = event;
 		this.expression = expression;
 		return;
+	}
+
+	/**
+	 * Returns {@link ScheduleElement} for {@code event} with recurrence described
+	 * by {@code expression}.
+	 * 
+	 * @param event
+	 *            string representing some event
+	 * @param expression
+	 *            {@link TemporalExpression} describing event's recurrence
+	 * @return {@link ScheduleElement}
+	 */
+	public static ScheduleElement of(String event, TemporalExpression expression) {
+		return new ScheduleElement(event, expression);
 	}
 
 	/**

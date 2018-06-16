@@ -10,14 +10,14 @@ import java.time.Month;
 import org.junit.Test;
 
 public class ScheduleElementTest {
-	private TemporalExpression dayInMonth = new DayInMonth(DayOfWeek.MONDAY, 2);
-	private TemporalExpression range = new RangeEveryYear(Month.JANUARY, Month.JUNE);
+	private TemporalExpression dayInMonth = DayInMonth.of(DayOfWeek.MONDAY, 2);
+	private TemporalExpression range = RangeEveryYear.of(Month.JANUARY, Month.JUNE);
 
 	private Intersection intersection = Intersection.of(dayInMonth, range);
 
 	private static final String EVENT = "Some event";
 
-	private ScheduleElement element = new ScheduleElement(EVENT, intersection);
+	private ScheduleElement element = ScheduleElement.of(EVENT, intersection);
 
 	private LocalDate in_1 = LocalDate.of(2018, 1, 8);
 	private LocalDate in_2 = LocalDate.of(2018, 2, 12);

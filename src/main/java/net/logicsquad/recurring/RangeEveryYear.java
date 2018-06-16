@@ -31,49 +31,65 @@ public class RangeEveryYear implements TemporalExpression {
 	private int endDay;
 
 	/**
-	 * Constructor taking {@link MonthDay}s.
-	 * 
-	 * @param start
-	 *            first day in range
-	 * @param end
-	 *            last day in range
-	 */
-	public RangeEveryYear(MonthDay start, MonthDay end) {
-		this.startMonth = start.getMonth();
-		this.endMonth = end.getMonth();
-		this.startDay = start.getDayOfMonth();
-		this.endDay = end.getDayOfMonth();
-		return;
-	}
-
-	/**
-	 * Constructor taking months.
+	 * Constructor
 	 * 
 	 * @param startMonth
-	 *            first month in range
+	 *            start month
 	 * @param endMonth
-	 *            last month in range
+	 *            end month
+	 * @param startDay
+	 *            first day (in start month) of range, or zero to include whole of
+	 *            start month
+	 * @param endDay
+	 *            last day (in end month) of range, or zero to include whole of end
+	 *            month
 	 */
-	public RangeEveryYear(Month startMonth, Month endMonth) {
+	private RangeEveryYear(Month startMonth, Month endMonth, int startDay, int endDay) {
 		this.startMonth = startMonth;
 		this.endMonth = endMonth;
-		this.startDay = 0;
-		this.endDay = 0;
+		this.startDay = startDay;
+		this.endDay = endDay;
 		return;
 	}
 
 	/**
-	 * Constructor taking a month.
+	 * Returns {@code RangeEveryYear} spanning from {@code start} day through
+	 * {@code end} day (inclusive).
+	 * 
+	 * @param start
+	 *            start day
+	 * @param end
+	 *            end day
+	 * @return {@code RangeEveryYear}
+	 */
+	public static RangeEveryYear of(MonthDay start, MonthDay end) {
+		return new RangeEveryYear(start.getMonth(), end.getMonth(), start.getDayOfMonth(), end.getDayOfMonth());
+	}
+
+	/**
+	 * Returns {@code RangeEveryYear} spanning from beginning of {@code startMonth}
+	 * through end of {@code endMonth} (inclusive).
+	 * 
+	 * @param startMonth
+	 *            start month
+	 * @param endMonth
+	 *            end month
+	 * @return {@code RangeEveryYear}
+	 */
+	public static RangeEveryYear of(Month startMonth, Month endMonth) {
+		return new RangeEveryYear(startMonth, endMonth, 0, 0);
+	}
+
+	/**
+	 * Returns {@code RangeEveryYear} spanning from beginning of {@code month}
+	 * through end of {@code month} (inclusive).
 	 * 
 	 * @param month
-	 *            month in range
+	 *            a month
+	 * @return {@code RangeEveryYear}
 	 */
-	public RangeEveryYear(Month month) {
-		this.startMonth = month;
-		this.endMonth = month;
-		this.startDay = 0;
-		this.endDay = 0;
-		return;
+	public static RangeEveryYear of(Month month) {
+		return new RangeEveryYear(month, month, 0, 0);
 	}
 
 	@Override

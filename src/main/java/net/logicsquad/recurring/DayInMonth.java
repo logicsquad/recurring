@@ -32,10 +32,14 @@ public class DayInMonth implements TemporalExpression {
 	 * @param ordinal
 	 *            ordinal position within a month
 	 */
-	public DayInMonth(DayOfWeek day, int ordinal) {
+	private DayInMonth(DayOfWeek day, int ordinal) {
 		this.day = day;
 		this.ordinal = ordinal;
 		return;
+	}
+
+	public static DayInMonth of(DayOfWeek day, int ordinal) {
+		return new DayInMonth(day, ordinal);
 	}
 
 	@Override
