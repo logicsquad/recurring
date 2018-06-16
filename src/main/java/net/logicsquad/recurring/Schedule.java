@@ -1,7 +1,6 @@
 package net.logicsquad.recurring;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -59,59 +58,5 @@ public interface Schedule {
 	 */
 	static Schedule of(ScheduleElement... elements) {
 		return new BasicSchedule(Arrays.asList(elements));
-	}
-
-	/**
-	 * A basic implementation of {@link Schedule} for use by the static factory
-	 * method.
-	 */
-	static class BasicSchedule implements Schedule {
-		/**
-		 * {@link ScheduleElement}s comprising this {@code Schedule}
-		 */
-		private final List<ScheduleElement> elements;
-
-		/**
-		 * Constructor
-		 * 
-		 * @param elements
-		 *            comprising {@link ScheduleElement}s
-		 */
-		public BasicSchedule(List<ScheduleElement> elements) {
-			this.elements = elements;
-			return;
-		}
-
-		@Override
-		public boolean isOccurring(String event, LocalDate date) {
-			for (ScheduleElement e : elements) {
-				if (e.event().equals(event) && e.isOccurring(date)) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-		@Override
-		public List<LocalDate> dates(String event, LocalDate start, LocalDate end) {
-			List<LocalDate> result = new ArrayList<>();
-			LocalDate cursor = start;
-			while (cursor.equals(end) || cursor.isBefore(end)) {
-				if (isOccurring(event, cursor)) {
-					result.add(cursor);
-				}
-				cursor = cursor.plusDays(1);
-			}
-			return result;
-		}
-
-		@Override
-		public LocalDate nextOccurrence(String event, LocalDate date) {
-			LocalDate cursor = date;
-			while (!isOccurring(event, cursor)) {
-				cursor = cursor.plusDays(1);
-			}
-			return cursor;
-		}
 	}
 }
