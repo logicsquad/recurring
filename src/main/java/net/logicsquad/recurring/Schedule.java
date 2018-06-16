@@ -11,12 +11,51 @@ import java.util.List;
  * @author paulh
  */
 public interface Schedule {
+	/**
+	 * Is {@code event} occurring on {@code date}?
+	 * 
+	 * @param event
+	 *            string representation of an event
+	 * @param date
+	 *            a {@link LocalDate}
+	 * @return {@code true} if {@code event} is occurring on {@code date}, otherwise
+	 *         {@code false}
+	 */
 	boolean isOccurring(String event, LocalDate date);
 
+	/**
+	 * Returns a list of {@link LocalDate}s on which {@code event} is occurring
+	 * between {@code start} and {@code end} dates (inclusive).
+	 * 
+	 * @param event
+	 *            string representation of an event
+	 * @param start
+	 *            start date
+	 * @param end
+	 *            end date
+	 * @return list of dates on which {@code event} is occurring
+	 */
 	List<LocalDate> dates(String event, LocalDate start, LocalDate end);
 
+	/**
+	 * Returns the next date on which {@code event} is occurring, on or after
+	 * {@code date}.
+	 * 
+	 * @param event
+	 *            string representation of an event
+	 * @param date
+	 *            an arbitrary date
+	 * @return date of next occurrence of {@code event}
+	 */
 	LocalDate nextOccurrence(String event, LocalDate date);
 
+	/**
+	 * Returns a {@link Schedule} composed of the supplied {@code elements}.
+	 * 
+	 * @param elements
+	 *            {@link ScheduleElement}s comprising the {@link Schedule}
+	 * @return a {@link Schedule}
+	 */
 	static Schedule of(ScheduleElement... elements) {
 		BasicSchedule result = new BasicSchedule();
 		for (ScheduleElement e : elements) {
@@ -25,9 +64,22 @@ public interface Schedule {
 		return result;
 	}
 
+	/**
+	 * A basic implementation of {@link Schedule} for use by the static factory
+	 * method.
+	 */
 	static class BasicSchedule implements Schedule {
+		/**
+		 * {@link ScheduleElement}s comprising this {@code Schedule}
+		 */
 		private List<ScheduleElement> elements = new ArrayList<>();
 
+		/**
+		 * Adds a {@link ScheduleElement} to this {@link Schedule}.
+		 * 
+		 * @param element
+		 *            {@link ScheduleElement}
+		 */
 		public void addElement(ScheduleElement element) {
 			elements.add(element);
 			return;
