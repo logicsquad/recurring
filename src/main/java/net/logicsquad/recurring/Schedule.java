@@ -2,6 +2,7 @@ package net.logicsquad.recurring;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -57,11 +58,7 @@ public interface Schedule {
 	 * @return a {@link Schedule}
 	 */
 	static Schedule of(ScheduleElement... elements) {
-		BasicSchedule result = new BasicSchedule();
-		for (ScheduleElement e : elements) {
-			result.addElement(e);
-		}
-		return result;
+		return new BasicSchedule(Arrays.asList(elements));
 	}
 
 	/**
@@ -72,16 +69,16 @@ public interface Schedule {
 		/**
 		 * {@link ScheduleElement}s comprising this {@code Schedule}
 		 */
-		private List<ScheduleElement> elements = new ArrayList<>();
+		private final List<ScheduleElement> elements;
 
 		/**
-		 * Adds a {@link ScheduleElement} to this {@link Schedule}.
+		 * Constructor
 		 * 
-		 * @param element
-		 *            {@link ScheduleElement}
+		 * @param elements
+		 *            comprising {@link ScheduleElement}s
 		 */
-		public void addElement(ScheduleElement element) {
-			elements.add(element);
+		public BasicSchedule(List<ScheduleElement> elements) {
+			this.elements = elements;
 			return;
 		}
 
