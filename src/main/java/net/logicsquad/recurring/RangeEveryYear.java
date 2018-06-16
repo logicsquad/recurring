@@ -149,4 +149,46 @@ public class RangeEveryYear implements TemporalExpression {
 			return date.getDayOfMonth() <= endDay;
 		}
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof RangeEveryYear)) {
+			return false;
+		}
+		RangeEveryYear other = (RangeEveryYear) o;
+		return endDay == other.endDay && endMonth == other.endMonth && startDay == other.startDay
+				&& startMonth == other.startMonth;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + endDay;
+		result = prime * result + ((endMonth == null) ? 0 : endMonth.hashCode());
+		result = prime * result + startDay;
+		result = prime * result + ((startMonth == null) ? 0 : startMonth.hashCode());
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		sb.append(this.getClass().getSimpleName());
+		sb.append(":");
+		sb.append(" startMonth=");
+		sb.append(startMonth);
+		sb.append(" endMonth=");
+		sb.append(endMonth);
+		sb.append(" startDay=");
+		sb.append(startDay);
+		sb.append(" endDay=");
+		sb.append(endDay);
+		sb.append("]");
+		return sb.toString();
+	}
 }

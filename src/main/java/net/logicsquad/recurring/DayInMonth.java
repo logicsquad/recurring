@@ -128,4 +128,39 @@ public class DayInMonth implements TemporalExpression {
 	private int daysLeftInMonth(LocalDate date) {
 		return (int) date.until(date.with(TemporalAdjusters.lastDayOfMonth()), ChronoUnit.DAYS);
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+		if (!(o instanceof DayInMonth)) {
+			return false;
+		}
+		DayInMonth other = (DayInMonth) o;
+		return other.ordinal == ordinal && other.day == day;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((day == null) ? 0 : day.hashCode());
+		result = prime * result + ordinal;
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		sb.append(this.getClass().getSimpleName());
+		sb.append(":");
+		sb.append(" day=");
+		sb.append(day);
+		sb.append(" ordinal=");
+		sb.append(ordinal);
+		sb.append("]");
+		return sb.toString();
+	}
 }
