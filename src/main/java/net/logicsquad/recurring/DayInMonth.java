@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Objects;
 
 /**
  * Describes an ordinal weekday of a month, such as "first Monday", "second
@@ -31,8 +32,16 @@ public class DayInMonth implements TemporalExpression {
 	 *            a {@link DayOfWeek}
 	 * @param ordinal
 	 *            ordinal position within a month
+	 * @throws NullPointerException
+	 *             if {@code day} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code ordinal} is 0
 	 */
 	private DayInMonth(DayOfWeek day, int ordinal) {
+		Objects.requireNonNull(day);
+		if (ordinal == 0) {
+			throw new IllegalArgumentException("DayInMonth.ordinal cannot be 0.");
+		}
 		this.day = day;
 		this.ordinal = ordinal;
 		return;

@@ -155,4 +155,20 @@ public class DayInMonthTest {
 		assertNotEquals(exp.hashCode(), diff1.hashCode());
 		return;
 	}
+
+	/**
+	 * {@link DayOfWeek} argument cannot be {@code null}.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void ofThrowsOnNullDayOfWeek() {
+		DayInMonth.of(null, 1);
+	}
+
+	/**
+	 * A value of 0 for {@code ordinal} doesn't make sense.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void ofThrowsOnZeroOrdinal() {
+		DayInMonth.of(DayOfWeek.MONDAY, 0);
+	}
 }
