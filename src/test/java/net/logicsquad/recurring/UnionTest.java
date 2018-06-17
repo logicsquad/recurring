@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -49,5 +50,20 @@ public class UnionTest {
 		assertFalse(union.includes(LocalDate.of(2020, 4, 7)));
 		assertFalse(union.includes(LocalDate.of(2021, 5, 11)));
 		return;
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullList() {
+		Union.of((List<TemporalExpression>) null);
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullExpression() {
+		Union.of((TemporalExpression) null);
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullExpressionArray() {
+		Union.of((TemporalExpression[]) null);
 	}
 }

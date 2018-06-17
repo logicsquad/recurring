@@ -17,6 +17,8 @@ public class Intersection extends CompositeTemporalExpression {
 	 * 
 	 * @param expressions
 	 *            sub-expressions
+	 * @throws NullPointerException
+	 *             if {@code expressions} is {@code null}
 	 */
 	private Intersection(List<TemporalExpression> expressions) {
 		super(expressions);
@@ -29,6 +31,8 @@ public class Intersection extends CompositeTemporalExpression {
 	 * @param expressions
 	 *            a list of {@link TemporalExpression}s
 	 * @return new object
+	 * @throws NullPointerException
+	 *             if {@code expressions} is {@code null}
 	 */
 	public static Intersection of(List<TemporalExpression> expressions) {
 		return new Intersection(expressions);
@@ -40,8 +44,12 @@ public class Intersection extends CompositeTemporalExpression {
 	 * @param expressions
 	 *            {@link TemporalExpression}s
 	 * @return new object
+	 * @throws NullPointerException
+	 *             if any {@link TemporalExpression} in {@code expressions} is
+	 *             {@code null}
 	 */
 	public static Intersection of(TemporalExpression... expressions) {
+		checkExpressionsForNull(expressions);
 		return new Intersection(Arrays.asList(expressions));
 	}
 

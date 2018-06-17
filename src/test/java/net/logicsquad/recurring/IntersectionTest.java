@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -64,5 +65,20 @@ public class IntersectionTest {
 		assertFalse(intersection.includes(out_11));
 		assertFalse(intersection.includes(out_12));
 		return;
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullList() {
+		Intersection.of((List<TemporalExpression>) null);
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullExpression() {
+		Intersection.of((TemporalExpression) null);
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullExpressionArray() {
+		Intersection.of((TemporalExpression[]) null);
 	}
 }

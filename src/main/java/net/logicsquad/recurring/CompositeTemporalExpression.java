@@ -1,6 +1,7 @@
 package net.logicsquad.recurring;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -21,8 +22,11 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 	 * 
 	 * @param expressions
 	 *            a collection of sub-expressions
+	 * @throws NullPointerException
+	 *             if {@code expressions} is {@code null}
 	 */
 	protected CompositeTemporalExpression(List<TemporalExpression> expressions) {
+		Objects.requireNonNull(expressions);
 		this.expressions = expressions;
 		return;
 	}
@@ -36,5 +40,21 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 		sb.append(expressions.stream().map(e -> e.toString()).collect(Collectors.joining(", ")));
 		sb.append("]");
 		return sb.toString();
+	}
+
+	/**
+	 * Checks each {@link TemporalExpression} in {@code expressions} for
+	 * {@code null}, throwing {@link NullPointerException} if it finds one.
+	 * 
+	 * @param expressions
+	 *            array of {@link TemporalExpression}s
+	 * @throws NullPointerException
+	 *             if any element of {@code expressions} is {@code null}
+	 */
+	protected static void checkExpressionsForNull(TemporalExpression... expressions) {
+		for (TemporalExpression e : expressions) {
+			Objects.requireNonNull(e);
+		}
+		return;
 	}
 }
