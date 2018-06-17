@@ -3,6 +3,7 @@ package net.logicsquad.recurring;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.MonthDay;
+import java.util.Objects;
 
 /**
  * Describes a contiguous range of days in any year.
@@ -45,6 +46,8 @@ public class RangeEveryYear implements TemporalExpression {
 	 *            month
 	 */
 	private RangeEveryYear(Month startMonth, Month endMonth, int startDay, int endDay) {
+		Objects.requireNonNull(startMonth);
+		Objects.requireNonNull(endMonth);
 		this.startMonth = startMonth;
 		this.endMonth = endMonth;
 		this.startDay = startDay;
@@ -61,8 +64,12 @@ public class RangeEveryYear implements TemporalExpression {
 	 * @param end
 	 *            end day
 	 * @return {@code RangeEveryYear}
+	 * @throws NullPointerException
+	 *             if either argument is {@code null}
 	 */
 	public static RangeEveryYear of(MonthDay start, MonthDay end) {
+		Objects.requireNonNull(start);
+		Objects.requireNonNull(end);
 		return new RangeEveryYear(start.getMonth(), end.getMonth(), start.getDayOfMonth(), end.getDayOfMonth());
 	}
 
@@ -75,8 +82,12 @@ public class RangeEveryYear implements TemporalExpression {
 	 * @param endMonth
 	 *            end month
 	 * @return {@code RangeEveryYear}
+	 * @throws NullPointerException
+	 *             if either argument is {@code null}
 	 */
 	public static RangeEveryYear of(Month startMonth, Month endMonth) {
+		Objects.requireNonNull(startMonth);
+		Objects.requireNonNull(endMonth);
 		return new RangeEveryYear(startMonth, endMonth, 0, 0);
 	}
 
@@ -87,8 +98,11 @@ public class RangeEveryYear implements TemporalExpression {
 	 * @param month
 	 *            a month
 	 * @return {@code RangeEveryYear}
+	 * @throws NullPointerException
+	 *             if argument is {@code null}
 	 */
 	public static RangeEveryYear of(Month month) {
+		Objects.requireNonNull(month);
 		return new RangeEveryYear(month, month, 0, 0);
 	}
 

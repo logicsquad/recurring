@@ -237,4 +237,60 @@ public class RangeEveryYearTest {
 		assertNotEquals(monthRange.hashCode(), monthRangeDiff1.hashCode());
 		return;
 	}
+
+	/**
+	 * Arguments to {@code of()} cannot be {@code null}.
+	 */
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullMonth() {
+		RangeEveryYear.of(null);
+	}
+
+	/**
+	 * Arguments to {@code of()} cannot be {@code null}.
+	 */
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullFirstMonth() {
+		RangeEveryYear.of(null, Month.APRIL);
+	}
+
+	/**
+	 * Arguments to {@code of()} cannot be {@code null}.
+	 */
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullSecondMonth() {
+		RangeEveryYear.of(Month.DECEMBER, null);
+	}
+
+	/**
+	 * Arguments to {@code of()} cannot be {@code null}.
+	 */
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullBothMonths() {
+		RangeEveryYear.of((Month) null, (Month) null);
+	}
+
+	/**
+	 * Arguments to {@code of()} cannot be {@code null}.
+	 */
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullFirstMonthDay() {
+		RangeEveryYear.of(null, MonthDay.of(Month.JULY, 1));
+	}
+
+	/**
+	 * Arguments to {@code of()} cannot be {@code null}.
+	 */
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullSecondMonthDay() {
+		RangeEveryYear.of(MonthDay.of(Month.JUNE, 12), null);
+	}
+
+	/**
+	 * Arguments to {@code of()} cannot be {@code null}.
+	 */
+	@Test(expected=NullPointerException.class)
+	public void ofThrowsOnNullBothMonthDays() {
+		RangeEveryYear.of((MonthDay) null, (MonthDay) null);
+	}
 }
