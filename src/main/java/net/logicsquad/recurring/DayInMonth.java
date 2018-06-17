@@ -26,7 +26,10 @@ public class DayInMonth implements TemporalExpression {
 	/**
 	 * Constructor taking a weekday and an ordinal number. Positive integers
 	 * correspond to "first", "second" and so on. Negative integers correspond to
-	 * "last", "second-to-last", and so on.
+	 * "last", "second-to-last", and so on. {@code ordinal} must be in the range
+	 * {@code [-5, 5]}, <em>excluding</em> {@code 0}. That is, the "0th {@code day}"
+	 * in the month doesn't make sense, and no month spans over more than five
+	 * calendar weeks.
 	 * 
 	 * @param day
 	 *            a {@link DayOfWeek}
@@ -35,12 +38,13 @@ public class DayInMonth implements TemporalExpression {
 	 * @throws NullPointerException
 	 *             if {@code day} is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if {@code ordinal} is 0
+	 *             if {@code ordinal} is not in {@code [-5, 5]}, <em>excluding</em>
+	 *             {@code 0}
 	 */
 	private DayInMonth(DayOfWeek day, int ordinal) {
 		Objects.requireNonNull(day);
-		if (ordinal == 0) {
-			throw new IllegalArgumentException("DayInMonth.ordinal cannot be 0.");
+		if (ordinal == 0 || ordinal < -5 || ordinal > 5) {
+			throw new IllegalArgumentException("ordinal=" + ordinal + " is not in [-5, 5] excluding 0.");
 		}
 		this.day = day;
 		this.ordinal = ordinal;

@@ -171,4 +171,20 @@ public class DayInMonthTest {
 	public void ofThrowsOnZeroOrdinal() {
 		DayInMonth.of(DayOfWeek.MONDAY, 0);
 	}
+
+	/**
+	 * {@code ordinal} can be at most 5 (either side of 0).
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void ofThrowsOnOrdinalOver5() {
+		DayInMonth.of(DayOfWeek.MONDAY, 6);
+	}
+
+	/**
+	 * {@code ordinal} can be at most 5 (either side of 0).
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void ofThrowsOnOrdinalUnderMinus5() {
+		DayInMonth.of(DayOfWeek.MONDAY, -6);
+	}
 }
