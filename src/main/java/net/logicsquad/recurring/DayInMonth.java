@@ -38,6 +38,16 @@ public class DayInMonth implements TemporalExpression {
 		return;
 	}
 
+	/**
+	 * Returns {@link DayInMonth} with day of week {@code day} and ordinal
+	 * {@code ordinal}. That is, the {@code ordinal}th {@code day} in the month.
+	 * 
+	 * @param day
+	 *            day of week
+	 * @param ordinal
+	 *            ordinal within month
+	 * @return {@link DayInMonth}
+	 */
 	public static DayInMonth of(DayOfWeek day, int ordinal) {
 		return new DayInMonth(day, ordinal);
 	}
