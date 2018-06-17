@@ -67,4 +67,18 @@ public class ScheduleElement {
 	public String event() {
 		return event;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		sb.append(this.getClass().getSimpleName());
+		sb.append(": ");
+		sb.append("event='");
+		sb.append(event);
+		sb.append("' expression=");
+		sb.append(expression);
+		sb.append("]");
+		return sb.toString();
+	}
 }

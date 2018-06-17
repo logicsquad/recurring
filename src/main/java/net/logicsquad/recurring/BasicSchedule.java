@@ -3,6 +3,7 @@ package net.logicsquad.recurring;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A basic implementation of {@link Schedule} for use by
@@ -57,5 +58,16 @@ final class BasicSchedule implements Schedule {
 			cursor = cursor.plusDays(1);
 		}
 		return cursor;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		sb.append(this.getClass().getSimpleName());
+		sb.append(": ");
+		sb.append(elements.stream().map(e -> e.toString()).collect(Collectors.joining(", ")));
+		sb.append("]");
+		return sb.toString();
 	}
 }

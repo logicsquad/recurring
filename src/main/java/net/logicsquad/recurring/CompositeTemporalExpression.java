@@ -1,6 +1,7 @@
 package net.logicsquad.recurring;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Superclass for {@link TemporalExpression}s that work by applying some action
@@ -24,5 +25,16 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 	protected CompositeTemporalExpression(List<TemporalExpression> expressions) {
 		this.expressions = expressions;
 		return;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		sb.append(this.getClass().getSimpleName());
+		sb.append(": ");
+		sb.append(expressions.stream().map(e -> e.toString()).collect(Collectors.joining(", ")));
+		sb.append("]");
+		return sb.toString();
 	}
 }
