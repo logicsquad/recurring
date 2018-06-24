@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,7 @@ public class ScheduleTest {
 	private Schedule schedule = Schedule.of(element);
 
 	// List of first 10 elements of stream from 2016-09-01: 2nd Monday, Jan -> Jun
+	// or, reversed, stream from 2018-05-01.
 	private List<LocalDate> expectedFutureDates = new ArrayList<>(Arrays.asList(
 			LocalDate.of(2017, 1, 9),
 			LocalDate.of(2017, 2, 13),
@@ -118,6 +120,16 @@ public class ScheduleTest {
 		assertEquals(LocalDate.of(2018, 1, 8), schedule.previousOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 8)));
 		assertEquals(LocalDate.of(2018, 1, 8), schedule.previousOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 9)));
 		assertEquals(LocalDate.of(2018, 2, 12), schedule.previousOccurrence(KNOWN_EVENT, LocalDate.of(2018, 2, 13)));
+		return;
+	}
+
+	@Test
+	public void pastDatesProducesExpectedResult() {
+		List<LocalDate> expectedPastDates = new ArrayList<>(expectedFutureDates);
+		Collections.reverse(expectedPastDates);
+		List<LocalDate> pastDates = schedule.pastDates(KNOWN_EVENT, LocalDate.of(2018, 5, 1)).limit(10)
+				.collect(Collectors.toList());
+		assertEquals(expectedPastDates, pastDates);
 		return;
 	}
 }
