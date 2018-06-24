@@ -36,7 +36,7 @@ public interface Schedule {
 	 *            end date
 	 * @return list of dates on which {@code event} is occurring
 	 */
-	List<LocalDate> dates(String event, LocalDate start, LocalDate end);
+	List<LocalDate> datesInRange(String event, LocalDate start, LocalDate end);
 
 	/**
 	 * Returns a stream of {@link LocalDate}s on which {@code event} is occurring
@@ -48,7 +48,7 @@ public interface Schedule {
 	 *            start date
 	 * @return stream of dates on which {@code event} is occurring
 	 */
-	Stream<LocalDate> stream(String event, LocalDate start);
+	Stream<LocalDate> futureDates(String event, LocalDate start);
 
 	/**
 	 * Returns the next date on which {@code event} is occurring, on or after

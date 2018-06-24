@@ -40,7 +40,7 @@ final class BasicSchedule implements Schedule {
 	}
 
 	@Override
-	public List<LocalDate> dates(String event, LocalDate start, LocalDate end) {
+	public List<LocalDate> datesInRange(String event, LocalDate start, LocalDate end) {
 		List<LocalDate> result = new ArrayList<>();
 		LocalDate cursor = start;
 		while (cursor.equals(end) || cursor.isBefore(end)) {
@@ -73,7 +73,7 @@ final class BasicSchedule implements Schedule {
 	}
 
 	@Override
-	public Stream<LocalDate> stream(String event, LocalDate start) {
+	public Stream<LocalDate> futureDates(String event, LocalDate start) {
 		return Stream.iterate(nextOccurrence(event, start), seed -> nextOccurrence(event, seed.plusDays(1)));
 	}
 }

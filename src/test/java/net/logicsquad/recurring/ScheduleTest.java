@@ -36,7 +36,7 @@ public class ScheduleTest {
 	private Schedule schedule = Schedule.of(element);
 
 	// List of first 10 elements of stream from 2016-09-01: 2nd Monday, Jan -> Jun
-	private List<LocalDate> expectedStreamResult = new ArrayList<>(Arrays.asList(
+	private List<LocalDate> expectedFutureDates = new ArrayList<>(Arrays.asList(
 			LocalDate.of(2017, 1, 9),
 			LocalDate.of(2017, 2, 13),
 			LocalDate.of(2017, 3, 13),
@@ -77,8 +77,8 @@ public class ScheduleTest {
 	}
 
 	@Test
-	public void datesReturnsExpectedDatesForYear() {
-		List<LocalDate> result = schedule.dates(KNOWN_EVENT, LocalDate.of(2018, 1, 1), LocalDate.of(2018, 12, 31));
+	public void datesInRangeReturnsExpectedDatesForYear() {
+		List<LocalDate> result = schedule.datesInRange(KNOWN_EVENT, LocalDate.of(2018, 1, 1), LocalDate.of(2018, 12, 31));
 		assertEquals(6, result.size());
 		assertTrue(result.contains(LocalDate.of(2018, 1, 8)));
 		assertTrue(result.contains(LocalDate.of(2018, 2, 12)));
@@ -102,10 +102,10 @@ public class ScheduleTest {
 	}
 
 	@Test
-	public void streamProducesExpectedResult() {
-		List<LocalDate> streamResult = schedule.stream(KNOWN_EVENT, LocalDate.of(2016, 9, 1)).limit(10)
+	public void futureDatesProducesExpectedResult() {
+		List<LocalDate> futureDates = schedule.futureDates(KNOWN_EVENT, LocalDate.of(2016, 9, 1)).limit(10)
 				.collect(Collectors.toList());
-		assertEquals(expectedStreamResult, streamResult);
+		assertEquals(expectedFutureDates, futureDates);
 		return;
 	}
 }
