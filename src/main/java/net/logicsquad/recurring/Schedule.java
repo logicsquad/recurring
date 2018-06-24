@@ -3,6 +3,7 @@ package net.logicsquad.recurring;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Encapsulates a "schedule" which can answer various questions about events it
@@ -36,6 +37,18 @@ public interface Schedule {
 	 * @return list of dates on which {@code event} is occurring
 	 */
 	List<LocalDate> dates(String event, LocalDate start, LocalDate end);
+
+	/**
+	 * Returns a stream of {@link LocalDate}s on which {@code event} is occurring
+	 * beginning at {@code start} (inclusive).
+	 * 
+	 * @param event
+	 *            string representation of an event
+	 * @param start
+	 *            start date
+	 * @return stream of dates on which {@code event} is occurring
+	 */
+	Stream<LocalDate> stream(String event, LocalDate start);
 
 	/**
 	 * Returns the next date on which {@code event} is occurring, on or after

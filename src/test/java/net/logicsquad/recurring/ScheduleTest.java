@@ -7,7 +7,10 @@ import static org.junit.Assert.assertTrue;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -32,6 +35,20 @@ public class ScheduleTest {
 
 	private Schedule schedule = Schedule.of(element);
 
+	// List of first 10 elements of stream from 2016-09-01: 2nd Monday, Jan -> Jun
+	private List<LocalDate> expectedStreamResult = new ArrayList<>(Arrays.asList(
+			LocalDate.of(2017, 1, 9),
+			LocalDate.of(2017, 2, 13),
+			LocalDate.of(2017, 3, 13),
+			LocalDate.of(2017, 4, 10),
+			LocalDate.of(2017, 5, 8),
+			LocalDate.of(2017, 6, 12),
+			LocalDate.of(2018, 1, 8),
+			LocalDate.of(2018, 2, 12),
+			LocalDate.of(2018, 3, 12),
+			LocalDate.of(2018, 4, 9)
+			));
+	
 	@Test
 	public void includesExpectedDatesForKnownEvent() {
 		assertTrue(schedule.isOccurring(KNOWN_EVENT, in_1));
@@ -81,6 +98,14 @@ public class ScheduleTest {
 		assertEquals(LocalDate.of(2018, 1, 8), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 8)));
 		assertEquals(LocalDate.of(2018, 2, 12), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 9)));
 		assertEquals(LocalDate.of(2018, 3, 12), schedule.nextOccurrence(KNOWN_EVENT, LocalDate.of(2018, 2, 13)));
+		return;
+	}
+
+	@Test
+	public void streamProducesExpectedResult() {
+		List<LocalDate> streamResult = schedule.stream(KNOWN_EVENT, LocalDate.of(2016, 9, 1)).limit(10)
+				.collect(Collectors.toList());
+		assertEquals(expectedStreamResult, streamResult);
 		return;
 	}
 }

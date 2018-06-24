@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A basic implementation of {@link Schedule} for use by
@@ -69,5 +70,10 @@ final class BasicSchedule implements Schedule {
 		sb.append(elements.stream().map(e -> e.toString()).collect(Collectors.joining(", ")));
 		sb.append("]");
 		return sb.toString();
+	}
+
+	@Override
+	public Stream<LocalDate> stream(String event, LocalDate start) {
+		return Stream.iterate(nextOccurrence(event, start), seed -> nextOccurrence(event, seed.plusDays(1)));
 	}
 }
