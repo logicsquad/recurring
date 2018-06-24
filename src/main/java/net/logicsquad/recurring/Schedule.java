@@ -63,6 +63,18 @@ public interface Schedule {
 	LocalDate nextOccurrence(String event, LocalDate date);
 
 	/**
+	 * Returns the previous date on which {@code event} is occurring, on or before
+	 * {@code date}.
+	 * 
+	 * @param event
+	 *            string representation of an event
+	 * @param date
+	 *            an arbitrary date
+	 * @return date of previous occurrence of {@code event}
+	 */
+	LocalDate previousOccurrence(String event, LocalDate date);
+
+	/**
 	 * Returns a {@link Schedule} composed of the supplied {@code elements}.
 	 * 
 	 * @param elements

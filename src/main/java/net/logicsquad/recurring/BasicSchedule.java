@@ -76,4 +76,13 @@ final class BasicSchedule implements Schedule {
 	public Stream<LocalDate> futureDates(String event, LocalDate start) {
 		return Stream.iterate(nextOccurrence(event, start), seed -> nextOccurrence(event, seed.plusDays(1)));
 	}
+
+	@Override
+	public LocalDate previousOccurrence(String event, LocalDate date) {
+		LocalDate cursor = date;
+		while (!isOccurring(event, cursor)) {
+			cursor = cursor.minusDays(1);
+		}
+		return cursor;
+	}
 }

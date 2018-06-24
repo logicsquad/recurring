@@ -108,4 +108,16 @@ public class ScheduleTest {
 		assertEquals(expectedFutureDates, futureDates);
 		return;
 	}
+
+	@Test
+	public void previousOccurrenceReturnsExpectedResults() {
+		assertEquals(LocalDate.of(2017, 6, 12), schedule.previousOccurrence(KNOWN_EVENT, LocalDate.of(2017, 6, 30)));
+		assertEquals(LocalDate.of(2017, 6, 12), schedule.previousOccurrence(KNOWN_EVENT, LocalDate.of(2017, 9, 1)));
+		assertEquals(LocalDate.of(2017, 6, 12), schedule.previousOccurrence(KNOWN_EVENT, LocalDate.of(2017, 12, 20)));
+		assertEquals(LocalDate.of(2017, 6, 12), schedule.previousOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 1)));
+		assertEquals(LocalDate.of(2018, 1, 8), schedule.previousOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 8)));
+		assertEquals(LocalDate.of(2018, 1, 8), schedule.previousOccurrence(KNOWN_EVENT, LocalDate.of(2018, 1, 9)));
+		assertEquals(LocalDate.of(2018, 2, 12), schedule.previousOccurrence(KNOWN_EVENT, LocalDate.of(2018, 2, 13)));
+		return;
+	}
 }
