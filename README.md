@@ -55,11 +55,18 @@ and all future dates of the meeting:
 
 Using Recurring
 ---------------
-The current version is `0.1-SNAPSHOT`: there has been no initial release
-yet. You can easily incorporate Recurring into your own work, though, by
-cloning this repository and building the JAR:
+The current release is `0.1`, and you can use Recurring in your
+projects by including it as a dependency:
 
-    $ mvn clean package
+    <dependency>
+      <groupId>net.logicsquad</groupId>
+      <artifactId>recurring</artifactId>
+      <version>0.1</version>
+    </dependency>
+
+Note that _the API may change prior to a `1.0` release,_ at which time
+it will remain stable, consistent with [semantic
+versioning](https://semver.org).
 
 Contributing
 ------------
