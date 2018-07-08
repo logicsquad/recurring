@@ -5,6 +5,7 @@
   <version>0.1-SNAPSHOT</version>
   <name>Recurring</name>
   <description>A Java implementation of the ideas in Martin Fowler's "Recurring Events for Calendars".</description>
+  <url>https://github.com/paulhoadley/recurring</url>
 
   <organization>
     <name>Logic Squad</name>
@@ -29,6 +30,12 @@
       <timezone>Australia/Adelaide</timezone>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/paulhoadley/recurring.git</connection>
+    <developerConnection>scm:git:ssh://github.com:paulhoadley/recurring.git</developerConnection>
+    <url>https://github.com/paulhoadley/recurring/tree/master</url>
+  </scm>
 
   <properties>
     <main.class></main.class>
