@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/paulhoadley/recurring.svg?branch=develop)](https://travis-ci.org/paulhoadley/recurring)
+[![License](https://img.shields.io/badge/License-BSD-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 Recurring
 =========
 
