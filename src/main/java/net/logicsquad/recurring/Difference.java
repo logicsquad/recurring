@@ -54,4 +54,17 @@ public class Difference implements TemporalExpression {
 	public boolean includes(LocalDate date) {
 		return included.includes(date) && !excluded.includes(date);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		sb.append(this.getClass().getSimpleName());
+		sb.append(": included=");
+		sb.append(included);
+		sb.append(", excluded=");
+		sb.append(excluded);
+		sb.append("]");
+		return sb.toString();
+	}
 }
