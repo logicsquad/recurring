@@ -2,6 +2,7 @@ package net.logicsquad.recurring;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,7 +26,7 @@ final class BasicSchedule implements Schedule {
 	 *            comprising {@link ScheduleElement}s
 	 */
 	public BasicSchedule(List<ScheduleElement> elements) {
-		this.elements = elements;
+		this.elements = Collections.unmodifiableList(new ArrayList<>(elements));
 		return;
 	}
 

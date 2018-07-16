@@ -132,4 +132,20 @@ public class ScheduleTest {
 		assertEquals(expectedPastDates, pastDates);
 		return;
 	}
+
+	@Test
+	public void elementsCannotBeModified() {
+		List<ScheduleElement> elements = new ArrayList<>();
+		elements.add(element);
+		Schedule modifyMe = Schedule.of(elements);
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_1));
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_2));
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_3));
+		// Remove element--should have no effect
+		elements.remove(element);
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_1));
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_2));
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_3));
+		return;
+	}
 }
