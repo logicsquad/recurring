@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -65,5 +66,19 @@ public class UnionTest {
 	@Test(expected=NullPointerException.class)
 	public void ofThrowsOnNullExpressionArray() {
 		Union.of((TemporalExpression[]) null);
+	}
+
+	@Test
+	public void expressionsCannotBeModified() {
+		List<TemporalExpression> expressions = new ArrayList<>();
+		expressions.add(range);
+		expressions.add(day);
+		Union modifyMe = Union.of(expressions);
+		// Show that a date in the range matches
+		assertTrue(modifyMe.includes(LocalDate.of(2018, 6, 1)));
+		expressions.remove(range);
+		// Show that a date in the range still matches
+		assertTrue(modifyMe.includes(LocalDate.of(2018, 6, 1)));
+		return;
 	}
 }

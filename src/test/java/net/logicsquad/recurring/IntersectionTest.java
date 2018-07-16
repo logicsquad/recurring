@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -80,5 +81,20 @@ public class IntersectionTest {
 	@Test(expected=NullPointerException.class)
 	public void ofThrowsOnNullExpressionArray() {
 		Intersection.of((TemporalExpression[]) null);
+	}
+
+	@Test
+	public void expressionsCannotBeModified() {
+		List<TemporalExpression> expressions = new ArrayList<>();
+		expressions.add(dayInMonth);
+		expressions.add(range);
+		Intersection modifyMe = Intersection.of(expressions);
+		// Show that a date in the range matches
+		assertTrue(modifyMe.includes(in_1));
+		expressions.remove(dayInMonth);
+		expressions.remove(range);
+		// Show that a date in the range still matches
+		assertTrue(modifyMe.includes(in_1));
+		return;
 	}
 }

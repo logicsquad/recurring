@@ -1,5 +1,7 @@
 package net.logicsquad.recurring;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,7 +29,7 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 	 */
 	protected CompositeTemporalExpression(List<TemporalExpression> expressions) {
 		Objects.requireNonNull(expressions);
-		this.expressions = expressions;
+		this.expressions = Collections.unmodifiableList(new ArrayList<>(expressions));
 		return;
 	}
 
