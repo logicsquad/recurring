@@ -26,9 +26,14 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 	 *            a collection of sub-expressions
 	 * @throws NullPointerException
 	 *             if {@code expressions} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code expressions} is empty
 	 */
 	protected CompositeTemporalExpression(List<TemporalExpression> expressions) {
 		Objects.requireNonNull(expressions);
+		if (expressions.size() == 0) {
+			throw new IllegalArgumentException("CompositeTemporalExpression requires at least one sub-expression.");
+		}
 		this.expressions = Collections.unmodifiableList(new ArrayList<>(expressions));
 		return;
 	}

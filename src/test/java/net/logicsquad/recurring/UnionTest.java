@@ -68,6 +68,11 @@ public class UnionTest {
 		Union.of((TemporalExpression[]) null);
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void ofThrowsOnEmptyList() {
+		Union.of(new ArrayList<>());
+	}
+
 	@Test
 	public void expressionsCannotBeModified() {
 		List<TemporalExpression> expressions = new ArrayList<>();

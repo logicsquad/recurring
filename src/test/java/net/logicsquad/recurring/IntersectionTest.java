@@ -83,6 +83,11 @@ public class IntersectionTest {
 		Intersection.of((TemporalExpression[]) null);
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void ofThrowsOnEmptyExpressions() {
+		Intersection.of(new ArrayList<>());
+	}
+
 	@Test
 	public void expressionsCannotBeModified() {
 		List<TemporalExpression> expressions = new ArrayList<>();
