@@ -89,11 +89,11 @@ public interface Schedule {
 	LocalDate previousOccurrence(String event, LocalDate date);
 
 	/**
-	 * Returns a {@link Schedule} composed of the supplied {@code elements}.
+	 * Returns a {@code Schedule} composed of the supplied {@code elements}.
 	 * 
 	 * @param elements
 	 *            {@link ScheduleElement}s comprising the {@link Schedule}
-	 * @return a {@link Schedule}
+	 * @return a {@code Schedule}
 	 */
 	static Schedule of(ScheduleElement... elements) {
 		return new BasicSchedule(Arrays.asList(elements));
