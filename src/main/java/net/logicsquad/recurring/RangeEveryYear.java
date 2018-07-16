@@ -14,22 +14,22 @@ public class RangeEveryYear implements TemporalExpression {
 	/**
 	 * First month of range
 	 */
-	private Month startMonth;
+	private final Month startMonth;
 
 	/**
 	 * Last month of range
 	 */
-	private Month endMonth;
+	private final Month endMonth;
 
 	/**
 	 * First day of range (in {@link #startMonth})
 	 */
-	private int startDay;
+	private final int startDay;
 
 	/**
 	 * Last day of range (in {@link #endMonth})
 	 */
-	private int endDay;
+	private final int endDay;
 
 	/**
 	 * Constructor

@@ -16,12 +16,12 @@ public class DayInMonth implements TemporalExpression {
 	/**
 	 * Ordinal position within month
 	 */
-	private int ordinal;
+	private final int ordinal;
 
 	/**
 	 * Day of week
 	 */
-	private DayOfWeek day;
+	private final DayOfWeek day;
 
 	/**
 	 * Constructor taking a weekday and an ordinal number. Positive integers
