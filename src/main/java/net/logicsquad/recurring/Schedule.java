@@ -98,4 +98,16 @@ public interface Schedule {
 	static Schedule of(ScheduleElement... elements) {
 		return new BasicSchedule(Arrays.asList(elements));
 	}
+
+	/**
+	 * Returns a {@code Schedule} composed of the {@link ScheduleElement}s in
+	 * {@code elements}.
+	 * 
+	 * @param elements
+	 *            a {@link List} of {@link ScheduleElement}s
+	 * @return a {@code Schedule}
+	 */
+	static Schedule of(List<ScheduleElement> elements) {
+		return new BasicSchedule(elements);
+	}
 }
