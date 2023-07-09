@@ -1,15 +1,12 @@
 package net.logicsquad.recurring;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests on {@link DayInMonth}.
@@ -159,32 +156,36 @@ public class DayInMonthTest {
 	/**
 	 * {@link DayOfWeek} argument cannot be {@code null}.
 	 */
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullDayOfWeek() {
-		DayInMonth.of(null, 1);
+		assertThrows(NullPointerException.class, () -> DayInMonth.of(null, 1));
+		return;
 	}
 
 	/**
 	 * A value of 0 for {@code ordinal} doesn't make sense.
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void ofThrowsOnZeroOrdinal() {
-		DayInMonth.of(DayOfWeek.MONDAY, 0);
+		assertThrows(IllegalArgumentException.class, () -> DayInMonth.of(DayOfWeek.MONDAY, 0));
+		return;
 	}
 
 	/**
 	 * {@code ordinal} can be at most 5 (either side of 0).
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void ofThrowsOnOrdinalOver5() {
-		DayInMonth.of(DayOfWeek.MONDAY, 6);
+		assertThrows(IllegalArgumentException.class, () -> DayInMonth.of(DayOfWeek.MONDAY, 6));
+		return;
 	}
 
 	/**
 	 * {@code ordinal} can be at most 5 (either side of 0).
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void ofThrowsOnOrdinalUnderMinus5() {
-		DayInMonth.of(DayOfWeek.MONDAY, -6);
+		assertThrows(IllegalArgumentException.class, () -> DayInMonth.of(DayOfWeek.MONDAY, -6));
+		return;
 	}
 }

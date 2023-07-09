@@ -1,7 +1,6 @@
 package net.logicsquad.recurring;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -9,7 +8,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class UnionTest {
 	RangeEveryYear range = RangeEveryYear.of(Month.JUNE, Month.SEPTEMBER);
@@ -53,24 +52,28 @@ public class UnionTest {
 		return;
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullList() {
-		Union.of((List<TemporalExpression>) null);
+		assertThrows(NullPointerException.class, () -> Union.of((List<TemporalExpression>) null));
+		return;
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullExpression() {
-		Union.of((TemporalExpression) null);
+		assertThrows(NullPointerException.class, () -> Union.of((TemporalExpression) null));
+		return;
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullExpressionArray() {
-		Union.of((TemporalExpression[]) null);
+		assertThrows(NullPointerException.class, () -> Union.of((TemporalExpression[]) null));
+		return;
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void ofThrowsOnEmptyList() {
-		Union.of(new ArrayList<>());
+		assertThrows(IllegalArgumentException.class, () -> Union.of(new ArrayList<>()));
+		return;
 	}
 
 	@Test

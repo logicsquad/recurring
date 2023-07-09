@@ -1,7 +1,6 @@
 package net.logicsquad.recurring;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -9,7 +8,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class IntersectionTest {
 	private TemporalExpression dayInMonth = DayInMonth.of(DayOfWeek.MONDAY, 2);
@@ -68,24 +67,28 @@ public class IntersectionTest {
 		return;
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullList() {
-		Intersection.of((List<TemporalExpression>) null);
+		assertThrows(NullPointerException.class, () -> Intersection.of((List<TemporalExpression>) null));
+		return;
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullExpression() {
-		Intersection.of((TemporalExpression) null);
+		assertThrows(NullPointerException.class, () -> Intersection.of((TemporalExpression) null));
+		return;
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullExpressionArray() {
-		Intersection.of((TemporalExpression[]) null);
+		assertThrows(NullPointerException.class, () -> Intersection.of((TemporalExpression[]) null));
+		return;
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void ofThrowsOnEmptyExpressions() {
-		Intersection.of(new ArrayList<>());
+		assertThrows(IllegalArgumentException.class, () -> Intersection.of(new ArrayList<>()));
+		return;
 	}
 
 	@Test
