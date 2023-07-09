@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,10 +23,11 @@ final class BasicSchedule implements Schedule {
 	/**
 	 * Constructor
 	 *
-	 * @param elements
-	 *            comprising {@link ScheduleElement}s
+	 * @param elements comprising {@link ScheduleElement}s
+	 * @throws NullPointerException if {@code elements} is {@code null}
 	 */
 	BasicSchedule(List<ScheduleElement> elements) {
+		Objects.requireNonNull(elements);
 		this.elements = Collections.unmodifiableList(new ArrayList<>(elements));
 		return;
 	}

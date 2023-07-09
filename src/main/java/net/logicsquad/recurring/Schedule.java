@@ -3,6 +3,7 @@ package net.logicsquad.recurring;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -91,23 +92,26 @@ public interface Schedule {
 	/**
 	 * Returns a {@code Schedule} composed of the supplied {@code elements}.
 	 *
-	 * @param elements
-	 *            {@link ScheduleElement}s comprising the {@link Schedule}
+	 * @param elements {@link ScheduleElement}s comprising the {@link Schedule}
 	 * @return a {@code Schedule}
+	 * @throws NullPointerException if any {@link ScheduleElement} in {@code elements} is {@code null}
 	 */
 	static Schedule of(ScheduleElement... elements) {
+		for (ScheduleElement e : elements) {
+			Objects.requireNonNull(e);
+		}
 		return new BasicSchedule(Arrays.asList(elements));
 	}
 
 	/**
-	 * Returns a {@code Schedule} composed of the {@link ScheduleElement}s in
-	 * {@code elements}.
+	 * Returns a {@code Schedule} composed of the {@link ScheduleElement}s in {@code elements}.
 	 *
-	 * @param elements
-	 *            a {@link List} of {@link ScheduleElement}s
+	 * @param elements a {@link List} of {@link ScheduleElement}s
 	 * @return a {@code Schedule}
+	 * @throws NullPointerException if {@code elements} is {@code null}
 	 */
 	static Schedule of(List<ScheduleElement> elements) {
+		Objects.requireNonNull(elements);
 		return new BasicSchedule(elements);
 	}
 }
