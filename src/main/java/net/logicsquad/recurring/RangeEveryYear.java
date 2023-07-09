@@ -7,33 +7,33 @@ import java.util.Objects;
 
 /**
  * Describes a contiguous range of days in any year.
- * 
+ *
  * @author paulh
  */
-public class RangeEveryYear implements TemporalExpression {
+public final class RangeEveryYear implements TemporalExpression {
 	/**
 	 * First month of range
 	 */
-	private Month startMonth;
+	private final Month startMonth;
 
 	/**
 	 * Last month of range
 	 */
-	private Month endMonth;
+	private final Month endMonth;
 
 	/**
 	 * First day of range (in {@link #startMonth})
 	 */
-	private int startDay;
+	private final int startDay;
 
 	/**
 	 * Last day of range (in {@link #endMonth})
 	 */
-	private int endDay;
+	private final int endDay;
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param startMonth
 	 *            start month
 	 * @param endMonth
@@ -58,7 +58,7 @@ public class RangeEveryYear implements TemporalExpression {
 	/**
 	 * Returns {@code RangeEveryYear} spanning from {@code start} day through
 	 * {@code end} day (inclusive).
-	 * 
+	 *
 	 * @param start
 	 *            start day
 	 * @param end
@@ -76,7 +76,7 @@ public class RangeEveryYear implements TemporalExpression {
 	/**
 	 * Returns {@code RangeEveryYear} spanning from beginning of {@code startMonth}
 	 * through end of {@code endMonth} (inclusive).
-	 * 
+	 *
 	 * @param startMonth
 	 *            start month
 	 * @param endMonth
@@ -94,7 +94,7 @@ public class RangeEveryYear implements TemporalExpression {
 	/**
 	 * Returns {@code RangeEveryYear} spanning from beginning of {@code month}
 	 * through end of {@code month} (inclusive).
-	 * 
+	 *
 	 * @param month
 	 *            a month
 	 * @return {@code RangeEveryYear}
@@ -114,7 +114,7 @@ public class RangeEveryYear implements TemporalExpression {
 	/**
 	 * Do any of the (possibly zero) months <em>between</em> {@link #startMonth} and
 	 * {@link #endMonth} (exclusive) include {@code date}?
-	 * 
+	 *
 	 * @param date
 	 *            a {@link LocalDate}
 	 * @return {@code true} if {@code date} falls in a month <em>between</em>
@@ -129,7 +129,7 @@ public class RangeEveryYear implements TemporalExpression {
 	/**
 	 * Does {@link #startMonth} (excluding days before {@link #startDay}, <em>if
 	 * set</em>) include {@code date}?
-	 * 
+	 *
 	 * @param date
 	 *            a {@link LocalDate}
 	 * @return {@code true} if {@link #startMonth} includes {@code date}, otherwise
@@ -148,7 +148,7 @@ public class RangeEveryYear implements TemporalExpression {
 	/**
 	 * Does {@link #endMonth} (excluding days after {@link #endDay}, <em>if
 	 * set</em>) include {@code date}?
-	 * 
+	 *
 	 * @param date
 	 *            a {@link LocalDate}
 	 * @return {@code true} if {@link #endMonth} includes {@code date}, otherwise
@@ -191,18 +191,8 @@ public class RangeEveryYear implements TemporalExpression {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(this.getClass().getSimpleName());
-		sb.append(":");
-		sb.append(" startMonth=");
-		sb.append(startMonth);
-		sb.append(" endMonth=");
-		sb.append(endMonth);
-		sb.append(" startDay=");
-		sb.append(startDay);
-		sb.append(" endDay=");
-		sb.append(endDay);
-		sb.append("]");
+		sb.append('[').append(this.getClass().getSimpleName()).append(": startMonth=").append(startMonth).append(" endMonth=").append(endMonth)
+				.append(" startDay=").append(startDay).append(" endDay=").append(endDay).append(']');
 		return sb.toString();
 	}
 }

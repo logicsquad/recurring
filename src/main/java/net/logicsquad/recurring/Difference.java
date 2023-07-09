@@ -8,10 +8,10 @@ import java.time.LocalDate;
  * sub-expression {@code included}, and another sub-expression {@code excluded}.
  * The value of this expression is then
  * {@code included.includes() && !excluded.includes()}.
- * 
+ *
  * @author paulh
  */
-public class Difference implements TemporalExpression {
+public final class Difference implements TemporalExpression {
 	/**
 	 * Included sub-expression
 	 */
@@ -24,7 +24,7 @@ public class Difference implements TemporalExpression {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param included
 	 *            included sub-expression
 	 * @param excluded
@@ -39,7 +39,7 @@ public class Difference implements TemporalExpression {
 	/**
 	 * Returns a {@link Difference} with sub-expressions {@code included} and
 	 * {@code excluded}.
-	 * 
+	 *
 	 * @param included
 	 *            included sub-expression
 	 * @param excluded
@@ -53,5 +53,12 @@ public class Difference implements TemporalExpression {
 	@Override
 	public boolean includes(LocalDate date) {
 		return included.includes(date) && !excluded.includes(date);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append('[').append(this.getClass().getSimpleName()).append(": included=").append(included).append(", excluded=").append(excluded).append(']');
+		return sb.toString();
 	}
 }

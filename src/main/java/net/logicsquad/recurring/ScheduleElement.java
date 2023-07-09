@@ -5,10 +5,10 @@ import java.time.LocalDate;
 /**
  * An element of a {@link Schedule} that links an event with a
  * {@link TemporalExpression} describing how the event recurs.
- * 
+ *
  * @author paulh
  */
-public class ScheduleElement {
+public final class ScheduleElement {
 	/**
 	 * String representing an event
 	 */
@@ -21,7 +21,7 @@ public class ScheduleElement {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param event
 	 *            string representing some event
 	 * @param expression
@@ -36,7 +36,7 @@ public class ScheduleElement {
 	/**
 	 * Returns {@link ScheduleElement} for {@code event} with recurrence described
 	 * by {@code expression}.
-	 * 
+	 *
 	 * @param event
 	 *            string representing some event
 	 * @param expression
@@ -49,7 +49,7 @@ public class ScheduleElement {
 
 	/**
 	 * Is this element's event occurring on {@code date}?
-	 * 
+	 *
 	 * @param date
 	 *            a {@link LocalDate}
 	 * @return {@code true} if this element's event is occurring on {@code date},
@@ -61,7 +61,7 @@ public class ScheduleElement {
 
 	/**
 	 * Returns this {@code ScheduleElement}'s event.
-	 * 
+	 *
 	 * @return event
 	 */
 	public String event() {
@@ -71,14 +71,8 @@ public class ScheduleElement {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(this.getClass().getSimpleName());
-		sb.append(": ");
-		sb.append("event='");
-		sb.append(event);
-		sb.append("' expression=");
-		sb.append(expression);
-		sb.append("]");
+		sb.append('[').append(this.getClass().getSimpleName()).append(": event='").append(event).append("' expression=").append(expression)
+				.append(']');
 		return sb.toString();
 	}
 }

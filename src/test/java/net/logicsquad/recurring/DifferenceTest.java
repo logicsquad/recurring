@@ -1,13 +1,12 @@
 package net.logicsquad.recurring;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DifferenceTest {
 	private TemporalExpression months = RangeEveryYear.of(Month.JUNE, Month.SEPTEMBER);

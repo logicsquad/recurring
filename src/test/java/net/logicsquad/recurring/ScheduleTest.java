@@ -1,8 +1,6 @@
 package net.logicsquad.recurring;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -13,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ScheduleTest {
 	private TemporalExpression dayInMonth = DayInMonth.of(DayOfWeek.MONDAY, 2);
@@ -50,7 +48,7 @@ public class ScheduleTest {
 			LocalDate.of(2018, 3, 12),
 			LocalDate.of(2018, 4, 9)
 			));
-	
+
 	@Test
 	public void includesExpectedDatesForKnownEvent() {
 		assertTrue(schedule.isOccurring(KNOWN_EVENT, in_1));
@@ -130,6 +128,48 @@ public class ScheduleTest {
 		List<LocalDate> pastDates = schedule.pastDates(KNOWN_EVENT, LocalDate.of(2018, 5, 1)).limit(10)
 				.collect(Collectors.toList());
 		assertEquals(expectedPastDates, pastDates);
+		return;
+	}
+
+	@Test
+	public void elementsCannotBeModified() {
+		List<ScheduleElement> elements = new ArrayList<>();
+		elements.add(element);
+		Schedule modifyMe = Schedule.of(elements);
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_1));
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_2));
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_3));
+		// Remove element--should have no effect
+		elements.remove(element);
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_1));
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_2));
+		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_3));
+		return;
+	}
+
+	// Can't create a Schedule from null
+	@Test
+	public void ofThrowsOnNullList() {
+		assertThrows(NullPointerException.class, () -> Schedule.of((List<ScheduleElement>) null));
+		return;
+	}
+
+	// We can create an empty Schedule
+	@Test
+	public void ofAllowsEmptyList() {
+		Schedule schedule = Schedule.of(new ArrayList<>());
+		// Just test some operations
+		assertFalse(schedule.isOccurring(KNOWN_EVENT, in_1));
+		assertFalse(schedule.isOccurring(KNOWN_EVENT, in_2));
+		assertFalse(schedule.isOccurring(KNOWN_EVENT, in_3));
+		assertTrue(schedule.datesInRange(KNOWN_EVENT, LocalDate.of(2017, 1, 1), LocalDate.of(2019, 12, 31)).isEmpty());
+		return;
+	}
+
+	// Can't add null to list of ScheduleElements
+	@Test
+	public void ofThrowsOnNullElement() {
+		assertThrows(NullPointerException.class, () -> Schedule.of(element, null));
 		return;
 	}
 }

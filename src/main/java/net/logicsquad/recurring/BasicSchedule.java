@@ -2,14 +2,16 @@ package net.logicsquad.recurring;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * A basic implementation of {@link Schedule} for use by
  * {@link Schedule#of(ScheduleElement...) Schedule.of()}.
- * 
+ *
  * @author paulh
  */
 final class BasicSchedule implements Schedule {
@@ -20,12 +22,13 @@ final class BasicSchedule implements Schedule {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param elements
-	 *            comprising {@link ScheduleElement}s
+	 *
+	 * @param elements comprising {@link ScheduleElement}s
+	 * @throws NullPointerException if {@code elements} is {@code null}
 	 */
-	public BasicSchedule(List<ScheduleElement> elements) {
-		this.elements = elements;
+	BasicSchedule(List<ScheduleElement> elements) {
+		Objects.requireNonNull(elements);
+		this.elements = Collections.unmodifiableList(new ArrayList<>(elements));
 		return;
 	}
 
@@ -64,11 +67,8 @@ final class BasicSchedule implements Schedule {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(this.getClass().getSimpleName());
-		sb.append(": ");
-		sb.append(elements.stream().map(e -> e.toString()).collect(Collectors.joining(", ")));
-		sb.append("]");
+		sb.append('[').append(this.getClass().getSimpleName()).append(": ").append(elements.stream().map(e -> e.toString()).collect(Collectors.joining(", ")))
+				.append(']');
 		return sb.toString();
 	}
 

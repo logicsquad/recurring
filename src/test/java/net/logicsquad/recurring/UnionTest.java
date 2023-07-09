@@ -1,14 +1,14 @@
 package net.logicsquad.recurring;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class UnionTest {
 	RangeEveryYear range = RangeEveryYear.of(Month.JUNE, Month.SEPTEMBER);
@@ -52,18 +52,41 @@ public class UnionTest {
 		return;
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullList() {
-		Union.of((List<TemporalExpression>) null);
+		assertThrows(NullPointerException.class, () -> Union.of((List<TemporalExpression>) null));
+		return;
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullExpression() {
-		Union.of((TemporalExpression) null);
+		assertThrows(NullPointerException.class, () -> Union.of((TemporalExpression) null));
+		return;
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullExpressionArray() {
-		Union.of((TemporalExpression[]) null);
+		assertThrows(NullPointerException.class, () -> Union.of((TemporalExpression[]) null));
+		return;
+	}
+
+	@Test
+	public void ofThrowsOnEmptyList() {
+		assertThrows(IllegalArgumentException.class, () -> Union.of(new ArrayList<>()));
+		return;
+	}
+
+	@Test
+	public void expressionsCannotBeModified() {
+		List<TemporalExpression> expressions = new ArrayList<>();
+		expressions.add(range);
+		expressions.add(day);
+		Union modifyMe = Union.of(expressions);
+		// Show that a date in the range matches
+		assertTrue(modifyMe.includes(LocalDate.of(2018, 6, 1)));
+		expressions.remove(range);
+		// Show that a date in the range still matches
+		assertTrue(modifyMe.includes(LocalDate.of(2018, 6, 1)));
+		return;
 	}
 }

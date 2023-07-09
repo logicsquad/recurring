@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/paulhoadley/recurring.svg?branch=develop)](https://travis-ci.org/paulhoadley/recurring)
+![](https://github.com/logicsquad/recurring/workflows/build/badge.svg)
 [![License](https://img.shields.io/badge/License-BSD-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 Recurring
@@ -55,13 +55,13 @@ and all future dates of the meeting:
 
 Using Recurring
 ---------------
-The current release is `0.1`, and you can use Recurring in your
-projects by including it as a dependency:
+You can use Recurring in your projects by including it as a
+dependency:
 
     <dependency>
       <groupId>net.logicsquad</groupId>
       <artifactId>recurring</artifactId>
-      <version>0.1</version>
+      <version>0.2</version>
     </dependency>
 
 Note that _the API may change prior to a `1.0` release,_ at which time

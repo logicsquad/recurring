@@ -1,19 +1,16 @@
 package net.logicsquad.recurring;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.MonthDay;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests on {@link RangeEveryYear}.
- * 
+ *
  * @author paulh
  */
 public class RangeEveryYearTest {
@@ -241,56 +238,63 @@ public class RangeEveryYearTest {
 	/**
 	 * Arguments to {@code of()} cannot be {@code null}.
 	 */
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullMonth() {
-		RangeEveryYear.of(null);
+		assertThrows(NullPointerException.class, () -> RangeEveryYear.of(null));
+		return;
 	}
 
 	/**
 	 * Arguments to {@code of()} cannot be {@code null}.
 	 */
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullFirstMonth() {
-		RangeEveryYear.of(null, Month.APRIL);
+		assertThrows(NullPointerException.class, () -> RangeEveryYear.of(null, Month.APRIL));
+		return;
 	}
 
 	/**
 	 * Arguments to {@code of()} cannot be {@code null}.
 	 */
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullSecondMonth() {
-		RangeEveryYear.of(Month.DECEMBER, null);
+		assertThrows(NullPointerException.class, () -> RangeEveryYear.of(Month.DECEMBER, null));
+		return;
 	}
 
 	/**
 	 * Arguments to {@code of()} cannot be {@code null}.
 	 */
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullBothMonths() {
-		RangeEveryYear.of((Month) null, (Month) null);
+		assertThrows(NullPointerException.class, () -> RangeEveryYear.of((Month) null, (Month) null));
+		return;
 	}
 
 	/**
 	 * Arguments to {@code of()} cannot be {@code null}.
 	 */
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullFirstMonthDay() {
-		RangeEveryYear.of(null, MonthDay.of(Month.JULY, 1));
+		assertThrows(NullPointerException.class, () -> RangeEveryYear.of(null, MonthDay.of(Month.JULY, 1)));
+		return;
 	}
 
 	/**
 	 * Arguments to {@code of()} cannot be {@code null}.
 	 */
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullSecondMonthDay() {
-		RangeEveryYear.of(MonthDay.of(Month.JUNE, 12), null);
+		assertThrows(NullPointerException.class, () -> RangeEveryYear.of(MonthDay.of(Month.JUNE, 12), null));
+		return;
 	}
 
 	/**
 	 * Arguments to {@code of()} cannot be {@code null}.
 	 */
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void ofThrowsOnNullBothMonthDays() {
-		RangeEveryYear.of((MonthDay) null, (MonthDay) null);
+		assertThrows(NullPointerException.class, () -> RangeEveryYear.of((MonthDay) null, (MonthDay) null));
+		return;
 	}
 }
