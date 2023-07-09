@@ -79,8 +79,7 @@ public final class DayInMonth implements TemporalExpression {
 	 *         otherwise {@code false}
 	 */
 	private boolean dayMatches(LocalDate date) {
-		boolean result = date.getDayOfWeek() == day;
-		return result;
+		return date.getDayOfWeek() == day;
 	}
 
 	/**

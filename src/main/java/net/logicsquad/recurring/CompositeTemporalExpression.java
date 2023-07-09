@@ -31,7 +31,7 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 	 */
 	protected CompositeTemporalExpression(List<TemporalExpression> expressions) {
 		Objects.requireNonNull(expressions);
-		if (expressions.size() == 0) {
+		if (expressions.isEmpty()) {
 			throw new IllegalArgumentException("CompositeTemporalExpression requires at least one sub-expression.");
 		}
 		this.expressions = Collections.unmodifiableList(new ArrayList<>(expressions));
