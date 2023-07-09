@@ -41,11 +41,8 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(this.getClass().getSimpleName());
-		sb.append(": ");
-		sb.append(expressions.stream().map(e -> e.toString()).collect(Collectors.joining(", ")));
-		sb.append("]");
+		sb.append('[').append(this.getClass().getSimpleName()).append(": ")
+				.append(expressions.stream().map(e -> e.toString()).collect(Collectors.joining(", "))).append(']');
 		return sb.toString();
 	}
 

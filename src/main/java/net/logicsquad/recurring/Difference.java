@@ -58,13 +58,7 @@ public final class Difference implements TemporalExpression {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(this.getClass().getSimpleName());
-		sb.append(": included=");
-		sb.append(included);
-		sb.append(", excluded=");
-		sb.append(excluded);
-		sb.append("]");
+		sb.append('[').append(this.getClass().getSimpleName()).append(": included=").append(included).append(", excluded=").append(excluded).append(']');
 		return sb.toString();
 	}
 }

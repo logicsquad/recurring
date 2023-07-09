@@ -71,14 +71,8 @@ public final class ScheduleElement {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(this.getClass().getSimpleName());
-		sb.append(": ");
-		sb.append("event='");
-		sb.append(event);
-		sb.append("' expression=");
-		sb.append(expression);
-		sb.append("]");
+		sb.append('[').append(this.getClass().getSimpleName()).append(": event='").append(event).append("' expression=").append(expression)
+				.append(']');
 		return sb.toString();
 	}
 }

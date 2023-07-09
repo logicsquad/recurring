@@ -176,14 +176,7 @@ public final class DayInMonth implements TemporalExpression {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(this.getClass().getSimpleName());
-		sb.append(":");
-		sb.append(" day=");
-		sb.append(day);
-		sb.append(" ordinal=");
-		sb.append(ordinal);
-		sb.append("]");
+		sb.append('[').append(this.getClass().getSimpleName()).append(": day=").append(day).append(" ordinal=").append(ordinal).append(']');
 		return sb.toString();
 	}
 }

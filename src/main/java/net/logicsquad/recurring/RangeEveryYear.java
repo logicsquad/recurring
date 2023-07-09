@@ -191,18 +191,8 @@ public final class RangeEveryYear implements TemporalExpression {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(this.getClass().getSimpleName());
-		sb.append(":");
-		sb.append(" startMonth=");
-		sb.append(startMonth);
-		sb.append(" endMonth=");
-		sb.append(endMonth);
-		sb.append(" startDay=");
-		sb.append(startDay);
-		sb.append(" endDay=");
-		sb.append(endDay);
-		sb.append("]");
+		sb.append('[').append(this.getClass().getSimpleName()).append(": startMonth=").append(startMonth).append(" endMonth=").append(endMonth)
+				.append(" startDay=").append(startDay).append(" endDay=").append(endDay).append(']');
 		return sb.toString();
 	}
 }
