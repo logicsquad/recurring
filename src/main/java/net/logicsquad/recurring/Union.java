@@ -11,7 +11,7 @@ import java.util.List;
  * 
  * @author paulh
  */
-public class Union extends CompositeTemporalExpression {
+public final class Union extends CompositeTemporalExpression {
 	/**
 	 * Constructor
 	 * 

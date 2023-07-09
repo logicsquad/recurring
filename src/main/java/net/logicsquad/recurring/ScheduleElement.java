@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * 
  * @author paulh
  */
-public class ScheduleElement {
+public final class ScheduleElement {
 	/**
 	 * String representing an event
 	 */

@@ -10,7 +10,7 @@ import java.util.Objects;
  * 
  * @author paulh
  */
-public class RangeEveryYear implements TemporalExpression {
+public final class RangeEveryYear implements TemporalExpression {
 	/**
 	 * First month of range
 	 */

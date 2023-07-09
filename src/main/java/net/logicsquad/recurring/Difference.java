@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * 
  * @author paulh
  */
-public class Difference implements TemporalExpression {
+public final class Difference implements TemporalExpression {
 	/**
 	 * Included sub-expression
 	 */

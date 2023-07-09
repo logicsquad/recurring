@@ -12,7 +12,7 @@ import java.util.Objects;
  * 
  * @author paulh
  */
-public class DayInMonth implements TemporalExpression {
+public final class DayInMonth implements TemporalExpression {
 	/**
 	 * Ordinal position within month
 	 */
