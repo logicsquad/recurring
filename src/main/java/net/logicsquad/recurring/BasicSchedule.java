@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 /**
  * A basic implementation of {@link Schedule} for use by
  * {@link Schedule#of(ScheduleElement...) Schedule.of()}.
- * 
+ *
  * @author paulh
  */
 final class BasicSchedule implements Schedule {
@@ -21,7 +21,7 @@ final class BasicSchedule implements Schedule {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param elements
 	 *            comprising {@link ScheduleElement}s
 	 */

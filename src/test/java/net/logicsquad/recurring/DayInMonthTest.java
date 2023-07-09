@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests on {@link DayInMonth}.
- * 
+ *
  * @author paulh
  */
 public class DayInMonthTest {

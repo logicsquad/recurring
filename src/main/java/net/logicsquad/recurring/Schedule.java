@@ -8,13 +8,13 @@ import java.util.stream.Stream;
 /**
  * Encapsulates a "schedule" which can answer various questions about events it
  * knows about.
- * 
+ *
  * @author paulh
  */
 public interface Schedule {
 	/**
 	 * Is {@code event} occurring on {@code date}?
-	 * 
+	 *
 	 * @param event
 	 *            string representation of an event
 	 * @param date
@@ -27,7 +27,7 @@ public interface Schedule {
 	/**
 	 * Returns a list of {@link LocalDate}s on which {@code event} is occurring
 	 * between {@code start} and {@code end} dates (inclusive).
-	 * 
+	 *
 	 * @param event
 	 *            string representation of an event
 	 * @param start
@@ -42,7 +42,7 @@ public interface Schedule {
 	 * Returns a stream of future {@link LocalDate}s on which {@code event} is
 	 * occurring beginning at {@code start} (inclusive) and proceeding forward in
 	 * time.
-	 * 
+	 *
 	 * @param event
 	 *            string representation of an event
 	 * @param start
@@ -55,7 +55,7 @@ public interface Schedule {
 	 * Returns a stream of past {@link LocalDate}s on which {@code event} is
 	 * occurring beginning at {@code start} (inclusive) and proceeding backwards in
 	 * time.
-	 * 
+	 *
 	 * @param event
 	 *            string representation of an event
 	 * @param start
@@ -67,7 +67,7 @@ public interface Schedule {
 	/**
 	 * Returns the next date on which {@code event} is occurring, on or after
 	 * {@code date}.
-	 * 
+	 *
 	 * @param event
 	 *            string representation of an event
 	 * @param date
@@ -79,7 +79,7 @@ public interface Schedule {
 	/**
 	 * Returns the previous date on which {@code event} is occurring, on or before
 	 * {@code date}.
-	 * 
+	 *
 	 * @param event
 	 *            string representation of an event
 	 * @param date
@@ -90,7 +90,7 @@ public interface Schedule {
 
 	/**
 	 * Returns a {@code Schedule} composed of the supplied {@code elements}.
-	 * 
+	 *
 	 * @param elements
 	 *            {@link ScheduleElement}s comprising the {@link Schedule}
 	 * @return a {@code Schedule}
@@ -102,7 +102,7 @@ public interface Schedule {
 	/**
 	 * Returns a {@code Schedule} composed of the {@link ScheduleElement}s in
 	 * {@code elements}.
-	 * 
+	 *
 	 * @param elements
 	 *            a {@link List} of {@link ScheduleElement}s
 	 * @return a {@code Schedule}

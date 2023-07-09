@@ -8,13 +8,13 @@ import java.util.List;
  * A {@link TemporalExpression} that acts as the intersection of its
  * sub-expressions. If this expression is composed of sub-expressions {A, B,
  * ...}, then the value of this expression is A ∩ B ∩ ...
- * 
+ *
  * @author paulh
  */
 public final class Intersection extends CompositeTemporalExpression {
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param expressions
 	 *            sub-expressions
 	 * @throws NullPointerException
@@ -27,7 +27,7 @@ public final class Intersection extends CompositeTemporalExpression {
 
 	/**
 	 * Returns an {@code Intersection} with sub-expressions {@code expressions}.
-	 * 
+	 *
 	 * @param expressions
 	 *            a list of {@link TemporalExpression}s
 	 * @return new object
@@ -40,7 +40,7 @@ public final class Intersection extends CompositeTemporalExpression {
 
 	/**
 	 * Returns an {@code Intersection} with sub-expressions {@code expressions}.
-	 * 
+	 *
 	 * @param expressions
 	 *            {@link TemporalExpression}s
 	 * @return new object

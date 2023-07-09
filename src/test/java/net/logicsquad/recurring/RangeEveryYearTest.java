@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests on {@link RangeEveryYear}.
- * 
+ *
  * @author paulh
  */
 public class RangeEveryYearTest {

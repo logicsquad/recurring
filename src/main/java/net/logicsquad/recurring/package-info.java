@@ -2,7 +2,7 @@
  * <p>
  * Provides:
  * </p>
- * 
+ *
  * <ul>
  * <li>{@link net.logicsquad.recurring.Schedule Schedule} interface (and a basic
  * implementation) to represent a schedule of recurring events.</li>
@@ -22,7 +22,7 @@
  * {@link net.logicsquad.recurring.Intersection Intersection},
  * {@link net.logicsquad.recurring.Difference Difference})</li>
  * </ul>
- * 
+ *
  * @author paulh
  */
 package net.logicsquad.recurring;

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * An element of a {@link Schedule} that links an event with a
  * {@link TemporalExpression} describing how the event recurs.
- * 
+ *
  * @author paulh
  */
 public final class ScheduleElement {
@@ -21,7 +21,7 @@ public final class ScheduleElement {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param event
 	 *            string representing some event
 	 * @param expression
@@ -36,7 +36,7 @@ public final class ScheduleElement {
 	/**
 	 * Returns {@link ScheduleElement} for {@code event} with recurrence described
 	 * by {@code expression}.
-	 * 
+	 *
 	 * @param event
 	 *            string representing some event
 	 * @param expression
@@ -49,7 +49,7 @@ public final class ScheduleElement {
 
 	/**
 	 * Is this element's event occurring on {@code date}?
-	 * 
+	 *
 	 * @param date
 	 *            a {@link LocalDate}
 	 * @return {@code true} if this element's event is occurring on {@code date},
@@ -61,7 +61,7 @@ public final class ScheduleElement {
 
 	/**
 	 * Returns this {@code ScheduleElement}'s event.
-	 * 
+	 *
 	 * @return event
 	 */
 	public String event() {

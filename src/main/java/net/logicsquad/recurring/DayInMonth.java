@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Describes an ordinal weekday of a month, such as "first Monday", "second
  * Tuesday" or "last Sunday".
- * 
+ *
  * @author paulh
  */
 public final class DayInMonth implements TemporalExpression {
@@ -30,7 +30,7 @@ public final class DayInMonth implements TemporalExpression {
 	 * {@code [-5, 5]}, <em>excluding</em> {@code 0}. That is, the "0th {@code day}"
 	 * in the month doesn't make sense, and no month spans over more than five
 	 * calendar weeks.
-	 * 
+	 *
 	 * @param day
 	 *            a {@link DayOfWeek}
 	 * @param ordinal
@@ -54,7 +54,7 @@ public final class DayInMonth implements TemporalExpression {
 	/**
 	 * Returns {@link DayInMonth} with day of week {@code day} and ordinal
 	 * {@code ordinal}. That is, the {@code ordinal}th {@code day} in the month.
-	 * 
+	 *
 	 * @param day
 	 *            day of week
 	 * @param ordinal
@@ -72,7 +72,7 @@ public final class DayInMonth implements TemporalExpression {
 
 	/**
 	 * Does {@link #day} match {@code date}'s day of week?
-	 * 
+	 *
 	 * @param date
 	 *            a {@link LocalDate}
 	 * @return {@code true} if {@code date}'s day of week matches {@link #day},
@@ -84,7 +84,7 @@ public final class DayInMonth implements TemporalExpression {
 
 	/**
 	 * Is {@code date} in the {@link #ordinal}th week of its month?
-	 * 
+	 *
 	 * @param date
 	 *            a {@link LocalDate}
 	 * @return {@code true} if {@code date} is in the {@link #ordinal}th week of its
@@ -102,7 +102,7 @@ public final class DayInMonth implements TemporalExpression {
 	 * Does {@code date}'s week from the start of the month containing {@code date}
 	 * match {@link #ordinal}? That is, does {@code date} fall in the
 	 * {@code ordinal}th week from the start of the month?
-	 * 
+	 *
 	 * @param date
 	 *            a {@link LocalDate}
 	 * @return {@code true} if {@code date} is in the {@link #ordinal}th week from
@@ -116,7 +116,7 @@ public final class DayInMonth implements TemporalExpression {
 	 * Does {@code date}'s week from the end of the month containing {@code date}
 	 * match {@link #ordinal}? That is, does {@code date} fall in the
 	 * {@code ordinal}th week from the end of the month?
-	 * 
+	 *
 	 * @param date
 	 *            a {@link LocalDate}
 	 * @return {@code true} if {@code date} is in the {@link #ordinal}th week from
@@ -131,7 +131,7 @@ public final class DayInMonth implements TemporalExpression {
 	 * <em>not</em> related to the (Sunday through Saturday) "calendar" week, but to
 	 * 7-day blocks from the first day of the month. That is, a {@code day} of, say,
 	 * 7 will always return 1, and a {@code day} of 8 will always return 2.
-	 * 
+	 *
 	 * @param day
 	 *            day of month
 	 * @return corresponding week of month
@@ -142,7 +142,7 @@ public final class DayInMonth implements TemporalExpression {
 
 	/**
 	 * How many days are left in the month from {@code date}?
-	 * 
+	 *
 	 * @param date
 	 *            a {@link LocalDate}
 	 * @return remaining day count

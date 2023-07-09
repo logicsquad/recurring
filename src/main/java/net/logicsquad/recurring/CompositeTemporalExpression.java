@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * Superclass for {@link TemporalExpression}s that work by applying some action
  * over a collection of sub-expressions. The sub-expressions are stored in the
  * {@link #expressions} list in this class.
- * 
+ *
  * @author paulh
  */
 public abstract class CompositeTemporalExpression implements TemporalExpression {
@@ -21,7 +21,7 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param expressions
 	 *            a collection of sub-expressions
 	 * @throws NullPointerException
@@ -49,7 +49,7 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 	/**
 	 * Checks each {@link TemporalExpression} in {@code expressions} for
 	 * {@code null}, throwing {@link NullPointerException} if it finds one.
-	 * 
+	 *
 	 * @param expressions
 	 *            array of {@link TemporalExpression}s
 	 * @throws NullPointerException
