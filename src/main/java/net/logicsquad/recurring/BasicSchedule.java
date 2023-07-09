@@ -25,7 +25,7 @@ final class BasicSchedule implements Schedule {
 	 * @param elements
 	 *            comprising {@link ScheduleElement}s
 	 */
-	public BasicSchedule(List<ScheduleElement> elements) {
+	BasicSchedule(List<ScheduleElement> elements) {
 		this.elements = Collections.unmodifiableList(new ArrayList<>(elements));
 		return;
 	}
