@@ -91,4 +91,21 @@ public class DayInWeek implements TemporalExpression {
 			return Objects.equals(referenceDate.getDayOfWeek(), date.getDayOfWeek()) && (ChronoUnit.WEEKS.between(referenceDate, date) % ordinal == 0);
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dayOfWeek, ordinal, referenceDate);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof DayInWeek)) {
+			return false;
+		}
+		DayInWeek other = (DayInWeek) obj;
+		return dayOfWeek == other.dayOfWeek && ordinal == other.ordinal && Objects.equals(referenceDate, other.referenceDate);
+	}
 }
