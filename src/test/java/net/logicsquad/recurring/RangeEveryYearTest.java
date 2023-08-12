@@ -297,4 +297,33 @@ public class RangeEveryYearTest {
 		assertThrows(NullPointerException.class, () -> RangeEveryYear.of((MonthDay) null, (MonthDay) null));
 		return;
 	}
+
+	/**
+	 * Ensure we can handle a single day range.
+	 */
+	@Test
+	public void canCreateRangeSpanningSingleDay() {
+		TemporalExpression exp = RangeEveryYear.of(MonthDay.of(Month.SEPTEMBER, 1), MonthDay.of(Month.SEPTEMBER, 1));
+		assertTrue(exp.includes(LocalDate.of(2023, 9, 1)));
+		assertFalse(exp.includes(LocalDate.of(2023, 9, 2)));
+		return;
+	}
+
+	/**
+	 * Ensure we can handle ranges starting and ending in the same month correctly.
+	 */
+	@Test
+	public void canCreateRangeWithinSingleMonth() {
+		TemporalExpression exp = RangeEveryYear.of(MonthDay.of(Month.SEPTEMBER, 1), MonthDay.of(Month.SEPTEMBER, 11));
+		assertTrue(exp.includes(LocalDate.of(2023, 9, 1)));
+		assertTrue(exp.includes(LocalDate.of(2023, 9, 5)));
+		assertTrue(exp.includes(LocalDate.of(2023, 9, 6)));
+		assertTrue(exp.includes(LocalDate.of(2023, 9, 11)));
+		assertFalse(exp.includes(LocalDate.of(2023, 9, 12)));
+		assertFalse(exp.includes(LocalDate.of(2023, 9, 13)));
+		assertFalse(exp.includes(LocalDate.of(2023, 9, 21)));
+		assertFalse(exp.includes(LocalDate.of(2023, 9, 30)));
+		assertFalse(exp.includes(LocalDate.of(2023, 10, 12)));
+		return;
+	}
 }
