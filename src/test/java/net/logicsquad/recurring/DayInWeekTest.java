@@ -26,7 +26,7 @@ public class DayInWeekTest {
 	private static final LocalDate THU = LocalDate.of(2023, 8, 17);
 
 	@Test
-	public void ofThrowsOnNull() {
+	public void ofThrowsOnNullDayOfWeek() {
 		assertThrows(NullPointerException.class, () -> DayInWeek.of(null));
 		return;
 	}
@@ -60,6 +60,50 @@ public class DayInWeekTest {
 		assertTrue(everyMonAndThu.includes(THU.plusWeeks(0)));
 		assertFalse(everyMonAndThu.includes(SAT));
 		assertFalse(everyMonAndThu.includes(SUN));
+		return;
+	}
+
+	@Test
+	public void ofThrowsOnNonPositiveOrdinal() {
+		assertThrows(IllegalArgumentException.class, () -> DayInWeek.of(0, SAT));
+		assertThrows(IllegalArgumentException.class, () -> DayInWeek.of(-1, SAT));
+		assertThrows(IllegalArgumentException.class, () -> DayInWeek.of(-10, SAT));
+		return;
+	}
+
+	@Test
+	public void ofThrowsOnNullReferenceDate() {
+		assertThrows(NullPointerException.class, () -> DayInWeek.of(1, null));
+		return;
+	}
+
+	@Test
+	public void dayInWeekWithOrdinalIncludesReturnsTrueOnMatch() {
+		// Every second Monday from MON
+		DayInWeek everySecondMonday = DayInWeek.of(2, MON);
+		assertTrue(everySecondMonday.includes(MON));
+		assertTrue(everySecondMonday.includes(MON.plusWeeks(2)));
+		assertTrue(everySecondMonday.includes(MON.plusWeeks(4)));
+		assertTrue(everySecondMonday.includes(MON.plusWeeks(12)));
+		assertTrue(everySecondMonday.includes(MON.minusWeeks(2)));
+		assertTrue(everySecondMonday.includes(MON.minusWeeks(4)));
+		assertTrue(everySecondMonday.includes(MON.minusWeeks(12)));
+		return;
+	}
+
+	@Test
+	public void dayInWeekWithOrdinalIncludesReturnsFalseOnNonMatch() {
+		// Every second Monday from MON
+		DayInWeek everySecondMonday = DayInWeek.of(2, MON);
+		assertFalse(everySecondMonday.includes(SAT));
+		assertFalse(everySecondMonday.includes(SUN));
+		assertFalse(everySecondMonday.includes(THU));
+		assertFalse(everySecondMonday.includes(MON.plusWeeks(1)));
+		assertFalse(everySecondMonday.includes(MON.plusWeeks(3)));
+		assertFalse(everySecondMonday.includes(MON.plusWeeks(11)));
+		assertFalse(everySecondMonday.includes(MON.minusWeeks(1)));
+		assertFalse(everySecondMonday.includes(MON.minusWeeks(3)));
+		assertFalse(everySecondMonday.includes(MON.minusWeeks(11)));
 		return;
 	}
 }
