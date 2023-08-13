@@ -44,7 +44,7 @@ public final class DayInWeek implements TemporalExpression {
 	 * Constructor taking either a {@code dayOfWeek} or an {@code ordinal} and a {@code referenceDate}. If {@code dayOfWeek} is set, this object
 	 * matches that day in <em>every</em> week. Otherwise, it matches the day of {@code referenceDate} every {@code ordinal} weeks, starting
 	 * from {@code referenceDate}.
-	 * 
+	 *
 	 * @param dayOfWeek     day of week to match
 	 * @param ordinal       weeks from {@code referenceDate} to match
 	 * @param referenceDate a reference date
@@ -58,7 +58,7 @@ public final class DayInWeek implements TemporalExpression {
 
 	/**
 	 * Returns a {@code DayInWeek} matching every {@code dayOfWeek}.
-	 * 
+	 *
 	 * @param dayOfWeek day of week
 	 * @return new object
 	 */
@@ -70,7 +70,7 @@ public final class DayInWeek implements TemporalExpression {
 	/**
 	 * Returns a {@code DayInWeek} matching the day of {@code referenceDate} every {@code ordinal} weeks (in either direction) from
 	 * {@code referenceDate} (and including {@code referenceDate}).
-	 * 
+	 *
 	 * @param ordinal       weeks from {@code referenceDate} to match
 	 * @param referenceDate a reference date
 	 * @return new object
@@ -78,7 +78,7 @@ public final class DayInWeek implements TemporalExpression {
 	public static DayInWeek of(int ordinal, LocalDate referenceDate) {
 		Objects.requireNonNull(referenceDate);
 		if (ordinal < 1) {
-			throw new IllegalArgumentException("");
+			throw new IllegalArgumentException("'ordinal' must be >= 1.");
 		}
 		return new DayInWeek(null, ordinal, referenceDate);
 	}
