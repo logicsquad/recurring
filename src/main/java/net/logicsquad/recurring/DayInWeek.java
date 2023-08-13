@@ -124,4 +124,12 @@ public final class DayInWeek implements TemporalExpression {
 		DayInWeek other = (DayInWeek) obj;
 		return dayOfWeek == other.dayOfWeek && ordinal == other.ordinal && Objects.equals(referenceDate, other.referenceDate);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append('[').append(this.getClass().getSimpleName()).append(": dayOfWeek=").append(dayOfWeek).append(" ordinal=").append(ordinal)
+				.append(" referenceDate=").append(referenceDate).append(']');
+		return sb.toString();
+	}
 }
