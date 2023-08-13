@@ -108,7 +108,11 @@ public final class RangeEveryYear implements TemporalExpression {
 
 	@Override
 	public boolean includes(LocalDate date) {
-		return monthsInclude(date) || startMonthIncludes(date) || endMonthIncludes(date);
+		if (Objects.equals(startMonth, endMonth)) {
+			return startMonthIncludes(date) && endMonthIncludes(date);
+		} else {
+			return monthsInclude(date) || startMonthIncludes(date) || endMonthIncludes(date);
+		}
 	}
 
 	/**

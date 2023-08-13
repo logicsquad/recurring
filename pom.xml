@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.logicsquad</groupId>
   <artifactId>recurring</artifactId>
-  <version>0.2</version>
+  <version>0.3</version>
   <name>Recurring</name>
   <description>A Java implementation of the ideas in Martin Fowler's "Recurring Events for Calendars".</description>
   <url>https://github.com/logicsquad/recurring</url>
@@ -48,16 +48,6 @@
   </properties>
 
   <profiles>
-    <profile>
-      <id>disable-java8-doclint</id>
-      <activation>
-        <jdk>[1.8,)</jdk>
-      </activation>
-      <properties>
-        <additionalparam>-Xdoclint:none</additionalparam>
-      </properties>
-    </profile>
-
     <profile>
       <id>release</id>
       <activation>
@@ -156,6 +146,7 @@
           <configuration>
             <detectLinks />
             <detectJavaApiLinks />
+            <doclint>none</doclint>
           </configuration>
           <executions>
             <execution>
@@ -207,6 +198,13 @@
         </plugin>
       </plugins>
     </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.1.2</version>
+      </plugin>
+    </plugins>
   </build>
 
   <reporting>

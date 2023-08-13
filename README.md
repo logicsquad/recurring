@@ -61,7 +61,7 @@ dependency:
     <dependency>
       <groupId>net.logicsquad</groupId>
       <artifactId>recurring</artifactId>
-      <version>0.2</version>
+      <version>0.3</version>
     </dependency>
 
 Note that _the API may change prior to a `1.0` release,_ at which time
