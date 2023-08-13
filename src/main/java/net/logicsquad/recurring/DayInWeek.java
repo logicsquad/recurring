@@ -24,7 +24,7 @@ import java.util.Objects;
  * @see <a href="https://github.com/logicsquad/recurring/issues/4">Issue #4</a>
  * @since 0.3
  */
-public class DayInWeek implements TemporalExpression {
+public final class DayInWeek implements TemporalExpression {
 	/**
 	 * Day of week
 	 */
@@ -85,10 +85,10 @@ public class DayInWeek implements TemporalExpression {
 
 	@Override
 	public boolean includes(LocalDate date) {
-		if (dayOfWeek != null) {
-			return Objects.equals(dayOfWeek, date.getDayOfWeek());
-		} else {
+		if (dayOfWeek == null) {
 			return Objects.equals(referenceDate.getDayOfWeek(), date.getDayOfWeek()) && (ChronoUnit.WEEKS.between(referenceDate, date) % ordinal == 0);
+		} else {
+			return Objects.equals(dayOfWeek, date.getDayOfWeek());
 		}
 	}
 
