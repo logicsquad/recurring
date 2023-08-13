@@ -127,17 +127,15 @@ public final class DayInMonth implements TemporalExpression {
 	}
 
 	/**
-	 * Returns the week in the month in which {@code day} occurs. Note that this is
-	 * <em>not</em> related to the (Sunday through Saturday) "calendar" week, but to
-	 * 7-day blocks from the first day of the month. That is, a {@code day} of, say,
-	 * 7 will always return 1, and a {@code day} of 8 will always return 2.
+	 * Returns the week in the month in which {@code dayOfMonth} occurs. Note that this is <em>not</em> related to the (Sunday through Saturday)
+	 * "calendar" week, but to 7-day blocks from the first day of the month. That is, a {@code dayOfMonth} of, say, 7 will always return 1, and
+	 * a {@code day} of 8 will always return 2.
 	 *
-	 * @param day
-	 *            day of month
+	 * @param dayOfMonth day of month
 	 * @return corresponding week of month
 	 */
-	private int weekInMonth(int day) {
-		return ((day - 1) / 7) + 1;
+	private int weekInMonth(int dayOfMonth) {
+		return ((dayOfMonth - 1) / 7) + 1;
 	}
 
 	/**
