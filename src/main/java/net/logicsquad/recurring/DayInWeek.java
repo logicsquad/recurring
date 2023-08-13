@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * <ol>
  * <li>{@link #of(DayOfWeek)} creates an expression matching <em>every</em> {@code dayOfWeek}; and</li>
- * <li>{@link #of(int, LocalDate) creates an expression matching the day of {@code referenceDate} in every {@code ordinal} weeks.</li>
+ * <li>{@link #of(int, LocalDate)} creates an expression matching the day of {@code referenceDate} in every {@code ordinal} weeks.</li>
  * </ol>
  *
  * <p>
