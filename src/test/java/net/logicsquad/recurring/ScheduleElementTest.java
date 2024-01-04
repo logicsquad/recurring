@@ -14,9 +14,11 @@ public class ScheduleElementTest {
 
 	private Intersection intersection = Intersection.of(dayInMonth, range);
 
-	private static final String EVENT = "Some event";
+	private static final String EVENT_1 = "Some event";
+	private static final Integer EVENT_2 = Integer.valueOf(12);
 
-	private ScheduleElement<String> element = ScheduleElement.of(EVENT, intersection);
+	private ScheduleElement<String> stringElement = ScheduleElement.of(EVENT_1, intersection);
+	private ScheduleElement<Integer> integerElement = ScheduleElement.of(EVENT_2, intersection);
 
 	private LocalDate in_1 = LocalDate.of(2018, 1, 8);
 	private LocalDate in_2 = LocalDate.of(2018, 2, 12);
@@ -28,17 +30,25 @@ public class ScheduleElementTest {
 
 	@Test
 	public void includesExpectedDates() {
-		assertTrue(element.isOccurring(in_1));
-		assertTrue(element.isOccurring(in_2));
-		assertTrue(element.isOccurring(in_3));
+		assertTrue(stringElement.isOccurring(in_1));
+		assertTrue(stringElement.isOccurring(in_2));
+		assertTrue(stringElement.isOccurring(in_3));
+
+		assertTrue(integerElement.isOccurring(in_1));
+		assertTrue(integerElement.isOccurring(in_2));
+		assertTrue(integerElement.isOccurring(in_3));
 		return;
 	}
 
 	@Test
 	public void excludesExpectedDates() {
-		assertFalse(element.isOccurring(out_1));
-		assertFalse(element.isOccurring(out_2));
-		assertFalse(element.isOccurring(out_3));
+		assertFalse(stringElement.isOccurring(out_1));
+		assertFalse(stringElement.isOccurring(out_2));
+		assertFalse(stringElement.isOccurring(out_3));
+
+		assertFalse(integerElement.isOccurring(out_1));
+		assertFalse(integerElement.isOccurring(out_2));
+		assertFalse(integerElement.isOccurring(out_3));
 		return;
 	}
 }
