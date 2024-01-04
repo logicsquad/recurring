@@ -14,6 +14,16 @@ import java.util.Objects;
  */
 public final class DayInMonth implements TemporalExpression {
 	/**
+	 * Maximum number of weeks in any month
+	 */
+	private static final int MAX_WEEKS_IN_MONTH = 5;
+
+	/**
+	 * Number of days in a week
+	 */
+	private static final int DAYS_IN_WEEK = 7;
+
+	/**
 	 * Ordinal position within month
 	 */
 	private final int ordinal;
@@ -24,26 +34,18 @@ public final class DayInMonth implements TemporalExpression {
 	private final DayOfWeek day;
 
 	/**
-	 * Constructor taking a weekday and an ordinal number. Positive integers
-	 * correspond to "first", "second" and so on. Negative integers correspond to
-	 * "last", "second-to-last", and so on. {@code ordinal} must be in the range
-	 * {@code [-5, 5]}, <em>excluding</em> {@code 0}. That is, the "0th {@code day}"
-	 * in the month doesn't make sense, and no month spans over more than five
-	 * calendar weeks.
+	 * Constructor taking a weekday and an ordinal number. Positive integers correspond to "first", "second" and so on. Negative integers
+	 * correspond to "last", "second-to-last", and so on. {@code ordinal} must be in the range {@code [-5, 5]}, <em>excluding</em> {@code 0}.
+	 * That is, the "0th {@code day}" in the month doesn't make sense, and no month spans over more than five calendar weeks.
 	 *
-	 * @param day
-	 *            a {@link DayOfWeek}
-	 * @param ordinal
-	 *            ordinal position within a month
-	 * @throws NullPointerException
-	 *             if {@code day} is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if {@code ordinal} is not in {@code [-5, 5]}, <em>excluding</em>
-	 *             {@code 0}
+	 * @param day     a {@link DayOfWeek}
+	 * @param ordinal ordinal position within a month
+	 * @throws NullPointerException     if {@code day} is {@code null}
+	 * @throws IllegalArgumentException if {@code ordinal} is not in {@code [-5, 5]}, <em>excluding</em> {@code 0}
 	 */
 	private DayInMonth(DayOfWeek day, int ordinal) {
 		Objects.requireNonNull(day);
-		if (ordinal == 0 || ordinal < -5 || ordinal > 5) {
+		if (ordinal == 0 || ordinal < -MAX_WEEKS_IN_MONTH || ordinal > MAX_WEEKS_IN_MONTH) {
 			throw new IllegalArgumentException("ordinal=" + ordinal + " is not in [-5, 5] excluding 0.");
 		}
 		this.day = day;
@@ -127,17 +129,15 @@ public final class DayInMonth implements TemporalExpression {
 	}
 
 	/**
-	 * Returns the week in the month in which {@code day} occurs. Note that this is
-	 * <em>not</em> related to the (Sunday through Saturday) "calendar" week, but to
-	 * 7-day blocks from the first day of the month. That is, a {@code day} of, say,
-	 * 7 will always return 1, and a {@code day} of 8 will always return 2.
+	 * Returns the week in the month in which {@code dayOfMonth} occurs. Note that this is <em>not</em> related to the (Sunday through Saturday)
+	 * "calendar" week, but to 7-day blocks from the first day of the month. That is, a {@code dayOfMonth} of, say, 7 will always return 1, and
+	 * a {@code day} of 8 will always return 2.
 	 *
-	 * @param day
-	 *            day of month
+	 * @param dayOfMonth day of month
 	 * @return corresponding week of month
 	 */
-	private int weekInMonth(int day) {
-		return ((day - 1) / 7) + 1;
+	private int weekInMonth(int dayOfMonth) {
+		return ((dayOfMonth - 1) / DAYS_IN_WEEK) + 1;
 	}
 
 	/**

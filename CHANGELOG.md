@@ -3,6 +3,12 @@
 The format here is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4] - 2024-01-04
+### Added
+- `Schedule` and `ScheduleElement` are now generic types, varying on
+  the type of `event` they accept. This allows use of types that might
+  be more suited to specific applications than `String`. #8
+
 ## [0.3] - 2023-08-13
 ### Added
 - `DayInWeek` now provides for expressions such as "every Monday",

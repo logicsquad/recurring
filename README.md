@@ -28,17 +28,17 @@ complex ways. For example:
 
 Getting started
 ---------------
-`ScheduleElement`s (which link a `TemporalExpression` to a `String`
-token representing an event) can be combined into a `Schedule`, which
-can then answer queries about the elements it contains. For example,
+`ScheduleElement`s (which link a `TemporalExpression` to some object
+representing an event) can be combined into a `Schedule`, which can
+then answer queries about the elements it contains. For example,
 construct a `TemporalExpression` representing an event that occurs on
 the first Thursday and last Wednesday of every month, and then put a
 `ScheduleElement` into a `Schedule`:
 
     TemporalExpression firstThursday = DayInMonth.of(DayOfWeek.THURSDAY, 1);
     TemporalExpression lastWednesday = DayInMonth.of(DayOfWeek.WEDNESDAY, -1);
-    ScheduleElement element = ScheduleElement.of("Meeting", Union.of(firstThursday, lastWednesday));
-    Schedule schedule = Schedule.of(element);
+    ScheduleElement<String> element = ScheduleElement.of("Meeting", Union.of(firstThursday, lastWednesday));
+    Schedule<String> schedule = Schedule.of(element);
 
 Among other things, the `Schedule` can now tell us if the meeting is on
 today:
@@ -61,7 +61,7 @@ dependency:
     <dependency>
       <groupId>net.logicsquad</groupId>
       <artifactId>recurring</artifactId>
-      <version>0.3</version>
+      <version>0.4</version>
     </dependency>
 
 Note that _the API may change prior to a `1.0` release,_ at which time
