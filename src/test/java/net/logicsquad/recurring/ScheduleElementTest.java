@@ -16,7 +16,7 @@ public class ScheduleElementTest {
 
 	private static final String EVENT = "Some event";
 
-	private ScheduleElement element = ScheduleElement.of(EVENT, intersection);
+	private ScheduleElement<String> element = ScheduleElement.of(EVENT, intersection);
 
 	private LocalDate in_1 = LocalDate.of(2018, 1, 8);
 	private LocalDate in_2 = LocalDate.of(2018, 2, 12);

@@ -9,16 +9,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * A basic implementation of {@link Schedule} for use by
- * {@link Schedule#of(ScheduleElement...) Schedule.of()}.
+ * A basic implementation of {@link Schedule} for use by {@link Schedule#of(ScheduleElement...) Schedule.of()}.
  *
+ * @param <T> type for {@link ScheduleElement}s and {@code event} objects
  * @author paulh
  */
-final class BasicSchedule implements Schedule {
+final class BasicSchedule<T> implements Schedule<T> {
 	/**
 	 * {@link ScheduleElement}s comprising this {@code Schedule}
 	 */
-	private final List<ScheduleElement> elements;
+	private final List<ScheduleElement<T>> elements;
 
 	/**
 	 * Constructor
@@ -26,15 +26,15 @@ final class BasicSchedule implements Schedule {
 	 * @param elements comprising {@link ScheduleElement}s
 	 * @throws NullPointerException if {@code elements} is {@code null}
 	 */
-	BasicSchedule(List<ScheduleElement> elements) {
+	BasicSchedule(List<ScheduleElement<T>> elements) {
 		Objects.requireNonNull(elements);
 		this.elements = Collections.unmodifiableList(new ArrayList<>(elements));
 		return;
 	}
 
 	@Override
-	public boolean isOccurring(String event, LocalDate date) {
-		for (ScheduleElement e : elements) {
+	public boolean isOccurring(T event, LocalDate date) {
+		for (ScheduleElement<T> e : elements) {
 			if (e.event().equals(event) && e.isOccurring(date)) {
 				return true;
 			}
@@ -43,7 +43,7 @@ final class BasicSchedule implements Schedule {
 	}
 
 	@Override
-	public List<LocalDate> datesInRange(String event, LocalDate start, LocalDate end) {
+	public List<LocalDate> datesInRange(T event, LocalDate start, LocalDate end) {
 		List<LocalDate> result = new ArrayList<>();
 		LocalDate cursor = start;
 		while (cursor.equals(end) || cursor.isBefore(end)) {
@@ -56,7 +56,7 @@ final class BasicSchedule implements Schedule {
 	}
 
 	@Override
-	public LocalDate nextOccurrence(String event, LocalDate date) {
+	public LocalDate nextOccurrence(T event, LocalDate date) {
 		LocalDate cursor = date;
 		while (!isOccurring(event, cursor)) {
 			cursor = cursor.plusDays(1);
@@ -73,17 +73,17 @@ final class BasicSchedule implements Schedule {
 	}
 
 	@Override
-	public Stream<LocalDate> futureDates(String event, LocalDate start) {
+	public Stream<LocalDate> futureDates(T event, LocalDate start) {
 		return Stream.iterate(nextOccurrence(event, start), seed -> nextOccurrence(event, seed.plusDays(1)));
 	}
 
 	@Override
-	public Stream<LocalDate> pastDates(String event, LocalDate start) {
+	public Stream<LocalDate> pastDates(T event, LocalDate start) {
 		return Stream.iterate(previousOccurrence(event, start), seed -> previousOccurrence(event, seed.minusDays(1)));
 	}
 
 	@Override
-	public LocalDate previousOccurrence(String event, LocalDate date) {
+	public LocalDate previousOccurrence(T event, LocalDate date) {
 		LocalDate cursor = date;
 		while (!isOccurring(event, cursor)) {
 			cursor = cursor.minusDays(1);

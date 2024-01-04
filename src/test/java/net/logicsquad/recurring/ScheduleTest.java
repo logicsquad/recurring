@@ -22,7 +22,7 @@ public class ScheduleTest {
 	private static final String KNOWN_EVENT = "Some event";
 	private static final String UNKNOWN_EVENT = "Some other event";
 
-	private ScheduleElement element = ScheduleElement.of(KNOWN_EVENT, intersection);
+	private ScheduleElement<String> element = ScheduleElement.of(KNOWN_EVENT, intersection);
 
 	private LocalDate in_1 = LocalDate.of(2018, 1, 8);
 	private LocalDate in_2 = LocalDate.of(2018, 2, 12);
@@ -32,7 +32,7 @@ public class ScheduleTest {
 	private LocalDate out_2 = LocalDate.of(2018, 8, 13);
 	private LocalDate out_3 = LocalDate.of(2018, 9, 10);
 
-	private Schedule schedule = Schedule.of(element);
+	private Schedule<String> schedule = Schedule.of(element);
 
 	// List of first 10 elements of stream from 2016-09-01: 2nd Monday, Jan -> Jun
 	// or, reversed, stream from 2018-05-01.
@@ -133,9 +133,9 @@ public class ScheduleTest {
 
 	@Test
 	public void elementsCannotBeModified() {
-		List<ScheduleElement> elements = new ArrayList<>();
+		List<ScheduleElement<String>> elements = new ArrayList<>();
 		elements.add(element);
-		Schedule modifyMe = Schedule.of(elements);
+		Schedule<String> modifyMe = Schedule.of(elements);
 		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_1));
 		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_2));
 		assertTrue(modifyMe.isOccurring(KNOWN_EVENT, in_3));
@@ -150,14 +150,14 @@ public class ScheduleTest {
 	// Can't create a Schedule from null
 	@Test
 	public void ofThrowsOnNullList() {
-		assertThrows(NullPointerException.class, () -> Schedule.of((List<ScheduleElement>) null));
+		assertThrows(NullPointerException.class, () -> Schedule.of((List<ScheduleElement<String>>) null));
 		return;
 	}
 
 	// We can create an empty Schedule
 	@Test
 	public void ofAllowsEmptyList() {
-		Schedule schedule = Schedule.of(new ArrayList<>());
+		Schedule<String> schedule = Schedule.of(new ArrayList<>());
 		// Just test some operations
 		assertFalse(schedule.isOccurring(KNOWN_EVENT, in_1));
 		assertFalse(schedule.isOccurring(KNOWN_EVENT, in_2));
