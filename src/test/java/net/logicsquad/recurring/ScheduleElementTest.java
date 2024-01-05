@@ -8,6 +8,11 @@ import java.time.Month;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests on {@link ScheduleElement}.
+ *
+ * @author paulh
+ */
 public class ScheduleElementTest {
 	private TemporalExpression dayInMonth = DayInMonth.of(DayOfWeek.MONDAY, 2);
 	private TemporalExpression range = RangeEveryYear.of(Month.JANUARY, Month.JUNE);

@@ -10,6 +10,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests on {@link Union}.
+ *
+ * @author paulh
+ */
 public class UnionTest {
 	RangeEveryYear range = RangeEveryYear.of(Month.JUNE, Month.SEPTEMBER);
 	DayInMonth day = DayInMonth.of(DayOfWeek.SUNDAY, 1);

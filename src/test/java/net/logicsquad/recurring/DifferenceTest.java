@@ -8,6 +8,11 @@ import java.time.Month;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests on {@link Difference}.
+ *
+ * @author paulh
+ */
 public class DifferenceTest {
 	private TemporalExpression months = RangeEveryYear.of(Month.JUNE, Month.SEPTEMBER);
 	private TemporalExpression days = DayInMonth.of(DayOfWeek.TUESDAY, -1);

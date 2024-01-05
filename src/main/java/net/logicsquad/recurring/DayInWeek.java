@@ -46,7 +46,7 @@ public final class DayInWeek implements TemporalExpression {
 	 * matches that day in <em>every</em> week. Otherwise, it matches the day of {@code referenceDate} every {@code ordinal} weeks, starting
 	 * from {@code referenceDate}. Only two combinations of parameter values are allowed:
 	 * </p>
-	 * 
+	 *
 	 * <ol>
 	 * <li>{@code dayOfWeek} is set, {@code ordinal} == 0, and {@code referenceDate} is {@code null}; or</li>
 	 * <li>{@code referenceDate} is set, {@code ordinal} &gt; 0 and {@code dayOfWeek} is {@code null}.</li>

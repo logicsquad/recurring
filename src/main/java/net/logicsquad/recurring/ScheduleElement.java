@@ -34,6 +34,7 @@ public final class ScheduleElement<T> {
 	/**
 	 * Returns {@link ScheduleElement} for {@code event} with recurrence described by {@code expression}.
 	 *
+	 * @param <T>        type for event
 	 * @param event      object representing an event
 	 * @param expression {@link TemporalExpression} describing event's recurrence
 	 * @return {@link ScheduleElement}
