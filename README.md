@@ -66,6 +66,9 @@ dependency:
 
 From 0.5, Recurring needs Java 17 or later. On Java 8 to 16, use 0.4.
 
+It's also a module, `net.logicsquad.recurring`, so on the module path,
+add `requires net.logicsquad.recurring;` to your `module-info.java`.
+
 Note that _the API may change prior to a `1.0` release,_ at which time
 it will remain stable, consistent with [semantic
 versioning](https://semver.org).
