@@ -29,6 +29,9 @@ complex ways. For example:
   19 August, except the month of June
 * Second Monday of January through March
 
+Recurring deals in dates, using `java.time.LocalDate`, so it has no
+notion of times or time zones.
+
 Getting started
 ---------------
 `ScheduleElement`s (which link a `TemporalExpression` to some object
@@ -42,6 +45,9 @@ the first Thursday and last Wednesday of every month, and then put a
     TemporalExpression lastWednesday = DayInMonth.of(DayOfWeek.WEDNESDAY, -1);
     ScheduleElement<String> element = ScheduleElement.of("Meeting", Union.of(firstThursday, lastWednesday));
     Schedule<String> schedule = Schedule.of(element);
+
+An event doesn't have to be a `String`. It can be any type, and the
+`Schedule` finds it using `equals()`.
 
 Among other things, the `Schedule` can now tell us if the meeting is on
 today:
@@ -60,6 +66,26 @@ That `Stream` is infinite, so limit it before collecting anything:
 
     List<LocalDate> nextFour = future.limit(4).toList();
 
+The other building blocks are `DayInWeek` and `RangeEveryYear`, and
+`Intersection` and `Difference` combine expressions as `Union` does.
+Here's the first combined example from above:
+
+    TemporalExpression mayToAugust = RangeEveryYear.of(MonthDay.of(Month.MAY, 17), MonthDay.of(Month.AUGUST, 19));
+    TemporalExpression june = RangeEveryYear.of(Month.JUNE);
+    TemporalExpression expression = Difference.of(Intersection.of(Union.of(firstThursday, lastWednesday), mayToAugust), june);
+
+`TemporalExpression` has a single method, so a lambda can be an
+expression too. That's the way to limit an expression to a particular
+year, which the built-in ones can't do:
+
+    TemporalExpression in2027 = date -> date.getYear() == 2027;
+    TemporalExpression only2027 = Intersection.of(expression, in2027);
+
+An expression like that runs out of dates, so query it with
+`datesInRange()`. For now, `nextOccurrence()` and `futureDates()` will
+keep looking for a date that never comes
+([#16](https://github.com/logicsquad/recurring/issues/16)).
+
 Using Recurring
 ---------------
 You can use Recurring in your projects by including it as a
@@ -76,6 +102,9 @@ From 0.5, Recurring needs Java 17 or later. On Java 8 to 16, use 0.4.
 It's also a module, `net.logicsquad.recurring`, so on the module path,
 add `requires net.logicsquad.recurring;` to your `module-info.java`.
 
+The [Javadoc](https://javadoc.io/doc/net.logicsquad/recurring) covers
+the rest of the API.
+
 Note that _the API may change prior to a `1.0` release,_ at which time
 it will remain stable, consistent with [semantic
 versioning](https://semver.org).
@@ -83,7 +112,8 @@ versioning](https://semver.org).
 Contributing
 ------------
 By all means, open issue tickets and pull requests if you have something
-to contribute.
+to contribute. To build the project and run its tests, use `mvn verify`
+on Java 17 or later.
 
 References
 ----------
