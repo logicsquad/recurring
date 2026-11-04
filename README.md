@@ -1,4 +1,4 @@
-![](https://github.com/logicsquad/recurring/workflows/build/badge.svg)
+![Build status](https://github.com/logicsquad/recurring/workflows/build/badge.svg)
 [![License](https://img.shields.io/badge/License-BSD-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 Recurring
@@ -12,18 +12,21 @@ _recurring events_ in Java. It is able to represent some simple
 
 * First Thursday of the month
 * Last Wednesday of the month
+* Every Monday
+* Every second Monday from 14 August 2023
 * Every day in June
 * Every day from 17 May through 19 August
 * 1 September
 
-The expressions are agnostic to the _year_.
+Most of these are agnostic to the _year_. The exception is "every second
+Monday", which counts weeks from a particular date.
 
 It also supports some simple ways of combining these expressions: union,
 intersection and difference. These can be combined in arbitrarily
 complex ways. For example:
 
 * First Thursday and last Wednesday of every month from 17 May through
-19 August, except the month of June
+  19 August, except the month of June
 * Second Monday of January through March
 
 Getting started
@@ -49,9 +52,13 @@ when the meeting last occurred:
 
     LocalDate last = schedule.previousOccurrence("Meeting", LocalDate.now());
 
-and all future dates of the meeting:
+and all of its dates from today onwards:
 
-	Stream<LocalDate> future = schedule.futureDates("Meeting", LocalDate.now());
+    Stream<LocalDate> future = schedule.futureDates("Meeting", LocalDate.now());
+
+That `Stream` is infinite, so limit it before collecting anything:
+
+    List<LocalDate> nextFour = future.limit(4).toList();
 
 Using Recurring
 ---------------
@@ -85,10 +92,12 @@ for Calendars"](https://martinfowler.com/apsupp/recurring.pdf) (1997).
 Where appropriate, we have made some changes to the code and ideas
 presented in the original article.
 
-* We will make use of interfaces where appropriate. The original article
+* We make use of interfaces where appropriate. The original article
   hinted at interfaces, but mostly gave examples of concrete classes.
-* We will use `java.time.LocalDate` instead of `java.util.Date`.
-* We will make some minor changes to suggested class names.
+* We use `java.time.LocalDate` instead of `java.util.Date`.
+* We have made some minor changes to class names. The `TE` suffix is
+  gone, so `DayInMonthTE` is now `DayInMonth`, and `RangeEachYearTE` is
+  now `RangeEveryYear`.
 
 Most of this just reflects more modern Java idioms and changes in the
 language and libraries.
