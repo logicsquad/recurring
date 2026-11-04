@@ -9,30 +9,30 @@ import java.time.MonthDay;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit tests on {@link RangeEveryYear}.
+ * Unit tests on {@link RangeEachYear}.
  *
  * @author paulh
  */
-public class RangeEveryYearTest {
+public class RangeEachYearTest {
 	// Objects created using different static factory methods
-	private RangeEveryYear fullRange = RangeEveryYear.of(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.JULY, 20));
-	private RangeEveryYear monthsRange = RangeEveryYear.of(Month.APRIL, Month.AUGUST);
-	private RangeEveryYear monthRange = RangeEveryYear.of(Month.JUNE);
+	private RangeEachYear fullRange = RangeEachYear.of(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.JULY, 20));
+	private RangeEachYear monthsRange = RangeEachYear.of(Month.APRIL, Month.AUGUST);
+	private RangeEachYear monthRange = RangeEachYear.of(Month.JUNE);
 
 	// Objects equal to corresponding object above
-	private RangeEveryYear fullRangeSame1 = RangeEveryYear.of(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.JULY, 20));
-	private RangeEveryYear monthsRangeSame1 = RangeEveryYear.of(Month.APRIL, Month.AUGUST);
-	private RangeEveryYear monthRangeSame1 = RangeEveryYear.of(Month.JUNE);
+	private RangeEachYear fullRangeSame1 = RangeEachYear.of(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.JULY, 20));
+	private RangeEachYear monthsRangeSame1 = RangeEachYear.of(Month.APRIL, Month.AUGUST);
+	private RangeEachYear monthRangeSame1 = RangeEachYear.of(Month.JUNE);
 
 	// Objects equal to corresponding object above
-	private RangeEveryYear fullRangeSame2 = RangeEveryYear.of(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.JULY, 20));
-	private RangeEveryYear monthsRangeSame2 = RangeEveryYear.of(Month.APRIL, Month.AUGUST);
-	private RangeEveryYear monthRangeSame2 = RangeEveryYear.of(Month.JUNE);
+	private RangeEachYear fullRangeSame2 = RangeEachYear.of(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.JULY, 20));
+	private RangeEachYear monthsRangeSame2 = RangeEachYear.of(Month.APRIL, Month.AUGUST);
+	private RangeEachYear monthRangeSame2 = RangeEachYear.of(Month.JUNE);
 
 	// Objects different to corresponding object above
-	private RangeEveryYear fullRangeDiff1 = RangeEveryYear.of(MonthDay.of(Month.MARCH, 2), MonthDay.of(Month.DECEMBER, 25));
-	private RangeEveryYear monthsRangeDiff1 = RangeEveryYear.of(Month.JANUARY, Month.MAY);
-	private RangeEveryYear monthRangeDiff1 = RangeEveryYear.of(Month.SEPTEMBER);
+	private RangeEachYear fullRangeDiff1 = RangeEachYear.of(MonthDay.of(Month.MARCH, 2), MonthDay.of(Month.DECEMBER, 25));
+	private RangeEachYear monthsRangeDiff1 = RangeEachYear.of(Month.JANUARY, Month.MAY);
+	private RangeEachYear monthRangeDiff1 = RangeEachYear.of(Month.SEPTEMBER);
 
 	// Dates known to be in fullRange
 	private LocalDate fullRange_in1 = LocalDate.of(2018, 3, 12);
@@ -240,7 +240,7 @@ public class RangeEveryYearTest {
 	 */
 	@Test
 	public void ofThrowsOnNullMonth() {
-		assertThrows(NullPointerException.class, () -> RangeEveryYear.of(null));
+		assertThrows(NullPointerException.class, () -> RangeEachYear.of(null));
 		return;
 	}
 
@@ -249,7 +249,7 @@ public class RangeEveryYearTest {
 	 */
 	@Test
 	public void ofThrowsOnNullFirstMonth() {
-		assertThrows(NullPointerException.class, () -> RangeEveryYear.of(null, Month.APRIL));
+		assertThrows(NullPointerException.class, () -> RangeEachYear.of(null, Month.APRIL));
 		return;
 	}
 
@@ -258,7 +258,7 @@ public class RangeEveryYearTest {
 	 */
 	@Test
 	public void ofThrowsOnNullSecondMonth() {
-		assertThrows(NullPointerException.class, () -> RangeEveryYear.of(Month.DECEMBER, null));
+		assertThrows(NullPointerException.class, () -> RangeEachYear.of(Month.DECEMBER, null));
 		return;
 	}
 
@@ -267,7 +267,7 @@ public class RangeEveryYearTest {
 	 */
 	@Test
 	public void ofThrowsOnNullBothMonths() {
-		assertThrows(NullPointerException.class, () -> RangeEveryYear.of((Month) null, (Month) null));
+		assertThrows(NullPointerException.class, () -> RangeEachYear.of((Month) null, (Month) null));
 		return;
 	}
 
@@ -276,7 +276,7 @@ public class RangeEveryYearTest {
 	 */
 	@Test
 	public void ofThrowsOnNullFirstMonthDay() {
-		assertThrows(NullPointerException.class, () -> RangeEveryYear.of(null, MonthDay.of(Month.JULY, 1)));
+		assertThrows(NullPointerException.class, () -> RangeEachYear.of(null, MonthDay.of(Month.JULY, 1)));
 		return;
 	}
 
@@ -285,7 +285,7 @@ public class RangeEveryYearTest {
 	 */
 	@Test
 	public void ofThrowsOnNullSecondMonthDay() {
-		assertThrows(NullPointerException.class, () -> RangeEveryYear.of(MonthDay.of(Month.JUNE, 12), null));
+		assertThrows(NullPointerException.class, () -> RangeEachYear.of(MonthDay.of(Month.JUNE, 12), null));
 		return;
 	}
 
@@ -294,7 +294,7 @@ public class RangeEveryYearTest {
 	 */
 	@Test
 	public void ofThrowsOnNullBothMonthDays() {
-		assertThrows(NullPointerException.class, () -> RangeEveryYear.of((MonthDay) null, (MonthDay) null));
+		assertThrows(NullPointerException.class, () -> RangeEachYear.of((MonthDay) null, (MonthDay) null));
 		return;
 	}
 
@@ -303,7 +303,7 @@ public class RangeEveryYearTest {
 	 */
 	@Test
 	public void canCreateRangeSpanningSingleDay() {
-		TemporalExpression exp = RangeEveryYear.of(MonthDay.of(Month.SEPTEMBER, 1), MonthDay.of(Month.SEPTEMBER, 1));
+		TemporalExpression exp = RangeEachYear.of(MonthDay.of(Month.SEPTEMBER, 1), MonthDay.of(Month.SEPTEMBER, 1));
 		assertTrue(exp.includes(LocalDate.of(2023, 9, 1)));
 		assertFalse(exp.includes(LocalDate.of(2023, 9, 2)));
 		return;
@@ -314,7 +314,7 @@ public class RangeEveryYearTest {
 	 */
 	@Test
 	public void canCreateRangeWithinSingleMonth() {
-		TemporalExpression exp = RangeEveryYear.of(MonthDay.of(Month.SEPTEMBER, 1), MonthDay.of(Month.SEPTEMBER, 11));
+		TemporalExpression exp = RangeEachYear.of(MonthDay.of(Month.SEPTEMBER, 1), MonthDay.of(Month.SEPTEMBER, 11));
 		assertTrue(exp.includes(LocalDate.of(2023, 9, 1)));
 		assertTrue(exp.includes(LocalDate.of(2023, 9, 5)));
 		assertTrue(exp.includes(LocalDate.of(2023, 9, 6)));

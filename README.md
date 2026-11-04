@@ -66,12 +66,12 @@ That `Stream` is infinite, so limit it before collecting anything:
 
     List<LocalDate> nextFour = future.limit(4).toList();
 
-The other building blocks are `DayInWeek` and `RangeEveryYear`, and
+The other building blocks are `DayInWeek` and `RangeEachYear`, and
 `Intersection` and `Difference` combine expressions as `Union` does.
 Here's the first combined example from above:
 
-    TemporalExpression mayToAugust = RangeEveryYear.of(MonthDay.of(Month.MAY, 17), MonthDay.of(Month.AUGUST, 19));
-    TemporalExpression june = RangeEveryYear.of(Month.JUNE);
+    TemporalExpression mayToAugust = RangeEachYear.of(MonthDay.of(Month.MAY, 17), MonthDay.of(Month.AUGUST, 19));
+    TemporalExpression june = RangeEachYear.of(Month.JUNE);
     TemporalExpression expression = Difference.of(Intersection.of(Union.of(firstThursday, lastWednesday), mayToAugust), june);
 
 `TemporalExpression` has a single method, so a lambda can be an
@@ -125,9 +125,8 @@ presented in the original article.
 * We make use of interfaces where appropriate. The original article
   hinted at interfaces, but mostly gave examples of concrete classes.
 * We use `java.time.LocalDate` instead of `java.util.Date`.
-* We have made some minor changes to class names. The `TE` suffix is
-  gone, so `DayInMonthTE` is now `DayInMonth`, and `RangeEachYearTE` is
-  now `RangeEveryYear`.
+* We have dropped the `TE` suffix from class names, so `DayInMonthTE` is
+  now `DayInMonth`.
 
 Most of this just reflects more modern Java idioms and changes in the
 language and libraries.
