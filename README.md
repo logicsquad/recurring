@@ -64,6 +64,8 @@ dependency:
       <version>0.4</version>
     </dependency>
 
+From 0.5, Recurring needs Java 17 or later. On Java 8 to 16, use 0.4.
+
 Note that _the API may change prior to a `1.0` release,_ at which time
 it will remain stable, consistent with [semantic
 versioning](https://semver.org).
