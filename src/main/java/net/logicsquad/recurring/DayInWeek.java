@@ -44,7 +44,7 @@ public final class DayInWeek implements TemporalExpression {
 	 * <p>
 	 * Constructor taking either a {@code dayOfWeek} or an {@code ordinal} and a {@code referenceDate}. If {@code dayOfWeek} is set, this object
 	 * matches that day in <em>every</em> week. Otherwise, it matches the day of {@code referenceDate} every {@code ordinal} weeks, starting
-	 * from {@code referenceDate}. Only two combinations of parameter values are allowed:
+	 * from {@code referenceDate}. The factories allow only two combinations of parameter values:
 	 * </p>
 	 *
 	 * <ol>
@@ -55,19 +55,11 @@ public final class DayInWeek implements TemporalExpression {
 	 * @param dayOfWeek     day of week to match
 	 * @param ordinal       weeks from {@code referenceDate} to match
 	 * @param referenceDate a reference date
-	 * @throws IllegalStateException if parameters do not conform to one of the allowed combinations above
 	 */
 	private DayInWeek(DayOfWeek dayOfWeek, int ordinal, LocalDate referenceDate) {
 		this.dayOfWeek = dayOfWeek;
 		this.ordinal = ordinal;
 		this.referenceDate = referenceDate;
-		// There are only two object states that make sense:
-		// 1. dayOfWeek is set, ordinal == 0, and referenceDate is null; or
-		// 2. referenceDate is set, ordinal > 0 and dayOfWeek is null.
-		if (!((dayOfWeek != null && ordinal == 0 && referenceDate == null) || (referenceDate != null && ordinal > 0 && dayOfWeek == null))) {
-			throw new IllegalStateException("Must have either dayOfWeek is set (and ordinal == 0, referenceDate is null), "
-					+ "or referenceDate is set, with ordinal > 0 (and dayOfWeek is null).");
-		}
 		return;
 	}
 

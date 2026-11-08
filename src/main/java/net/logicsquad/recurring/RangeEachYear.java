@@ -137,13 +137,7 @@ public final class RangeEachYear implements TemporalExpression {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + endDay;
-		result = prime * result + ((endMonth == null) ? 0 : endMonth.hashCode());
-		result = prime * result + startDay;
-		result = prime * result + ((startMonth == null) ? 0 : startMonth.hashCode());
-		return result;
+		return Objects.hash(startMonth, endMonth, startDay, endDay);
 	}
 
 	@Override

@@ -165,11 +165,7 @@ public final class DayInMonth implements TemporalExpression {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((day == null) ? 0 : day.hashCode());
-		result = prime * result + ordinal;
-		return result;
+		return Objects.hash(day, ordinal);
 	}
 
 	@Override
