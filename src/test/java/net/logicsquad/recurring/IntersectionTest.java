@@ -10,9 +10,14 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests on {@link Intersection}.
+ *
+ * @author paulh
+ */
 public class IntersectionTest {
 	private TemporalExpression dayInMonth = DayInMonth.of(DayOfWeek.MONDAY, 2);
-	private TemporalExpression range = RangeEveryYear.of(Month.JANUARY, Month.JUNE);
+	private TemporalExpression range = RangeEachYear.of(Month.JANUARY, Month.JUNE);
 
 	private Intersection intersection = Intersection.of(dayInMonth, range);
 

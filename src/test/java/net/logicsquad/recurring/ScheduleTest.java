@@ -13,9 +13,14 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests on {@link Schedule}.
+ *
+ * @author paulh
+ */
 public class ScheduleTest {
 	private TemporalExpression dayInMonth = DayInMonth.of(DayOfWeek.MONDAY, 2);
-	private TemporalExpression range = RangeEveryYear.of(Month.JANUARY, Month.JUNE);
+	private TemporalExpression range = RangeEachYear.of(Month.JANUARY, Month.JUNE);
 
 	private Intersection intersection = Intersection.of(dayInMonth, range);
 

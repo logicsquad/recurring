@@ -10,6 +10,7 @@ import java.time.LocalDate;
  *
  * @author paulh
  */
+@FunctionalInterface
 public interface TemporalExpression {
 	/**
 	 * Is {@code date} included by this {@code TemporalExpression}?

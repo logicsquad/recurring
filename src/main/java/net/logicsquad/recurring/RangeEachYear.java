@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author paulh
  */
-public final class RangeEveryYear implements TemporalExpression {
+public final class RangeEachYear implements TemporalExpression {
 	/**
 	 * First month of range
 	 */
@@ -45,7 +45,7 @@ public final class RangeEveryYear implements TemporalExpression {
 	 *            last day (in end month) of range, or zero to include whole of end
 	 *            month
 	 */
-	private RangeEveryYear(Month startMonth, Month endMonth, int startDay, int endDay) {
+	private RangeEachYear(Month startMonth, Month endMonth, int startDay, int endDay) {
 		Objects.requireNonNull(startMonth);
 		Objects.requireNonNull(endMonth);
 		this.startMonth = startMonth;
@@ -56,54 +56,54 @@ public final class RangeEveryYear implements TemporalExpression {
 	}
 
 	/**
-	 * Returns {@code RangeEveryYear} spanning from {@code start} day through
+	 * Returns {@code RangeEachYear} spanning from {@code start} day through
 	 * {@code end} day (inclusive).
 	 *
 	 * @param start
 	 *            start day
 	 * @param end
 	 *            end day
-	 * @return {@code RangeEveryYear}
+	 * @return {@code RangeEachYear}
 	 * @throws NullPointerException
 	 *             if either argument is {@code null}
 	 */
-	public static RangeEveryYear of(MonthDay start, MonthDay end) {
+	public static RangeEachYear of(MonthDay start, MonthDay end) {
 		Objects.requireNonNull(start);
 		Objects.requireNonNull(end);
-		return new RangeEveryYear(start.getMonth(), end.getMonth(), start.getDayOfMonth(), end.getDayOfMonth());
+		return new RangeEachYear(start.getMonth(), end.getMonth(), start.getDayOfMonth(), end.getDayOfMonth());
 	}
 
 	/**
-	 * Returns {@code RangeEveryYear} spanning from beginning of {@code startMonth}
+	 * Returns {@code RangeEachYear} spanning from beginning of {@code startMonth}
 	 * through end of {@code endMonth} (inclusive).
 	 *
 	 * @param startMonth
 	 *            start month
 	 * @param endMonth
 	 *            end month
-	 * @return {@code RangeEveryYear}
+	 * @return {@code RangeEachYear}
 	 * @throws NullPointerException
 	 *             if either argument is {@code null}
 	 */
-	public static RangeEveryYear of(Month startMonth, Month endMonth) {
+	public static RangeEachYear of(Month startMonth, Month endMonth) {
 		Objects.requireNonNull(startMonth);
 		Objects.requireNonNull(endMonth);
-		return new RangeEveryYear(startMonth, endMonth, 0, 0);
+		return new RangeEachYear(startMonth, endMonth, 0, 0);
 	}
 
 	/**
-	 * Returns {@code RangeEveryYear} spanning from beginning of {@code month}
+	 * Returns {@code RangeEachYear} spanning from beginning of {@code month}
 	 * through end of {@code month} (inclusive).
 	 *
 	 * @param month
 	 *            a month
-	 * @return {@code RangeEveryYear}
+	 * @return {@code RangeEachYear}
 	 * @throws NullPointerException
 	 *             if argument is {@code null}
 	 */
-	public static RangeEveryYear of(Month month) {
+	public static RangeEachYear of(Month month) {
 		Objects.requireNonNull(month);
-		return new RangeEveryYear(month, month, 0, 0);
+		return new RangeEachYear(month, month, 0, 0);
 	}
 
 	@Override
@@ -173,10 +173,10 @@ public final class RangeEveryYear implements TemporalExpression {
 		if (this == o) {
 			return true;
 		}
-		if (!(o instanceof RangeEveryYear)) {
+		if (!(o instanceof RangeEachYear)) {
 			return false;
 		}
-		RangeEveryYear other = (RangeEveryYear) o;
+		RangeEachYear other = (RangeEachYear) o;
 		return endDay == other.endDay && endMonth == other.endMonth && startDay == other.startDay
 				&& startMonth == other.startMonth;
 	}

@@ -73,6 +73,7 @@ public interface Schedule<T> {
 	/**
 	 * Returns a {@code Schedule} composed of the supplied {@code elements}.
 	 *
+	 * @param <T>      type for event
 	 * @param elements {@link ScheduleElement}s comprising the {@link Schedule}
 	 * @return a {@code Schedule}
 	 * @throws NullPointerException if any {@link ScheduleElement} in {@code elements} is {@code null}
@@ -88,6 +89,7 @@ public interface Schedule<T> {
 	/**
 	 * Returns a {@code Schedule} composed of the {@link ScheduleElement}s in {@code elements}.
 	 *
+	 * @param <T>      type for event
 	 * @param elements a {@link List} of {@link ScheduleElement}s
 	 * @return a {@code Schedule}
 	 * @throws NullPointerException if {@code elements} is {@code null}

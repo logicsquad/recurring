@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +47,36 @@ public class DayInMonthTest {
 	 * Second Monday in August 2018
 	 */
 	private LocalDate match2 = LocalDate.of(2018, 8, 13);
+
+	/**
+	 * Fifth Saturdays starting 1 January 2024
+	 */
+	private List<LocalDate> expectedFifthSaturdays = new ArrayList<>(Arrays.asList(
+			LocalDate.of(2024, 3, 30),
+			LocalDate.of(2024, 6, 29),
+			LocalDate.of(2024, 8, 31),
+			LocalDate.of(2024, 11, 30),
+			LocalDate.of(2025, 3, 29),
+			LocalDate.of(2025, 5, 31),
+			LocalDate.of(2025, 8, 30),
+			LocalDate.of(2025, 11, 29),
+			LocalDate.of(2026, 1, 31),
+			LocalDate.of(2026, 5, 30)));
+
+	/**
+	 * Fifth Saturdays from the end of the month starting 1 January 2024
+	 */
+	private List<LocalDate> expectedMinusFifthSaturdays = new ArrayList<>(Arrays.asList(
+			LocalDate.of(2024, 3, 2),
+			LocalDate.of(2024, 6, 1),
+			LocalDate.of(2024, 8, 3),
+			LocalDate.of(2024, 11, 2),
+			LocalDate.of(2025, 3, 1),
+			LocalDate.of(2025, 5, 3),
+			LocalDate.of(2025, 8, 2),
+			LocalDate.of(2025, 11, 1),
+			LocalDate.of(2026, 1, 3),
+			LocalDate.of(2026, 5, 2)));
 
 	/**
 	 * Tests that expression matches known-good dates.
@@ -186,6 +220,35 @@ public class DayInMonthTest {
 	@Test
 	public void ofThrowsOnOrdinalUnderMinus5() {
 		assertThrows(IllegalArgumentException.class, () -> DayInMonth.of(DayOfWeek.MONDAY, -6));
+		return;
+	}
+
+	/**
+	 * Obviously not every month has a "fifth Saturday", for example. Here we're making sure that the sequence of dates is correct, and we don't
+	 * get a result where, say, the "fifth Saturday" in March falls through to the first Saturday of April when it doesn't exist in March at
+	 * all.
+	 */
+	@Test
+	public void fifthSaturdaysIsExpectedSequence() {
+		DayInMonth fifthSaturday = DayInMonth.of(DayOfWeek.SATURDAY, 5);
+		ScheduleElement<String> fifthElement = ScheduleElement.of("fifth", fifthSaturday);
+		Schedule<String> fifthSchedule = Schedule.of(fifthElement);
+		List<LocalDate> fifthSaturdays = fifthSchedule.futureDates("fifth", LocalDate.of(2024, 1, 1)).limit(10).collect(Collectors.toList());
+		assertEquals(expectedFifthSaturdays, fifthSaturdays);
+		return;
+	}
+
+	/**
+	 * Similarly, not every month has a "fifth Saturday from the end": it only occurs in those months that have five Saturdays to begin with, in
+	 * which case it's the first Saturday in that month.
+	 */
+	@Test
+	public void minusFifthSaturdaysIsExpectedSequence() {
+		DayInMonth minusFifthSaturday = DayInMonth.of(DayOfWeek.SATURDAY, -5);
+		ScheduleElement<String> minusFifthElement = ScheduleElement.of("fifth", minusFifthSaturday);
+		Schedule<String> minusFifthSchedule = Schedule.of(minusFifthElement);
+		List<LocalDate> minusFifthSaturdays = minusFifthSchedule.futureDates("fifth", LocalDate.of(2024, 1, 1)).limit(10).collect(Collectors.toList());
+		assertEquals(expectedMinusFifthSaturdays, minusFifthSaturdays);
 		return;
 	}
 }
