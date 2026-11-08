@@ -326,4 +326,68 @@ public class RangeEachYearTest {
 		assertFalse(exp.includes(LocalDate.of(2023, 10, 12)));
 		return;
 	}
+
+	/**
+	 * A range of months whose end comes before its start wraps around the end of the year.
+	 */
+	@Test
+	public void rangeOfMonthsCanWrapAroundNewYear() {
+		TemporalExpression exp = RangeEachYear.of(Month.NOVEMBER, Month.FEBRUARY);
+		assertTrue(exp.includes(LocalDate.of(2026, 11, 1)));
+		assertTrue(exp.includes(LocalDate.of(2026, 12, 25)));
+		assertTrue(exp.includes(LocalDate.of(2027, 1, 15)));
+		assertTrue(exp.includes(LocalDate.of(2027, 2, 28)));
+		assertTrue(exp.includes(LocalDate.of(2028, 2, 29)));
+		assertFalse(exp.includes(LocalDate.of(2026, 10, 31)));
+		assertFalse(exp.includes(LocalDate.of(2027, 3, 1)));
+		assertFalse(exp.includes(LocalDate.of(2027, 6, 15)));
+		return;
+	}
+
+	/**
+	 * A range of days whose end comes before its start wraps around the end of the year.
+	 */
+	@Test
+	public void rangeOfDaysCanWrapAroundNewYear() {
+		TemporalExpression exp = RangeEachYear.of(MonthDay.of(Month.DECEMBER, 20), MonthDay.of(Month.JANUARY, 10));
+		assertTrue(exp.includes(LocalDate.of(2026, 12, 20)));
+		assertTrue(exp.includes(LocalDate.of(2026, 12, 31)));
+		assertTrue(exp.includes(LocalDate.of(2027, 1, 1)));
+		assertTrue(exp.includes(LocalDate.of(2027, 1, 10)));
+		assertFalse(exp.includes(LocalDate.of(2026, 12, 19)));
+		assertFalse(exp.includes(LocalDate.of(2027, 1, 11)));
+		assertFalse(exp.includes(LocalDate.of(2027, 6, 15)));
+		return;
+	}
+
+	/**
+	 * A range within one month whose end comes before its start wraps around the end of the year, leaving out only the days in between.
+	 */
+	@Test
+	public void reversedRangeWithinMonthWrapsAroundNewYear() {
+		TemporalExpression exp = RangeEachYear.of(MonthDay.of(Month.JUNE, 20), MonthDay.of(Month.JUNE, 10));
+		assertTrue(exp.includes(LocalDate.of(2027, 6, 20)));
+		assertTrue(exp.includes(LocalDate.of(2027, 7, 1)));
+		assertTrue(exp.includes(LocalDate.of(2028, 1, 1)));
+		assertTrue(exp.includes(LocalDate.of(2028, 6, 10)));
+		assertFalse(exp.includes(LocalDate.of(2027, 6, 11)));
+		assertFalse(exp.includes(LocalDate.of(2027, 6, 19)));
+		return;
+	}
+
+	/**
+	 * A range ending in February includes the last day of February, whether or not it's a leap year.
+	 */
+	@Test
+	public void rangeEndingInFebruaryIncludesLastDayOfFebruary() {
+		TemporalExpression months = RangeEachYear.of(Month.FEBRUARY);
+		TemporalExpression days = RangeEachYear.of(MonthDay.of(Month.FEBRUARY, 1), MonthDay.of(Month.FEBRUARY, 29));
+		for (TemporalExpression exp : new TemporalExpression[] { months, days }) {
+			assertTrue(exp.includes(LocalDate.of(2027, 2, 28)));
+			assertTrue(exp.includes(LocalDate.of(2028, 2, 29)));
+			assertFalse(exp.includes(LocalDate.of(2027, 3, 1)));
+			assertFalse(exp.includes(LocalDate.of(2028, 3, 1)));
+		}
+		return;
+	}
 }

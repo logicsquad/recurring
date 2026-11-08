@@ -16,6 +16,7 @@ _recurring events_ in Java. It is able to represent some simple
 * Every second Monday from 14 August 2023
 * Every day in June
 * Every day from 17 May through 19 August
+* Every day from 20 December through 10 January
 * 1 September
 
 Most of these are agnostic to the _year_. The exception is "every second

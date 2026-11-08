@@ -6,7 +6,8 @@ import java.time.MonthDay;
 import java.util.Objects;
 
 /**
- * Describes a contiguous range of days in any year.
+ * Describes a contiguous range of days in any year. A range whose end comes before its start wraps around the end of the year, so that 1
+ * November through 28 February, for example, includes December and January.
  *
  * @author paulh
  */
@@ -57,7 +58,8 @@ public final class RangeEachYear implements TemporalExpression {
 
 	/**
 	 * Returns {@code RangeEachYear} spanning from {@code start} day through
-	 * {@code end} day (inclusive).
+	 * {@code end} day (inclusive). If {@code end} comes before {@code start} in
+	 * the year, the range wraps around the end of the year.
 	 *
 	 * @param start
 	 *            start day
@@ -75,7 +77,8 @@ public final class RangeEachYear implements TemporalExpression {
 
 	/**
 	 * Returns {@code RangeEachYear} spanning from beginning of {@code startMonth}
-	 * through end of {@code endMonth} (inclusive).
+	 * through end of {@code endMonth} (inclusive). If {@code endMonth} comes
+	 * before {@code startMonth}, the range wraps around the end of the year.
 	 *
 	 * @param startMonth
 	 *            start month
@@ -108,63 +111,14 @@ public final class RangeEachYear implements TemporalExpression {
 
 	@Override
 	public boolean includes(LocalDate date) {
-		if (Objects.equals(startMonth, endMonth)) {
-			return startMonthIncludes(date) && endMonthIncludes(date);
+		MonthDay day = MonthDay.from(date);
+		MonthDay first = MonthDay.of(startMonth, startDay == 0 ? 1 : startDay);
+		MonthDay last = MonthDay.of(endMonth, endDay == 0 ? endMonth.maxLength() : endDay);
+		if (first.isAfter(last)) {
+			// The range wraps around the end of the year
+			return !day.isBefore(first) || !day.isAfter(last);
 		} else {
-			return monthsInclude(date) || startMonthIncludes(date) || endMonthIncludes(date);
-		}
-	}
-
-	/**
-	 * Do any of the (possibly zero) months <em>between</em> {@link #startMonth} and
-	 * {@link #endMonth} (exclusive) include {@code date}?
-	 *
-	 * @param date
-	 *            a {@link LocalDate}
-	 * @return {@code true} if {@code date} falls in a month <em>between</em>
-	 *         {@link #startMonth} and {@link #endMonth} (exclusive), otherwise
-	 *         {@code false}
-	 */
-	private boolean monthsInclude(LocalDate date) {
-		int month = date.getMonthValue();
-		return month > startMonth.getValue() && month < endMonth.getValue();
-	}
-
-	/**
-	 * Does {@link #startMonth} (excluding days before {@link #startDay}, <em>if
-	 * set</em>) include {@code date}?
-	 *
-	 * @param date
-	 *            a {@link LocalDate}
-	 * @return {@code true} if {@link #startMonth} includes {@code date}, otherwise
-	 *         {@code false}
-	 */
-	private boolean startMonthIncludes(LocalDate date) {
-		if (date.getMonthValue() != startMonth.getValue()) {
-			return false;
-		} else if (startDay == 0) {
-			return true;
-		} else {
-			return date.getDayOfMonth() >= startDay;
-		}
-	}
-
-	/**
-	 * Does {@link #endMonth} (excluding days after {@link #endDay}, <em>if
-	 * set</em>) include {@code date}?
-	 *
-	 * @param date
-	 *            a {@link LocalDate}
-	 * @return {@code true} if {@link #endMonth} includes {@code date}, otherwise
-	 *         {@code false}
-	 */
-	private boolean endMonthIncludes(LocalDate date) {
-		if (date.getMonthValue() != endMonth.getValue()) {
-			return false;
-		} else if (endDay == 0) {
-			return true;
-		} else {
-			return date.getDayOfMonth() <= endDay;
+			return !day.isBefore(first) && !day.isAfter(last);
 		}
 	}
 
