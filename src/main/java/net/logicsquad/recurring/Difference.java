@@ -8,7 +8,8 @@ import java.util.Objects;
  * sub-expressions. Specifically, this expression is composed of a
  * sub-expression {@code included}, and another sub-expression {@code excluded}.
  * The value of this expression is then
- * {@code included.includes() && !excluded.includes()}.
+ * {@code included.includes() && !excluded.includes()}. Two differences are
+ * equal if both of their sub-expressions are equal.
  *
  * @author paulh
  */
@@ -58,6 +59,23 @@ public final class Difference implements TemporalExpression {
 	@Override
 	public boolean includes(LocalDate date) {
 		return included.includes(date) && !excluded.includes(date);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Difference)) {
+			return false;
+		}
+		Difference other = (Difference) obj;
+		return included.equals(other.included) && excluded.equals(other.excluded);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(included, excluded);
 	}
 
 	@Override

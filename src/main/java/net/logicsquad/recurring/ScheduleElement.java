@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * An element of a {@link Schedule} that links an event with a {@link TemporalExpression} describing how the event recurs.
+ * An element of a {@link Schedule} that links an event with a {@link TemporalExpression} describing how the event recurs. Two elements
+ * are equal if their events and expressions are equal.
  *
  * @param <T> type for {@code event} objects
  * @author paulh
@@ -64,6 +65,23 @@ public final class ScheduleElement<T> {
 	 */
 	public T event() {
 		return event;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof ScheduleElement)) {
+			return false;
+		}
+		ScheduleElement<?> other = (ScheduleElement<?>) obj;
+		return event.equals(other.event) && expression.equals(other.expression);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(event, expression);
 	}
 
 	@Override

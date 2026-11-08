@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
 /**
  * Superclass for {@link TemporalExpression}s that work by applying some action
  * over a collection of sub-expressions. The sub-expressions are stored in the
- * {@link #expressions} list in this class.
+ * {@link #expressions} list in this class. Two composite expressions are equal
+ * if they're of the same class, with equal sub-expressions in the same order.
  *
  * @author paulh
  */
@@ -36,6 +37,22 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 		}
 		this.expressions = Collections.unmodifiableList(new ArrayList<>(expressions));
 		return;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || obj.getClass() != getClass()) {
+			return false;
+		}
+		return expressions.equals(((CompositeTemporalExpression) obj).expressions);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getClass().getName(), expressions);
 	}
 
 	@Override

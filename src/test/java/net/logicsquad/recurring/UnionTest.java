@@ -21,6 +21,11 @@ public class UnionTest {
 
 	Union union = Union.of(range, day);
 
+	// Objects equal to union, and one different to it
+	Union unionSame1 = Union.of(RangeEachYear.of(Month.JUNE, Month.SEPTEMBER), DayInMonth.of(DayOfWeek.SUNDAY, 1));
+	Union unionSame2 = Union.of(range, day);
+	Union unionDiff1 = Union.of(range);
+
 	@Test
 	public void unionIncludesAnyDayInRange() {
 		assertTrue(union.includes(LocalDate.of(2018, 6, 1)));
@@ -92,6 +97,100 @@ public class UnionTest {
 		expressions.remove(range);
 		// Show that a date in the range still matches
 		assertTrue(modifyMe.includes(LocalDate.of(2018, 6, 1)));
+		return;
+	}
+
+	/**
+	 * Tests reflexivity of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsReflexive() {
+		assertTrue(union.equals(union));
+		return;
+	}
+
+	/**
+	 * Tests symmetry of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsSymmetric() {
+		assertTrue(union.equals(unionSame1));
+		assertTrue(unionSame1.equals(union));
+		return;
+	}
+
+	/**
+	 * Tests transitivity of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsTransitive() {
+		assertTrue(union.equals(unionSame1));
+		assertTrue(unionSame1.equals(unionSame2));
+		assertTrue(union.equals(unionSame2));
+		return;
+	}
+
+	/**
+	 * Tests consistency of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsConsistent() {
+		for (int i = 0; i < 1000; i++) {
+			assertTrue(union.equals(unionSame1));
+		}
+		return;
+	}
+
+	/**
+	 * Tests null-handling of {@code equals()}.
+	 */
+	@Test
+	public void equalsHandlesNull() {
+		assertFalse(union.equals(null));
+		return;
+	}
+
+	/**
+	 * Tests that a different sub-expression, or the same ones in a different order, make a union unequal, and that it doesn't
+	 * equal an intersection of the same sub-expressions.
+	 */
+	@Test
+	public void equalsComparesEachPart() {
+		assertNotEquals(union, Union.of(range, DayInMonth.of(DayOfWeek.SUNDAY, 2)));
+		assertNotEquals(union, Union.of(day, range));
+		assertNotEquals(union, Intersection.of(range, day));
+		return;
+	}
+
+	/**
+	 * Tests consistency of {@code hashCode()}.
+	 */
+	@Test
+	public void hashCodeIsConsistent() {
+		int hashCode = union.hashCode();
+		for (int i = 0; i < 1000; i++) {
+			assertEquals(hashCode, union.hashCode());
+		}
+		return;
+	}
+
+	/**
+	 * Tests equality of {@code hashCode()}.
+	 */
+	@Test
+	public void equalObjectsHaveEqualHashCodes() {
+		assertEquals(union.hashCode(), unionSame1.hashCode());
+		assertEquals(union.hashCode(), unionSame2.hashCode());
+		return;
+	}
+
+	// This is not required by the contract, but is desirable
+	/**
+	 * Tests non-equality of {@code hashCode()}.
+	 */
+	@Test
+	public void unequalObjectsHaveUnequalHashCodes() {
+		assertNotEquals(union.hashCode(), unionDiff1.hashCode());
 		return;
 	}
 }

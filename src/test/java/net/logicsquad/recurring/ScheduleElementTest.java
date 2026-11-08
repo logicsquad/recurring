@@ -25,6 +25,12 @@ public class ScheduleElementTest {
 	private ScheduleElement<String> stringElement = ScheduleElement.of(EVENT_1, intersection);
 	private ScheduleElement<Integer> integerElement = ScheduleElement.of(EVENT_2, intersection);
 
+	// Objects equal to stringElement, and one different to it
+	private ScheduleElement<String> stringElementSame1 = ScheduleElement.of("Some event",
+			Intersection.of(DayInMonth.of(DayOfWeek.MONDAY, 2), RangeEachYear.of(Month.JANUARY, Month.JUNE)));
+	private ScheduleElement<String> stringElementSame2 = ScheduleElement.of(EVENT_1, intersection);
+	private ScheduleElement<String> stringElementDiff1 = ScheduleElement.of("Some other event", intersection);
+
 	private LocalDate in_1 = LocalDate.of(2018, 1, 8);
 	private LocalDate in_2 = LocalDate.of(2018, 2, 12);
 	private LocalDate in_3 = LocalDate.of(2018, 3, 12);
@@ -72,6 +78,99 @@ public class ScheduleElementTest {
 	@Test
 	public void ofThrowsOnNullExpression() {
 		assertThrows(NullPointerException.class, () -> ScheduleElement.of(EVENT_1, null));
+		return;
+	}
+
+	/**
+	 * Tests reflexivity of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsReflexive() {
+		assertTrue(stringElement.equals(stringElement));
+		return;
+	}
+
+	/**
+	 * Tests symmetry of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsSymmetric() {
+		assertTrue(stringElement.equals(stringElementSame1));
+		assertTrue(stringElementSame1.equals(stringElement));
+		return;
+	}
+
+	/**
+	 * Tests transitivity of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsTransitive() {
+		assertTrue(stringElement.equals(stringElementSame1));
+		assertTrue(stringElementSame1.equals(stringElementSame2));
+		assertTrue(stringElement.equals(stringElementSame2));
+		return;
+	}
+
+	/**
+	 * Tests consistency of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsConsistent() {
+		for (int i = 0; i < 1000; i++) {
+			assertTrue(stringElement.equals(stringElementSame1));
+		}
+		return;
+	}
+
+	/**
+	 * Tests null-handling of {@code equals()}.
+	 */
+	@Test
+	public void equalsHandlesNull() {
+		assertFalse(stringElement.equals(null));
+		return;
+	}
+
+	/**
+	 * Tests that a different event or expression makes an element unequal.
+	 */
+	@Test
+	public void equalsComparesEachPart() {
+		assertNotEquals(stringElement, stringElementDiff1);
+		assertNotEquals(stringElement, ScheduleElement.of(EVENT_1, range));
+		assertNotEquals(stringElement, integerElement);
+		return;
+	}
+
+	/**
+	 * Tests consistency of {@code hashCode()}.
+	 */
+	@Test
+	public void hashCodeIsConsistent() {
+		int hashCode = stringElement.hashCode();
+		for (int i = 0; i < 1000; i++) {
+			assertEquals(hashCode, stringElement.hashCode());
+		}
+		return;
+	}
+
+	/**
+	 * Tests equality of {@code hashCode()}.
+	 */
+	@Test
+	public void equalObjectsHaveEqualHashCodes() {
+		assertEquals(stringElement.hashCode(), stringElementSame1.hashCode());
+		assertEquals(stringElement.hashCode(), stringElementSame2.hashCode());
+		return;
+	}
+
+	// This is not required by the contract, but is desirable
+	/**
+	 * Tests non-equality of {@code hashCode()}.
+	 */
+	@Test
+	public void unequalObjectsHaveUnequalHashCodes() {
+		assertNotEquals(stringElement.hashCode(), stringElementDiff1.hashCode());
 		return;
 	}
 }

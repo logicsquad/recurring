@@ -21,6 +21,11 @@ public class IntersectionTest {
 
 	private Intersection intersection = Intersection.of(dayInMonth, range);
 
+	// Objects equal to intersection, and one different to it
+	private Intersection intersectionSame1 = Intersection.of(DayInMonth.of(DayOfWeek.MONDAY, 2), RangeEachYear.of(Month.JANUARY, Month.JUNE));
+	private Intersection intersectionSame2 = Intersection.of(dayInMonth, range);
+	private Intersection intersectionDiff1 = Intersection.of(dayInMonth);
+
 	private LocalDate in_1 = LocalDate.of(2018, 1, 8);
 	private LocalDate in_2 = LocalDate.of(2018, 2, 12);
 	private LocalDate in_3 = LocalDate.of(2018, 3, 12);
@@ -108,6 +113,100 @@ public class IntersectionTest {
 		expressions.remove(range);
 		// Show that a date in the range still matches
 		assertTrue(modifyMe.includes(in_1));
+		return;
+	}
+
+	/**
+	 * Tests reflexivity of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsReflexive() {
+		assertTrue(intersection.equals(intersection));
+		return;
+	}
+
+	/**
+	 * Tests symmetry of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsSymmetric() {
+		assertTrue(intersection.equals(intersectionSame1));
+		assertTrue(intersectionSame1.equals(intersection));
+		return;
+	}
+
+	/**
+	 * Tests transitivity of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsTransitive() {
+		assertTrue(intersection.equals(intersectionSame1));
+		assertTrue(intersectionSame1.equals(intersectionSame2));
+		assertTrue(intersection.equals(intersectionSame2));
+		return;
+	}
+
+	/**
+	 * Tests consistency of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsConsistent() {
+		for (int i = 0; i < 1000; i++) {
+			assertTrue(intersection.equals(intersectionSame1));
+		}
+		return;
+	}
+
+	/**
+	 * Tests null-handling of {@code equals()}.
+	 */
+	@Test
+	public void equalsHandlesNull() {
+		assertFalse(intersection.equals(null));
+		return;
+	}
+
+	/**
+	 * Tests that a different sub-expression, or the same ones in a different order, make an intersection unequal, and that
+	 * it doesn't equal a union of the same sub-expressions.
+	 */
+	@Test
+	public void equalsComparesEachPart() {
+		assertNotEquals(intersection, Intersection.of(dayInMonth, RangeEachYear.of(Month.JANUARY, Month.JULY)));
+		assertNotEquals(intersection, Intersection.of(range, dayInMonth));
+		assertNotEquals(intersection, Union.of(dayInMonth, range));
+		return;
+	}
+
+	/**
+	 * Tests consistency of {@code hashCode()}.
+	 */
+	@Test
+	public void hashCodeIsConsistent() {
+		int hashCode = intersection.hashCode();
+		for (int i = 0; i < 1000; i++) {
+			assertEquals(hashCode, intersection.hashCode());
+		}
+		return;
+	}
+
+	/**
+	 * Tests equality of {@code hashCode()}.
+	 */
+	@Test
+	public void equalObjectsHaveEqualHashCodes() {
+		assertEquals(intersection.hashCode(), intersectionSame1.hashCode());
+		assertEquals(intersection.hashCode(), intersectionSame2.hashCode());
+		return;
+	}
+
+	// This is not required by the contract, but is desirable
+	/**
+	 * Tests non-equality of {@code hashCode()}.
+	 */
+	@Test
+	public void unequalObjectsHaveUnequalHashCodes() {
+		assertNotEquals(intersection.hashCode(), intersectionDiff1.hashCode());
 		return;
 	}
 }
