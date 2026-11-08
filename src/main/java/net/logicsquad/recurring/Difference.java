@@ -1,6 +1,7 @@
 package net.logicsquad.recurring;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * A {@link TemporalExpression} that is the difference between two
@@ -45,8 +46,12 @@ public final class Difference implements TemporalExpression {
 	 * @param excluded
 	 *            excluded sub-expression
 	 * @return new object
+	 * @throws NullPointerException
+	 *             if {@code included} or {@code excluded} is {@code null}
 	 */
 	public static Difference of(TemporalExpression included, TemporalExpression excluded) {
+		Objects.requireNonNull(included);
+		Objects.requireNonNull(excluded);
 		return new Difference(included, excluded);
 	}
 

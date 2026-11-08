@@ -1,6 +1,7 @@
 package net.logicsquad.recurring;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * An element of a {@link Schedule} that links an event with a {@link TemporalExpression} describing how the event recurs.
@@ -38,8 +39,11 @@ public final class ScheduleElement<T> {
 	 * @param event      object representing an event
 	 * @param expression {@link TemporalExpression} describing event's recurrence
 	 * @return {@link ScheduleElement}
+	 * @throws NullPointerException if {@code event} or {@code expression} is {@code null}
 	 */
 	public static <T> ScheduleElement<T> of(T event, TemporalExpression expression) {
+		Objects.requireNonNull(event);
+		Objects.requireNonNull(expression);
 		return new ScheduleElement<T>(event, expression);
 	}
 

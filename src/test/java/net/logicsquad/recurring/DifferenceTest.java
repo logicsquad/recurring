@@ -50,4 +50,22 @@ public class DifferenceTest {
 		assertFalse(difference.includes(out_4));
 		return;
 	}
+
+	/**
+	 * {@code included} argument cannot be {@code null}.
+	 */
+	@Test
+	public void ofThrowsOnNullIncluded() {
+		assertThrows(NullPointerException.class, () -> Difference.of(null, days));
+		return;
+	}
+
+	/**
+	 * {@code excluded} argument cannot be {@code null}.
+	 */
+	@Test
+	public void ofThrowsOnNullExcluded() {
+		assertThrows(NullPointerException.class, () -> Difference.of(months, null));
+		return;
+	}
 }

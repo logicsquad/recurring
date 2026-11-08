@@ -56,4 +56,22 @@ public class ScheduleElementTest {
 		assertFalse(integerElement.isOccurring(out_3));
 		return;
 	}
+
+	/**
+	 * {@code event} argument cannot be {@code null}.
+	 */
+	@Test
+	public void ofThrowsOnNullEvent() {
+		assertThrows(NullPointerException.class, () -> ScheduleElement.of(null, intersection));
+		return;
+	}
+
+	/**
+	 * {@code expression} argument cannot be {@code null}.
+	 */
+	@Test
+	public void ofThrowsOnNullExpression() {
+		assertThrows(NullPointerException.class, () -> ScheduleElement.of(EVENT_1, null));
+		return;
+	}
 }
