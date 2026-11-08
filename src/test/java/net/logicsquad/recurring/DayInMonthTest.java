@@ -177,6 +177,16 @@ public class DayInMonthTest {
 		return;
 	}
 
+	/**
+	 * Tests that objects differing in only one field are unequal.
+	 */
+	@Test
+	public void equalsComparesEachField() {
+		assertNotEquals(exp, DayInMonth.of(DayOfWeek.TUESDAY, 2));
+		assertNotEquals(exp, DayInMonth.of(DayOfWeek.MONDAY, 3));
+		return;
+	}
+
 	// This is not required by the contract, but is desirable
 	/**
 	 * Tests non-equality of {@code hashCode()}.

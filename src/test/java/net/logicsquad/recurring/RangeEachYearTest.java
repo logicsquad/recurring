@@ -223,6 +223,18 @@ public class RangeEachYearTest {
 		return;
 	}
 
+	/**
+	 * Tests that objects differing in only one field are unequal.
+	 */
+	@Test
+	public void equalsComparesEachField() {
+		assertNotEquals(fullRange, RangeEachYear.of(MonthDay.of(Month.APRIL, 12), MonthDay.of(Month.JULY, 20)));
+		assertNotEquals(fullRange, RangeEachYear.of(MonthDay.of(Month.MARCH, 13), MonthDay.of(Month.JULY, 20)));
+		assertNotEquals(fullRange, RangeEachYear.of(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.AUGUST, 20)));
+		assertNotEquals(fullRange, RangeEachYear.of(MonthDay.of(Month.MARCH, 12), MonthDay.of(Month.JULY, 21)));
+		return;
+	}
+
 	// This is not required by the contract, but is desirable
 	/**
 	 * Tests non-equality of {@code hashCode()}.

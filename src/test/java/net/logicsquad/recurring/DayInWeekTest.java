@@ -1,6 +1,8 @@
 package net.logicsquad.recurring;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -24,6 +26,22 @@ public class DayInWeekTest {
 	private static final LocalDate MON = LocalDate.of(2023, 8, 14);
 
 	private static final LocalDate THU = LocalDate.of(2023, 8, 17);
+
+	// Objects created using each static factory method
+	private DayInWeek everyMonday = DayInWeek.of(DayOfWeek.MONDAY);
+	private DayInWeek fortnightly = DayInWeek.of(2, MON);
+
+	// Objects equal to corresponding object above
+	private DayInWeek everyMondaySame1 = DayInWeek.of(DayOfWeek.MONDAY);
+	private DayInWeek fortnightlySame1 = DayInWeek.of(2, MON);
+
+	// Objects equal to corresponding object above
+	private DayInWeek everyMondaySame2 = DayInWeek.of(DayOfWeek.MONDAY);
+	private DayInWeek fortnightlySame2 = DayInWeek.of(2, MON);
+
+	// Objects different to corresponding object above
+	private DayInWeek everyMondayDiff1 = DayInWeek.of(DayOfWeek.TUESDAY);
+	private DayInWeek fortnightlyDiff1 = DayInWeek.of(3, MON);
 
 	@Test
 	public void ofThrowsOnNullDayOfWeek() {
@@ -104,6 +122,112 @@ public class DayInWeekTest {
 		assertFalse(everySecondMonday.includes(MON.minusWeeks(1)));
 		assertFalse(everySecondMonday.includes(MON.minusWeeks(3)));
 		assertFalse(everySecondMonday.includes(MON.minusWeeks(11)));
+		return;
+	}
+
+	/**
+	 * Tests reflexivity of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsReflexive() {
+		assertTrue(everyMonday.equals(everyMonday));
+		assertTrue(fortnightly.equals(fortnightly));
+		return;
+	}
+
+	/**
+	 * Tests symmetry of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsSymmetric() {
+		assertTrue(everyMonday.equals(everyMondaySame1));
+		assertTrue(everyMondaySame1.equals(everyMonday));
+		assertTrue(fortnightly.equals(fortnightlySame1));
+		assertTrue(fortnightlySame1.equals(fortnightly));
+		return;
+	}
+
+	/**
+	 * Tests transitivity of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsTransitive() {
+		assertTrue(everyMonday.equals(everyMondaySame1));
+		assertTrue(everyMondaySame1.equals(everyMondaySame2));
+		assertTrue(everyMonday.equals(everyMondaySame2));
+		assertTrue(fortnightly.equals(fortnightlySame1));
+		assertTrue(fortnightlySame1.equals(fortnightlySame2));
+		assertTrue(fortnightly.equals(fortnightlySame2));
+		return;
+	}
+
+	/**
+	 * Tests consistency of {@code equals()}.
+	 */
+	@Test
+	public void equalsIsConsistent() {
+		for (int i = 0; i < 1000; i++) {
+			assertTrue(everyMonday.equals(everyMondaySame1));
+			assertTrue(fortnightly.equals(fortnightlySame1));
+		}
+		return;
+	}
+
+	/**
+	 * Tests null-handling of {@code equals()}.
+	 */
+	@Test
+	public void equalsHandlesNull() {
+		assertFalse(everyMonday.equals(null));
+		assertFalse(fortnightly.equals(null));
+		return;
+	}
+
+	/**
+	 * Tests that objects differing in only one field are unequal.
+	 */
+	@Test
+	public void equalsComparesEachField() {
+		assertNotEquals(everyMonday, everyMondayDiff1);
+		assertNotEquals(fortnightly, fortnightlyDiff1);
+		assertNotEquals(fortnightly, DayInWeek.of(2, MON.plusWeeks(1)));
+		return;
+	}
+
+	/**
+	 * Tests consistency of {@code hashCode()}.
+	 */
+	@Test
+	public void hashCodeIsConsistent() {
+		int everyMondayHashCode = everyMonday.hashCode();
+		int fortnightlyHashCode = fortnightly.hashCode();
+		for (int i = 0; i < 1000; i++) {
+			assertEquals(everyMondayHashCode, everyMonday.hashCode());
+			assertEquals(fortnightlyHashCode, fortnightly.hashCode());
+		}
+		return;
+	}
+
+	/**
+	 * Tests equality of {@code hashCode()}.
+	 */
+	@Test
+	public void equalObjectsHaveEqualHashCodes() {
+		assertEquals(everyMonday.hashCode(), everyMondaySame1.hashCode());
+		assertEquals(everyMonday.hashCode(), everyMondaySame2.hashCode());
+		assertEquals(fortnightly.hashCode(), fortnightlySame1.hashCode());
+		assertEquals(fortnightly.hashCode(), fortnightlySame2.hashCode());
+		return;
+	}
+
+	// This is not required by the contract, but is desirable
+	/**
+	 * Tests non-equality of {@code hashCode()}.
+	 */
+	@Test
+	public void unequalObjectsHaveUnequalHashCodes() {
+		assertNotEquals(everyMonday.hashCode(), everyMondayDiff1.hashCode());
+		assertNotEquals(fortnightly.hashCode(), fortnightlyDiff1.hashCode());
 		return;
 	}
 }
