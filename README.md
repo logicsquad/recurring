@@ -94,10 +94,10 @@ dependency:
     <dependency>
       <groupId>net.logicsquad</groupId>
       <artifactId>recurring</artifactId>
-      <version>0.4</version>
+      <version>0.5</version>
     </dependency>
 
-From 0.5, Recurring needs Java 17 or later. On Java 8 to 16, use 0.4.
+Recurring needs Java 17 or later. On Java 8 to 16, use 0.4.
 
 It's also a module, `net.logicsquad.recurring`, so on the module path,
 add `requires net.logicsquad.recurring;` to your `module-info.java`.
