@@ -57,7 +57,7 @@ today:
 
 when the meeting last occurred:
 
-    LocalDate last = schedule.previousOccurrence("Meeting", LocalDate.now());
+    Optional<LocalDate> last = schedule.previousOccurrence("Meeting", LocalDate.now());
 
 and all of its dates from today onwards:
 
@@ -82,10 +82,10 @@ year, which the built-in ones can't do:
     TemporalExpression in2027 = date -> date.getYear() == 2027;
     TemporalExpression only2027 = Intersection.of(expression, in2027);
 
-An expression like that runs out of dates, so query it with
-`datesInRange()`. For now, `nextOccurrence()` and `futureDates()` will
-keep looking for a date that never comes
-([#16](https://github.com/logicsquad/recurring/issues/16)).
+An expression like that runs out of dates. The occurrence methods search
+up to 400 years ahead or back, the length of the Gregorian calendar's
+cycle, so `futureDates()` ends after the last date, and
+`nextOccurrence()` returns an empty `Optional` when there isn't one.
 
 Using Recurring
 ---------------

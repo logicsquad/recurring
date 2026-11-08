@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,6 +16,11 @@ import java.util.stream.Stream;
  * @author paulh
  */
 final class BasicSchedule<T> implements Schedule<T> {
+	/**
+	 * Number of days in 400 years of the Gregorian calendar, after which it repeats
+	 */
+	private static final int SEARCH_LIMIT = 146_097;
+
 	/**
 	 * {@link ScheduleElement}s comprising this {@code Schedule}
 	 */
@@ -56,12 +62,8 @@ final class BasicSchedule<T> implements Schedule<T> {
 	}
 
 	@Override
-	public LocalDate nextOccurrence(T event, LocalDate date) {
-		LocalDate cursor = date;
-		while (!isOccurring(event, cursor)) {
-			cursor = cursor.plusDays(1);
-		}
-		return cursor;
+	public Optional<LocalDate> nextOccurrence(T event, LocalDate date) {
+		return search(event, date, 1);
 	}
 
 	@Override
@@ -74,20 +76,53 @@ final class BasicSchedule<T> implements Schedule<T> {
 
 	@Override
 	public Stream<LocalDate> futureDates(T event, LocalDate start) {
-		return Stream.iterate(nextOccurrence(event, start), seed -> nextOccurrence(event, seed.plusDays(1)));
+		return occurrences(event, start, 1);
 	}
 
 	@Override
 	public Stream<LocalDate> pastDates(T event, LocalDate start) {
-		return Stream.iterate(previousOccurrence(event, start), seed -> previousOccurrence(event, seed.minusDays(1)));
+		return occurrences(event, start, -1);
 	}
 
 	@Override
-	public LocalDate previousOccurrence(T event, LocalDate date) {
-		LocalDate cursor = date;
-		while (!isOccurring(event, cursor)) {
-			cursor = cursor.minusDays(1);
+	public Optional<LocalDate> previousOccurrence(T event, LocalDate date) {
+		return search(event, date, -1);
+	}
+
+	/**
+	 * Returns the first date on which {@code event} is occurring, searching a day at a time from {@code date} (inclusive) in the direction of
+	 * {@code step}, for at most {@link #SEARCH_LIMIT} days.
+	 *
+	 * @param event object representing an event
+	 * @param date  date to search from
+	 * @param step  1 to search forward in time, or -1 to search backwards
+	 * @return first date found, or an empty {@link Optional} if there's none within the limit, or {@code event} isn't in this schedule
+	 */
+	private Optional<LocalDate> search(T event, LocalDate date, int step) {
+		if (elements.stream().noneMatch(e -> e.event().equals(event))) {
+			return Optional.empty();
 		}
-		return cursor;
+		LocalDate cursor = date;
+		for (int i = 0; i < SEARCH_LIMIT; i++) {
+			if (isOccurring(event, cursor)) {
+				return Optional.of(cursor);
+			}
+			cursor = cursor.plusDays(step);
+		}
+		return Optional.empty();
+	}
+
+	/**
+	 * Returns the dates on which {@code event} is occurring, from {@code start} (inclusive) in the direction of {@code step}, ending when a
+	 * search finds no further date.
+	 *
+	 * @param event object representing an event
+	 * @param start date to start from
+	 * @param step  1 to go forward in time, or -1 to go backwards
+	 * @return stream of dates on which {@code event} is occurring
+	 */
+	private Stream<LocalDate> occurrences(T event, LocalDate start, int step) {
+		return Stream.iterate(search(event, start, step), Optional::isPresent, found -> search(event, found.get().plusDays(step), step))
+				.map(Optional::get);
 	}
 }

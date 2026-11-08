@@ -3,12 +3,14 @@ package net.logicsquad.recurring;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -125,21 +127,21 @@ public class ScheduleTest {
 
 	@Test
 	public void nextOccurrenceReturnsExpectedResults() {
-		assertEquals(LocalDate.of(2018, 1, 8), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 6, 30)));
-		assertEquals(LocalDate.of(2018, 1, 8), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 9, 1)));
-		assertEquals(LocalDate.of(2018, 1, 8), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 12, 20)));
-		assertEquals(LocalDate.of(2018, 1, 8), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 1)));
-		assertEquals(LocalDate.of(2018, 1, 8), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 8)));
-		assertEquals(LocalDate.of(2018, 2, 12), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 9)));
-		assertEquals(LocalDate.of(2018, 3, 12), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 2, 13)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 6, 30)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 9, 1)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 12, 20)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 1)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 8)));
+		assertEquals(Optional.of(LocalDate.of(2018, 2, 12)), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 9)));
+		assertEquals(Optional.of(LocalDate.of(2018, 3, 12)), stringSchedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 2, 13)));
 
-		assertEquals(LocalDate.of(2018, 1, 8), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 6, 30)));
-		assertEquals(LocalDate.of(2018, 1, 8), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 9, 1)));
-		assertEquals(LocalDate.of(2018, 1, 8), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 12, 20)));
-		assertEquals(LocalDate.of(2018, 1, 8), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 1)));
-		assertEquals(LocalDate.of(2018, 1, 8), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 8)));
-		assertEquals(LocalDate.of(2018, 2, 12), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 9)));
-		assertEquals(LocalDate.of(2018, 3, 12), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 2, 13)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 6, 30)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 9, 1)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 12, 20)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 1)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 8)));
+		assertEquals(Optional.of(LocalDate.of(2018, 2, 12)), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 9)));
+		assertEquals(Optional.of(LocalDate.of(2018, 3, 12)), integerSchedule.nextOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 2, 13)));
 		return;
 	}
 
@@ -155,21 +157,21 @@ public class ScheduleTest {
 
 	@Test
 	public void previousOccurrenceReturnsExpectedResults() {
-		assertEquals(LocalDate.of(2017, 6, 12), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 6, 30)));
-		assertEquals(LocalDate.of(2017, 6, 12), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 9, 1)));
-		assertEquals(LocalDate.of(2017, 6, 12), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 12, 20)));
-		assertEquals(LocalDate.of(2017, 6, 12), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 1)));
-		assertEquals(LocalDate.of(2018, 1, 8), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 8)));
-		assertEquals(LocalDate.of(2018, 1, 8), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 9)));
-		assertEquals(LocalDate.of(2018, 2, 12), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 2, 13)));
+		assertEquals(Optional.of(LocalDate.of(2017, 6, 12)), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 6, 30)));
+		assertEquals(Optional.of(LocalDate.of(2017, 6, 12)), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 9, 1)));
+		assertEquals(Optional.of(LocalDate.of(2017, 6, 12)), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2017, 12, 20)));
+		assertEquals(Optional.of(LocalDate.of(2017, 6, 12)), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 1)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 8)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 1, 9)));
+		assertEquals(Optional.of(LocalDate.of(2018, 2, 12)), stringSchedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2018, 2, 13)));
 
-		assertEquals(LocalDate.of(2017, 6, 12), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 6, 30)));
-		assertEquals(LocalDate.of(2017, 6, 12), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 9, 1)));
-		assertEquals(LocalDate.of(2017, 6, 12), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 12, 20)));
-		assertEquals(LocalDate.of(2017, 6, 12), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 1)));
-		assertEquals(LocalDate.of(2018, 1, 8), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 8)));
-		assertEquals(LocalDate.of(2018, 1, 8), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 9)));
-		assertEquals(LocalDate.of(2018, 2, 12), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 2, 13)));
+		assertEquals(Optional.of(LocalDate.of(2017, 6, 12)), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 6, 30)));
+		assertEquals(Optional.of(LocalDate.of(2017, 6, 12)), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 9, 1)));
+		assertEquals(Optional.of(LocalDate.of(2017, 6, 12)), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2017, 12, 20)));
+		assertEquals(Optional.of(LocalDate.of(2017, 6, 12)), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 1)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 8)));
+		assertEquals(Optional.of(LocalDate.of(2018, 1, 8)), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 1, 9)));
+		assertEquals(Optional.of(LocalDate.of(2018, 2, 12)), integerSchedule.previousOccurrence(KNOWN_EVENT_2, LocalDate.of(2018, 2, 13)));
 		return;
 	}
 
@@ -224,6 +226,69 @@ public class ScheduleTest {
 	@Test
 	public void ofThrowsOnNullElement() {
 		assertThrows(NullPointerException.class, () -> Schedule.of(stringElement, null));
+		return;
+	}
+
+	/**
+	 * The occurrence methods give up straight away on an event that isn't in the schedule.
+	 */
+	@Test
+	public void occurrenceMethodsFindNothingForUnknownEvent() {
+		assertTimeoutPreemptively(Duration.ofSeconds(10), () -> {
+			assertEquals(Optional.empty(), stringSchedule.nextOccurrence(UNKNOWN_EVENT_1, in_1));
+			assertEquals(Optional.empty(), stringSchedule.previousOccurrence(UNKNOWN_EVENT_1, in_1));
+			assertEquals(0, stringSchedule.futureDates(UNKNOWN_EVENT_1, in_1).count());
+			assertEquals(0, stringSchedule.pastDates(UNKNOWN_EVENT_1, in_1).count());
+		});
+		return;
+	}
+
+	/**
+	 * The occurrence methods give up after 400 years on an expression that never matches.
+	 */
+	@Test
+	public void occurrenceMethodsFindNothingForExpressionThatNeverMatches() {
+		TemporalExpression never = Intersection.of(RangeEachYear.of(Month.JUNE), RangeEachYear.of(Month.JULY));
+		Schedule<String> schedule = Schedule.of(ScheduleElement.of(KNOWN_EVENT_1, never));
+		assertTimeoutPreemptively(Duration.ofSeconds(10), () -> {
+			assertEquals(Optional.empty(), schedule.nextOccurrence(KNOWN_EVENT_1, in_1));
+			assertEquals(Optional.empty(), schedule.previousOccurrence(KNOWN_EVENT_1, in_1));
+			assertEquals(0, schedule.futureDates(KNOWN_EVENT_1, in_1).count());
+			assertEquals(0, schedule.pastDates(KNOWN_EVENT_1, in_1).count());
+		});
+		return;
+	}
+
+	/**
+	 * The streams end after the last date of an expression that runs out of dates.
+	 */
+	@Test
+	public void streamsEndAfterLastOccurrence() {
+		Schedule<String> schedule = Schedule.of(ScheduleElement.of(KNOWN_EVENT_1, Intersection.of(intersection, date -> date.getYear() == 2018)));
+		List<LocalDate> expected = Arrays.asList(LocalDate.of(2018, 1, 8), LocalDate.of(2018, 2, 12), LocalDate.of(2018, 3, 12),
+				LocalDate.of(2018, 4, 9), LocalDate.of(2018, 5, 14), LocalDate.of(2018, 6, 11));
+		assertTimeoutPreemptively(Duration.ofSeconds(10), () -> {
+			assertEquals(expected, schedule.futureDates(KNOWN_EVENT_1, LocalDate.of(2016, 9, 1)).collect(Collectors.toList()));
+			List<LocalDate> past = schedule.pastDates(KNOWN_EVENT_1, LocalDate.of(2020, 1, 1)).collect(Collectors.toList());
+			Collections.reverse(past);
+			assertEquals(expected, past);
+		});
+		return;
+	}
+
+	/**
+	 * The search for an occurrence covers 400 years from the given date, in either direction.
+	 */
+	@Test
+	public void searchCovers400Years() {
+		LocalDate once = LocalDate.of(2400, 1, 1);
+		Schedule<String> schedule = Schedule.of(ScheduleElement.of(KNOWN_EVENT_1, date -> date.equals(once)));
+		assertTimeoutPreemptively(Duration.ofSeconds(10), () -> {
+			assertEquals(Optional.of(once), schedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2000, 1, 2)));
+			assertEquals(Optional.empty(), schedule.nextOccurrence(KNOWN_EVENT_1, LocalDate.of(2000, 1, 1)));
+			assertEquals(Optional.of(once), schedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2799, 12, 31)));
+			assertEquals(Optional.empty(), schedule.previousOccurrence(KNOWN_EVENT_1, LocalDate.of(2800, 1, 1)));
+		});
 		return;
 	}
 }
