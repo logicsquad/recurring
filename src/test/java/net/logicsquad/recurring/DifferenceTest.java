@@ -68,4 +68,14 @@ public class DifferenceTest {
 		assertThrows(NullPointerException.class, () -> Difference.of(months, null));
 		return;
 	}
+
+	/**
+	 * Days outside the included expression are excluded, whether or not the excluded expression matches them.
+	 */
+	@Test
+	public void excludesDaysOutsideIncludedExpression() {
+		assertFalse(difference.includes(LocalDate.of(2018, 10, 1)));
+		assertFalse(difference.includes(LocalDate.of(2018, 10, 30)));
+		return;
+	}
 }

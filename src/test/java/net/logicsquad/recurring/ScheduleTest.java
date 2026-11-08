@@ -291,4 +291,45 @@ public class ScheduleTest {
 		});
 		return;
 	}
+
+	/**
+	 * A schedule with several events tells them apart.
+	 */
+	@Test
+	public void scheduleTellsEventsApart() {
+		Schedule<String> schedule = Schedule.of(ScheduleElement.of("Board", DayInMonth.of(DayOfWeek.THURSDAY, 1)),
+				ScheduleElement.of("Staff", DayInMonth.of(DayOfWeek.WEDNESDAY, -1)));
+		LocalDate firstThursday = LocalDate.of(2027, 1, 7);
+		LocalDate lastWednesday = LocalDate.of(2027, 1, 27);
+		assertTrue(schedule.isOccurring("Board", firstThursday));
+		assertFalse(schedule.isOccurring("Board", lastWednesday));
+		assertTrue(schedule.isOccurring("Staff", lastWednesday));
+		assertFalse(schedule.isOccurring("Staff", firstThursday));
+		assertEquals(Arrays.asList(firstThursday), schedule.datesInRange("Board", LocalDate.of(2027, 1, 1), LocalDate.of(2027, 1, 31)));
+		assertEquals(Arrays.asList(lastWednesday), schedule.datesInRange("Staff", LocalDate.of(2027, 1, 1), LocalDate.of(2027, 1, 31)));
+		return;
+	}
+
+	/**
+	 * An event with two elements occurs on the dates of either.
+	 */
+	@Test
+	public void eventWithTwoElementsOccursOnDatesOfEither() {
+		Schedule<String> schedule = Schedule.of(ScheduleElement.of("Meeting", DayInMonth.of(DayOfWeek.THURSDAY, 1)),
+				ScheduleElement.of("Other", DayInWeek.of(DayOfWeek.MONDAY)), ScheduleElement.of("Meeting", DayInMonth.of(DayOfWeek.WEDNESDAY, -1)));
+		List<LocalDate> expected = Arrays.asList(LocalDate.of(2027, 1, 7), LocalDate.of(2027, 1, 27), LocalDate.of(2027, 2, 4),
+				LocalDate.of(2027, 2, 24));
+		assertEquals(expected, schedule.datesInRange("Meeting", LocalDate.of(2027, 1, 1), LocalDate.of(2027, 2, 28)));
+		assertEquals(Optional.of(LocalDate.of(2027, 1, 27)), schedule.nextOccurrence("Meeting", LocalDate.of(2027, 1, 8)));
+		return;
+	}
+
+	/**
+	 * {@code datesInRange()} returns an empty list when the end is before the start.
+	 */
+	@Test
+	public void datesInRangeIsEmptyWhenEndIsBeforeStart() {
+		assertEquals(Collections.emptyList(), stringSchedule.datesInRange(KNOWN_EVENT_1, LocalDate.of(2018, 12, 31), LocalDate.of(2018, 1, 1)));
+		return;
+	}
 }

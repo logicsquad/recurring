@@ -24,7 +24,8 @@ public interface Schedule<T> {
 	boolean isOccurring(T event, LocalDate date);
 
 	/**
-	 * Returns a list of {@link LocalDate}s on which {@code event} is occurring between {@code start} and {@code end} dates (inclusive).
+	 * Returns a list of {@link LocalDate}s on which {@code event} is occurring between {@code start} and {@code end} dates (inclusive). The
+	 * list is empty if {@code end} is before {@code start}.
 	 *
 	 * @param event object representing an event
 	 * @param start start date
