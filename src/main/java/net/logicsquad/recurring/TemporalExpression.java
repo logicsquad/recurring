@@ -8,6 +8,14 @@ import java.time.LocalDate;
  * day from 1 January to 31 March". A {@code TemporalExpression} can report
  * whether an arbitrary date matches it.
  *
+ * <p>
+ * The expressions in this package are equal if they're built the same way from
+ * equal parts. Equality doesn't compare the dates that expressions match, so
+ * {@code RangeEachYear.of(Month.JUNE)} doesn't equal the range from 1 June to
+ * 30 June, although both match the same dates. A lambda is equal only to
+ * itself.
+ * </p>
+ *
  * @author paulh
  */
 @FunctionalInterface

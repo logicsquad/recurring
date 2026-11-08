@@ -230,4 +230,14 @@ public class DayInWeekTest {
 		assertNotEquals(fortnightly.hashCode(), fortnightlyDiff1.hashCode());
 		return;
 	}
+
+	/**
+	 * Equality compares how expressions are built, not the dates they match.
+	 */
+	@Test
+	public void equalityComparesStructureNotDates() {
+		assertNotEquals(everyMonday, DayInWeek.of(1, MON));
+		assertNotEquals(fortnightly, DayInWeek.of(2, MON.plusWeeks(2)));
+		return;
+	}
 }

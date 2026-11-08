@@ -402,4 +402,13 @@ public class RangeEachYearTest {
 		}
 		return;
 	}
+
+	/**
+	 * Equality compares how ranges are built, not the dates they match.
+	 */
+	@Test
+	public void equalityComparesStructureNotDates() {
+		assertNotEquals(monthRange, RangeEachYear.of(MonthDay.of(Month.JUNE, 1), MonthDay.of(Month.JUNE, 30)));
+		return;
+	}
 }
