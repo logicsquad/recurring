@@ -8,17 +8,18 @@ import java.util.stream.Collectors;
 
 /**
  * Superclass for {@link TemporalExpression}s that work by applying some action
- * over a collection of sub-expressions. The sub-expressions are stored in the
- * {@link #expressions} list in this class. Two composite expressions are equal
- * if they're of the same class, with equal sub-expressions in the same order.
+ * over a list of sub-expressions. It's sealed, so {@link Union} and
+ * {@link Intersection} are its only subclasses. Two composite expressions are
+ * equal if they're of the same class, with equal sub-expressions in the same
+ * order.
  *
  * @author paulh
  */
-public abstract class CompositeTemporalExpression implements TemporalExpression {
+public abstract sealed class CompositeTemporalExpression implements TemporalExpression permits Union, Intersection {
 	/**
 	 * Collection of sub-expressions
 	 */
-	protected final List<TemporalExpression> expressions;
+	final List<TemporalExpression> expressions;
 
 	/**
 	 * Constructor
@@ -30,7 +31,7 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 	 * @throws IllegalArgumentException
 	 *             if {@code expressions} is empty
 	 */
-	protected CompositeTemporalExpression(List<TemporalExpression> expressions) {
+	CompositeTemporalExpression(List<TemporalExpression> expressions) {
 		Objects.requireNonNull(expressions);
 		if (expressions.isEmpty()) {
 			throw new IllegalArgumentException("CompositeTemporalExpression requires at least one sub-expression.");
@@ -72,7 +73,7 @@ public abstract class CompositeTemporalExpression implements TemporalExpression 
 	 * @throws NullPointerException
 	 *             if any element of {@code expressions} is {@code null}
 	 */
-	protected static void checkExpressionsForNull(TemporalExpression... expressions) {
+	static void checkExpressionsForNull(TemporalExpression... expressions) {
 		for (TemporalExpression e : expressions) {
 			Objects.requireNonNull(e);
 		}
