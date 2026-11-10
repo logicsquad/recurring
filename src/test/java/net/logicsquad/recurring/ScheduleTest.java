@@ -332,4 +332,66 @@ public class ScheduleTest {
 		assertEquals(Collections.emptyList(), stringSchedule.datesInRange(KNOWN_EVENT_1, LocalDate.of(2018, 12, 31), LocalDate.of(2018, 1, 1)));
 		return;
 	}
+
+	/**
+	 * {@code isOccurring()} rejects a {@code null} date, whether or not the event is in the schedule.
+	 */
+	@Test
+	public void isOccurringThrowsOnNullDate() {
+		assertThrows(NullPointerException.class, () -> stringSchedule.isOccurring(KNOWN_EVENT_1, null));
+		assertThrows(NullPointerException.class, () -> stringSchedule.isOccurring(UNKNOWN_EVENT_1, null));
+		return;
+	}
+
+	/**
+	 * {@code datesInRange()} rejects a {@code null} start or end, whether or not the event is in the schedule.
+	 */
+	@Test
+	public void datesInRangeThrowsOnNullStartOrEnd() {
+		assertThrows(NullPointerException.class, () -> stringSchedule.datesInRange(KNOWN_EVENT_1, null, in_1));
+		assertThrows(NullPointerException.class, () -> stringSchedule.datesInRange(KNOWN_EVENT_1, in_1, null));
+		assertThrows(NullPointerException.class, () -> stringSchedule.datesInRange(UNKNOWN_EVENT_1, null, in_1));
+		assertThrows(NullPointerException.class, () -> stringSchedule.datesInRange(UNKNOWN_EVENT_1, in_1, null));
+		return;
+	}
+
+	/**
+	 * {@code futureDates()} rejects a {@code null} start, whether or not the event is in the schedule.
+	 */
+	@Test
+	public void futureDatesThrowsOnNullStart() {
+		assertThrows(NullPointerException.class, () -> stringSchedule.futureDates(KNOWN_EVENT_1, null));
+		assertThrows(NullPointerException.class, () -> stringSchedule.futureDates(UNKNOWN_EVENT_1, null));
+		return;
+	}
+
+	/**
+	 * {@code pastDates()} rejects a {@code null} start, whether or not the event is in the schedule.
+	 */
+	@Test
+	public void pastDatesThrowsOnNullStart() {
+		assertThrows(NullPointerException.class, () -> stringSchedule.pastDates(KNOWN_EVENT_1, null));
+		assertThrows(NullPointerException.class, () -> stringSchedule.pastDates(UNKNOWN_EVENT_1, null));
+		return;
+	}
+
+	/**
+	 * {@code nextOccurrence()} rejects a {@code null} date, whether or not the event is in the schedule.
+	 */
+	@Test
+	public void nextOccurrenceThrowsOnNullDate() {
+		assertThrows(NullPointerException.class, () -> stringSchedule.nextOccurrence(KNOWN_EVENT_1, null));
+		assertThrows(NullPointerException.class, () -> stringSchedule.nextOccurrence(UNKNOWN_EVENT_1, null));
+		return;
+	}
+
+	/**
+	 * {@code previousOccurrence()} rejects a {@code null} date, whether or not the event is in the schedule.
+	 */
+	@Test
+	public void previousOccurrenceThrowsOnNullDate() {
+		assertThrows(NullPointerException.class, () -> stringSchedule.previousOccurrence(KNOWN_EVENT_1, null));
+		assertThrows(NullPointerException.class, () -> stringSchedule.previousOccurrence(UNKNOWN_EVENT_1, null));
+		return;
+	}
 }

@@ -20,6 +20,7 @@ public interface Schedule<T> {
 	 * @param event object representing an event
 	 * @param date  a {@link LocalDate}
 	 * @return {@code true} if {@code event} is occurring on {@code date}, otherwise {@code false}
+	 * @throws NullPointerException if {@code date} is {@code null}
 	 */
 	boolean isOccurring(T event, LocalDate date);
 
@@ -31,6 +32,7 @@ public interface Schedule<T> {
 	 * @param start start date
 	 * @param end   end date
 	 * @return list of dates on which {@code event} is occurring
+	 * @throws NullPointerException if {@code start} or {@code end} is {@code null}
 	 */
 	List<LocalDate> datesInRange(T event, LocalDate start, LocalDate end);
 
@@ -41,6 +43,7 @@ public interface Schedule<T> {
 	 * @param event object representing an event
 	 * @param start start date
 	 * @return stream of dates on which {@code event} is occurring
+	 * @throws NullPointerException if {@code start} is {@code null}
 	 */
 	Stream<LocalDate> futureDates(T event, LocalDate start);
 
@@ -52,6 +55,7 @@ public interface Schedule<T> {
 	 * @param event object representing an event
 	 * @param start start date
 	 * @return stream of dates on which {@code event} is occurring
+	 * @throws NullPointerException if {@code start} is {@code null}
 	 */
 	Stream<LocalDate> pastDates(T event, LocalDate start);
 
@@ -62,6 +66,7 @@ public interface Schedule<T> {
 	 * @param event object representing an event
 	 * @param date  an arbitrary date
 	 * @return date of next occurrence of {@code event}, or an empty {@link Optional} if it doesn't occur within 400 years
+	 * @throws NullPointerException if {@code date} is {@code null}
 	 */
 	Optional<LocalDate> nextOccurrence(T event, LocalDate date);
 
@@ -72,6 +77,7 @@ public interface Schedule<T> {
 	 * @param event object representing an event
 	 * @param date  an arbitrary date
 	 * @return date of previous occurrence of {@code event}, or an empty {@link Optional} if it didn't occur within the 400 years before
+	 * @throws NullPointerException if {@code date} is {@code null}
 	 */
 	Optional<LocalDate> previousOccurrence(T event, LocalDate date);
 

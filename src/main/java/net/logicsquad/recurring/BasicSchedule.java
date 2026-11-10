@@ -40,6 +40,7 @@ final class BasicSchedule<T> implements Schedule<T> {
 
 	@Override
 	public boolean isOccurring(T event, LocalDate date) {
+		Objects.requireNonNull(date);
 		for (ScheduleElement<T> e : elements) {
 			if (e.event().equals(event) && e.isOccurring(date)) {
 				return true;
@@ -50,6 +51,8 @@ final class BasicSchedule<T> implements Schedule<T> {
 
 	@Override
 	public List<LocalDate> datesInRange(T event, LocalDate start, LocalDate end) {
+		Objects.requireNonNull(start);
+		Objects.requireNonNull(end);
 		List<LocalDate> result = new ArrayList<>();
 		LocalDate cursor = start;
 		while (cursor.equals(end) || cursor.isBefore(end)) {
@@ -99,6 +102,7 @@ final class BasicSchedule<T> implements Schedule<T> {
 	 * @return first date found, or an empty {@link Optional} if there's none within the limit, or {@code event} isn't in this schedule
 	 */
 	private Optional<LocalDate> search(T event, LocalDate date, int step) {
+		Objects.requireNonNull(date);
 		if (elements.stream().noneMatch(e -> e.event().equals(event))) {
 			return Optional.empty();
 		}
