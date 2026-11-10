@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -23,6 +24,17 @@ public interface Schedule<T> {
 	 * @throws NullPointerException if {@code date} is {@code null}
 	 */
 	boolean isOccurring(T event, LocalDate date);
+
+	/**
+	 * Returns the events occurring on {@code date}, each once, in the order of their first {@link ScheduleElement} in this
+	 * {@code Schedule}.
+	 *
+	 * @param date a {@link LocalDate}
+	 * @return events occurring on {@code date}, in a new set that's empty if there are none
+	 * @throws NullPointerException if {@code date} is {@code null}
+	 * @since 0.6
+	 */
+	Set<T> eventsOn(LocalDate date);
 
 	/**
 	 * Returns a list of {@link LocalDate}s on which {@code event} is occurring between {@code start} and {@code end} dates (inclusive). The

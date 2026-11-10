@@ -3,9 +3,12 @@ package net.logicsquad.recurring;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -47,6 +50,19 @@ final class BasicSchedule<T> implements Schedule<T> {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public Set<T> eventsOn(LocalDate date) {
+		Objects.requireNonNull(date);
+		Set<T> seen = new HashSet<>();
+		Set<T> result = new LinkedHashSet<>();
+		for (ScheduleElement<T> e : elements) {
+			if (seen.add(e.event()) && isOccurring(e.event(), date)) {
+				result.add(e.event());
+			}
+		}
+		return result;
 	}
 
 	@Override

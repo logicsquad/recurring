@@ -394,4 +394,32 @@ public class ScheduleTest {
 		assertThrows(NullPointerException.class, () -> stringSchedule.previousOccurrence(UNKNOWN_EVENT_1, null));
 		return;
 	}
+
+	/**
+	 * {@code eventsOn()} returns each event occurring on a date once, in the order of its first element, and nothing for a date with
+	 * nothing on it.
+	 */
+	@Test
+	public void eventsOnReturnsEventsOccurringOnDate() {
+		Schedule<String> schedule = Schedule.of(ScheduleElement.of("Board", DayInMonth.of(DayOfWeek.THURSDAY, 1)),
+				ScheduleElement.of("Staff", DayInWeek.of(DayOfWeek.WEDNESDAY)), ScheduleElement.of("Board", DayInMonth.of(DayOfWeek.WEDNESDAY, -1)));
+		// First Thursday: Board, from its first element
+		assertEquals(Arrays.asList("Board"), new ArrayList<>(schedule.eventsOn(LocalDate.of(2027, 1, 7))));
+		// A Wednesday that isn't the last one: Staff
+		assertEquals(Arrays.asList("Staff"), new ArrayList<>(schedule.eventsOn(LocalDate.of(2027, 1, 13))));
+		// Last Wednesday: Board, from its second element, still comes before Staff
+		assertEquals(Arrays.asList("Board", "Staff"), new ArrayList<>(schedule.eventsOn(LocalDate.of(2027, 1, 27))));
+		// A Monday: nothing
+		assertTrue(schedule.eventsOn(LocalDate.of(2027, 1, 11)).isEmpty());
+		return;
+	}
+
+	/**
+	 * {@code eventsOn()} rejects a {@code null} date.
+	 */
+	@Test
+	public void eventsOnThrowsOnNullDate() {
+		assertThrows(NullPointerException.class, () -> stringSchedule.eventsOn(null));
+		return;
+	}
 }

@@ -55,6 +55,10 @@ today:
 
     boolean today = schedule.isOccurring("Meeting", LocalDate.now());
 
+what's on today, across all of its events:
+
+    Set<String> events = schedule.eventsOn(LocalDate.now());
+
 when the meeting last occurred:
 
     Optional<LocalDate> last = schedule.previousOccurrence("Meeting", LocalDate.now());
