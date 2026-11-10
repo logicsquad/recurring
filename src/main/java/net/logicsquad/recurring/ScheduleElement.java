@@ -5,7 +5,8 @@ import java.util.Objects;
 
 /**
  * An element of a {@link Schedule} that links an event with a {@link TemporalExpression} describing how the event recurs. Two elements
- * are equal if their events and expressions are equal.
+ * are equal if their events and expressions are equal. Elements are immutable, and so safe to share between threads, as long as their
+ * events and expressions are too.
  *
  * @param <T> type for {@code event} objects
  * @author paulh

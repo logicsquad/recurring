@@ -16,6 +16,12 @@ import java.time.LocalDate;
  * itself.
  * </p>
  *
+ * <p>
+ * The expressions in this package are immutable, and so safe to share between
+ * threads. An expression of your own, such as a lambda, should be too, since
+ * schedules and composite expressions share the expressions they're given.
+ * </p>
+ *
  * @author paulh
  */
 @FunctionalInterface

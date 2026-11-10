@@ -9,7 +9,9 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 /**
- * Encapsulates a "schedule" which can answer various questions about events it knows about.
+ * Encapsulates a "schedule" which can answer various questions about events it knows about. The schedules that
+ * {@link #of(ScheduleElement...)} returns are immutable, and so safe to share between threads, as long as their events and expressions
+ * are too.
  *
  * @param <T> type for {@link ScheduleElement}s and {@code event} objects
  * @author paulh
