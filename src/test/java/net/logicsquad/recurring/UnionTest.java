@@ -6,6 +6,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -77,6 +78,12 @@ public class UnionTest {
 	@Test
 	public void ofThrowsOnNullExpressionArray() {
 		assertThrows(NullPointerException.class, () -> Union.of((TemporalExpression[]) null));
+		return;
+	}
+
+	@Test
+	public void ofThrowsOnNullExpressionInList() {
+		assertThrows(NullPointerException.class, () -> Union.of(Arrays.<TemporalExpression>asList(range, null)));
 		return;
 	}
 

@@ -6,6 +6,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -92,6 +93,12 @@ public class IntersectionTest {
 	@Test
 	public void ofThrowsOnNullExpressionArray() {
 		assertThrows(NullPointerException.class, () -> Intersection.of((TemporalExpression[]) null));
+		return;
+	}
+
+	@Test
+	public void ofThrowsOnNullExpressionInList() {
+		assertThrows(NullPointerException.class, () -> Intersection.of(Arrays.<TemporalExpression>asList(dayInMonth, null)));
 		return;
 	}
 
