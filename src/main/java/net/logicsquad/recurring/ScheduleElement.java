@@ -67,6 +67,16 @@ public final class ScheduleElement<T> {
 		return event;
 	}
 
+	/**
+	 * Returns this {@code ScheduleElement}'s expression.
+	 *
+	 * @return expression describing how this element's event recurs
+	 * @since 0.6
+	 */
+	public TemporalExpression expression() {
+		return expression;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

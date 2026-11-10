@@ -173,4 +173,16 @@ public class ScheduleElementTest {
 		assertNotEquals(stringElement.hashCode(), stringElementDiff1.hashCode());
 		return;
 	}
+
+	/**
+	 * {@code event()} and {@code expression()} return what the element was made from.
+	 */
+	@Test
+	public void accessorsReturnEventAndExpression() {
+		assertEquals(EVENT_1, stringElement.event());
+		assertSame(intersection, stringElement.expression());
+		assertEquals(EVENT_2, integerElement.event());
+		assertSame(intersection, integerElement.expression());
+		return;
+	}
 }
